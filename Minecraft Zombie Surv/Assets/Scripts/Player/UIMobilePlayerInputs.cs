@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class UIMobilePlayerInputs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Joystick moveJoystick;
+    [SerializeField] private Joystick lookJoystick;
+
+    public Joystick MoveJoystick { get => moveJoystick; }
+    public Joystick LookJoystick { get => lookJoystick; }
+
+    private void OnEnable()
     {
-        
+        ServiceLocator.AddService(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        ServiceLocator.RemoveService(this);
     }
 }
