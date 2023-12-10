@@ -11,6 +11,8 @@ public class MapsManager : MonoBehaviour
     [Space]
     [SerializeField] private MapInfo selectedMap;
 
+    private LoadingManager loadingManager;
+
     private void OnEnable()
     {
         ServiceLocator.AddService(this);
@@ -21,9 +23,14 @@ public class MapsManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
+    private void Start()
+    {
+        loadingManager = ServiceLocator.GetService<LoadingManager>();
+    }
+
     [Button]
     public void LoadSelectedMap()
     {
-        SceneManager.LoadScene(selectedMap.SceneName);
+        loadingManager.LoadScene(selectedMap.SceneName);
     }
 }
