@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MapsManager : MonoBehaviour
+public class LevelsManager : MonoBehaviour
 {
-    [SerializeField] private MapInfo[] allMaps;
+    [SerializeField] private LevelInfo[] allMaps;
 
     [Space]
-    [SerializeField] private MapInfo selectedMap;
+    [SerializeField] private LevelInfo selectedLevel;
 
     private LoadingManager loadingManager;
+
+    public LevelInfo[] AllLevels { get => allMaps; }
 
     private void OnEnable()
     {
@@ -29,8 +31,13 @@ public class MapsManager : MonoBehaviour
     }
 
     [Button]
-    public void LoadSelectedMap()
+    public void LoadSelectedLevel()
     {
-        loadingManager.LoadScene(selectedMap.SceneName);
+        loadingManager.LoadScene(selectedLevel.SceneName);
+    }
+
+    public void SelectLevel(LevelInfo level)
+    {
+        selectedLevel = level;
     }
 }

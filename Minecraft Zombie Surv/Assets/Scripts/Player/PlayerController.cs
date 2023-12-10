@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         UIMobilePlayerInputs playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;
+        playerInputs.enabled = false;
     }
 
     private void Update()

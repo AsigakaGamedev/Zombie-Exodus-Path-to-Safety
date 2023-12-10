@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a4ae5fad93d80d488cb7a0098d4c966, type: 3}
-  m_Name: test_map
+  m_Name: level_2
   m_EditorClassIdentifier: 
   sceneName: TestMap
+  levelPreview: {fileID: 0}
+  levelName: Level 2
+  levelDescription: ' Level 2 Descrt'
