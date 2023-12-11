@@ -591,14 +591,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3654051144885107911}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0.00000003090862, z: 0.70710677, w: 0.00000003090862}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0.315, y: 0.23099998, z: 0}
   m_LocalScale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3300579854134519128}
   m_Father: {fileID: 8911597733044139080}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -180}
 --- !u!1 &4784180653397508266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5242080903645845919}
   - component: {fileID: 2781102578989624980}
+  - component: {fileID: 5321733042507482998}
   m_Layer: 0
   m_Name: minecraft_character
   m_TagString: Untagged
@@ -1082,6 +1083,27 @@ MonoBehaviour:
   - {fileID: 2581681111132466969}
   textures:
   - {fileID: 2800000, guid: 9726660e0396dee4999694321526882c, type: 3}
+--- !u!95 &5321733042507482998
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264217198965691266}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 098abd4373081774ebb66e72c950234d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8332164364403707498
 GameObject:
   m_ObjectHideFlags: 0
