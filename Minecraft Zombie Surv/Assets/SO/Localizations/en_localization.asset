@@ -16,6 +16,14 @@ MonoBehaviour:
     _serializedList:
     - Key: start
       Value: Start
+    - Key: audio
+      Value: Audio
+    - Key: language
+      Value: Language
+    - Key: main
+      Value: Main
+    - Key: graphics
+      Value: Graphics
     - Key: okay
       Value: Okay
     - Key: select_language
@@ -32,4 +40,4 @@ MonoBehaviour:
       Value: Shop
     - Key: settings
       Value: Settings
-  copyLocalization: {fileID: 0}
+  copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}

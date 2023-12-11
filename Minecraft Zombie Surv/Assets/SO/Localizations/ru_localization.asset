@@ -32,4 +32,12 @@ MonoBehaviour:
       Value: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u044F\u0437\u044B\u043A"
     - Key: okay
       Value: "\u0425\u043E\u0440\u043E\u0448\u043E"
+    - Key: main
+      Value: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435"
+    - Key: graphics
+      Value: "\u0413\u0440\u0430\u0444\u0438\u043A\u0430"
+    - Key: language
+      Value: "\u042F\u0437\u044B\u043A"
+    - Key: audio
+      Value: "\u0417\u0432\u0443\u043A"
   copyLocalization: {fileID: 11400000, guid: 2a0e683bd2b4c944daccae33311a6e29, type: 2}
