@@ -16,6 +16,8 @@ MonoBehaviour:
     _serializedList:
     - Key: start
       Value: Start
+    - Key: skins
+      Value: Skins
     - Key: audio
       Value: Audio
     - Key: language

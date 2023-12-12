@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemName: stone_name
-  itemDescription: stone_desc
+  itemNameKey: stone_name
+  itemDescriptionKey: stone_desc
