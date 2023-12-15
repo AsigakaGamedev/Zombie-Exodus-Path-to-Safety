@@ -15,6 +15,11 @@ public class UICurrencyText : MonoBehaviour
     {
         economy = ServiceLocator.GetService<ServicesManager>().Economy;
         economy.onCurrencyUpdate += OnUpdateCurrency;
+
+        if (economy.TryGetCurrency(currencyID, out CurrencyDefinition currency))
+        {
+            linkedText.text = currency.Initial.ToString();
+        }
     }
 
     private void OnDestroy()

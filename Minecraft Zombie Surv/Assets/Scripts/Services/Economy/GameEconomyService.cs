@@ -28,13 +28,8 @@ public class GameEconomyService : MonoBehaviour
         print($"Economy updated\nCurrencies count - {currencies.Count}");
     }
 
-    public CurrencyDefinition GetCurrency(string id)
+    public bool TryGetCurrency(string id, out CurrencyDefinition currency)
     {
-        if (currencies.TryGetValue(id, out CurrencyDefinition currency))
-        {
-            return currency;
-        }
-
-        return null;
+        return currencies.TryGetValue(id, out currency);
     }
 }

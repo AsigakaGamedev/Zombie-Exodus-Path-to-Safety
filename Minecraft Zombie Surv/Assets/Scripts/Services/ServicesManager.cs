@@ -35,7 +35,9 @@ public class ServicesManager : MonoBehaviour
         print($"Player Authenticated {AuthenticationService.Instance.PlayerId}");
 
         economy.Refresh();
+
         cloud.Init();
+        cloud.LoadPlayerData();
 
         ServiceLocator.GetService<LoadingManager>().LoadScene(mainMenuScene);
     }

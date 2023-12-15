@@ -25,7 +25,7 @@ public class LocalizableText : MonoBehaviour
 
     private void OnDestroy()
     {
-        localizationManager.onLocalizationChange -= OnLocalizationChange;
+        if (localizationManager) localizationManager.onLocalizationChange -= OnLocalizationChange;
     }
 
     private void OnLocalizationChange(LocalizationInfo localization)
