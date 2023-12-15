@@ -1034,6 +1034,7 @@ GameObject:
   - component: {fileID: 5242080903645845919}
   - component: {fileID: 2781102578989624980}
   - component: {fileID: 5321733042507482998}
+  - component: {fileID: 6216732742005634774}
   m_Layer: 0
   m_Name: minecraft_character
   m_TagString: Untagged
@@ -1069,7 +1070,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7264217198965691266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0af3c04fcf8a6094e8873d1f7a919afb, type: 3}
   m_Name: 
@@ -1104,6 +1105,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6216732742005634774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264217198965691266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4819037fb636ea346afd1feecdde1e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renders:
+  - {fileID: 5245953356179765962}
+  - {fileID: 3002985167431365626}
+  - {fileID: 3658094871741915852}
+  - {fileID: 3220522982093845105}
+  - {fileID: 2490678468557165647}
+  - {fileID: 2581681111132466969}
 --- !u!1 &8332164364403707498
 GameObject:
   m_ObjectHideFlags: 0
