@@ -8,11 +8,13 @@ using UnityEngine;
 public class ServicesManager : MonoBehaviour
 {
     [SerializeField] private GameEconomyService economy;
+    [SerializeField] private GameCloudService cloud;
 
     [Space]
     [Scene, SerializeField] private string mainMenuScene;
 
     public GameEconomyService Economy { get => economy; }
+    public GameCloudService Cloud { get => cloud; }
 
     private void OnEnable()
     {
@@ -33,6 +35,7 @@ public class ServicesManager : MonoBehaviour
         print($"Player Authenticated {AuthenticationService.Instance.PlayerId}");
 
         economy.Refresh();
+        cloud.Init();
 
         ServiceLocator.GetService<LoadingManager>().LoadScene(mainMenuScene);
     }

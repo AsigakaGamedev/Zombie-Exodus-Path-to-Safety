@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.chenpipi.project-pin-board": {
+      "version": "https://github.com/ichenpipi/unity-project-pin-board.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2ecf5f15398dcd085ebf8cb1131b973da3277559"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
@@ -128,6 +135,16 @@
         "com.unity.services.core": "1.12.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.services.cloudsave": {
+      "version": "3.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.services.authentication": "2.6.1",
+        "com.unity.services.core": "1.4.3"
       },
       "url": "https://packages.unity.com"
     },
