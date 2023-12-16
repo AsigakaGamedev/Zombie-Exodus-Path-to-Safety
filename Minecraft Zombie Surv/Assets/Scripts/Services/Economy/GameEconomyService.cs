@@ -10,7 +10,7 @@ public class GameEconomyService : MonoBehaviour
 {
     private Dictionary<string, CurrencyDefinition> currencies;
 
-    public Action<string, CurrencyDefinition> onCurrencyUpdate;
+    public Action<PlayerBalance> onPlayerBalanceUpdate;
 
     public async Task Refresh()
     {
@@ -22,11 +22,16 @@ public class GameEconomyService : MonoBehaviour
         foreach (CurrencyDefinition curCurrency in rawCurrencies)
         {
             currencies.Add(curCurrency.Id, curCurrency);
-            onCurrencyUpdate?.Invoke(curCurrency.Id, curCurrency);
-            print($"Currency {curCurrency.Id} was added! {curCurrency.Modified}");
+            print($"Currency {curCurrency.Id} was added!");
         }
 
-        print($"Economy updated\nCurrencies count - {currencies.Count}");
+        GetBalancesResult results = await EconomyService.Instance.PlayerBalances.GetBalancesAsync();
+
+        foreach (PlayerBalance balance in results.Balances)
+        {
+            print($"Balance {balance.CurrencyId} is {balance.Balance}");
+            onPlayerBalanceUpdate?.Invoke(balance);
+        }
     }
 
     public async Task<PlayerBalance> TryGetBalance(string currencyID)
@@ -46,6 +51,7 @@ public class GameEconomyService : MonoBehaviour
 
     public async Task IncrementBalance(string id, int amount)
     {
-        await EconomyService.Instance.PlayerBalances.IncrementBalanceAsync(id, amount);
+        PlayerBalance playerBalance = await EconomyService.Instance.PlayerBalances.IncrementBalanceAsync(id, amount);
+        onPlayerBalanceUpdate?.Invoke(playerBalance);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Economy.Model;
 using UnityEngine;
@@ -12,25 +13,29 @@ public class UICurrencyText : MonoBehaviour
     private ServicesManager services;
     private GameEconomyService economy;
 
-    private void Start()
+    private async void Start()
     {
         services = ServiceLocator.GetService<ServicesManager>();
-        services.onInitialized += OnServicesInitialized;
+
+        while (!services.IsInitialized)
+        {
+            await Task.Delay(500);
+        }
+
+        economy = services.Economy;
+        economy.onPlayerBalanceUpdate += OnUpdateBalance;
+
+        UpdateBalance();
     }
 
     private void OnDestroy()
     {
-        services.onInitialized -= OnServicesInitialized;
-
         if (economy)
-            economy.onCurrencyUpdate -= OnUpdateCurrency;
+            economy.onPlayerBalanceUpdate -= OnUpdateBalance;
     }
 
-    private async void OnServicesInitialized()
+    private async void UpdateBalance()
     {
-        economy = ServiceLocator.GetService<ServicesManager>().Economy;
-        economy.onCurrencyUpdate += OnUpdateCurrency;
-
         PlayerBalance playerBalance = await economy.TryGetBalance(currencyID);
         if (playerBalance != null)
         {
@@ -38,10 +43,10 @@ public class UICurrencyText : MonoBehaviour
         }
     }
 
-    private void OnUpdateCurrency(string id, CurrencyDefinition currency)
+    private void OnUpdateBalance(PlayerBalance playerBalance)
     {
-        if (id != currencyID) return;
+        if (playerBalance.CurrencyId != currencyID) return;
 
-        linkedText.text = currency.Initial.ToString();
+        linkedText.text = playerBalance.Balance.ToString();
     }
 }

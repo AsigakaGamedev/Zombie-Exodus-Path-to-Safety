@@ -28,12 +28,12 @@ public class GameCloudService : MonoBehaviour
         playerManager.onNicknameChange -= OnPlayerChangeNickname;
     }
 
-    private void OnPlayerChangeNickname(string newNickname)
+    private async void OnPlayerChangeNickname(string newNickname)
     {
-        SavePlayerData();
+        await SavePlayerData();
     }
 
-    public async void SavePlayerData()
+    public async Task SavePlayerData()
     {
         PlayerCloudData playerData = new PlayerCloudData()
         {

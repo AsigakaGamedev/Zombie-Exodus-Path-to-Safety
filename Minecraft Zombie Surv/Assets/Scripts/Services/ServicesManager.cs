@@ -22,6 +22,8 @@ public class ServicesManager : MonoBehaviour
     public GameCloudService Cloud { get => cloud; }
     public AdsService Ads { get => ads; set => ads = value; }
 
+    public bool IsInitialized { get; private set; }
+
     private void OnEnable()
     {
         ServiceLocator.AddService(this);
@@ -34,6 +36,7 @@ public class ServicesManager : MonoBehaviour
 
     private async void Start()
     {
+        IsInitialized = false;
         await UnityServices.InitializeAsync();
 
         ServiceLocator.GetService<LoadingManager>().LoadScene(mainMenuScene);
@@ -44,7 +47,7 @@ public class ServicesManager : MonoBehaviour
         ads.DestroyService();
     }
 
-    private async void InitializeAllServices()
+    private async Task InitializeAllServices()
     {
         ads.InitService();
 
@@ -54,6 +57,8 @@ public class ServicesManager : MonoBehaviour
         await cloud.LoadPlayerData();
 
         onInitialized?.Invoke();
+        IsInitialized = true;
+        await economy.Refresh();
     }
 
     public async Task TrySignUp(string login, string password)
@@ -61,7 +66,9 @@ public class ServicesManager : MonoBehaviour
         await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(login, password);
         Debug.Log("SignUp is successful.");
 
-        InitializeAllServices();
+        ServiceLocator.GetService<PlayerManager>().SetNickname(login);
+
+        await InitializeAllServices();
     }
 
     public async Task TrySignIn(string login, string password)
@@ -69,6 +76,6 @@ public class ServicesManager : MonoBehaviour
         await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(login, password);
         Debug.Log("SignIn is successful.");
 
-        InitializeAllServices();
+        await InitializeAllServices();
     }
 }
