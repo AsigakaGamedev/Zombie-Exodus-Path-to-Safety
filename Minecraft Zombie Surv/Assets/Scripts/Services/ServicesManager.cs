@@ -9,12 +9,14 @@ public class ServicesManager : MonoBehaviour
 {
     [SerializeField] private GameEconomyService economy;
     [SerializeField] private GameCloudService cloud;
+    [SerializeField] private AdsService ads;
 
     [Space]
     [Scene, SerializeField] private string mainMenuScene;
 
     public GameEconomyService Economy { get => economy; }
     public GameCloudService Cloud { get => cloud; }
+    public AdsService Ads { get => ads; set => ads = value; }
 
     private void OnEnable()
     {
