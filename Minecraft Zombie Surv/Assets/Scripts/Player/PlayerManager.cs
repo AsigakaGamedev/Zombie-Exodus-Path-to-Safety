@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     private void OnLoadPlayerData(PlayerCloudData playerData)
     {
         playerNickname = playerData.Nickname;
+        onNicknameChange?.Invoke(playerNickname);
     }
 
     public void SetNickname(string newNick)

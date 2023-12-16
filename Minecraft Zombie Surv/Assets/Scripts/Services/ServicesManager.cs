@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -32,15 +33,34 @@ public class ServicesManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        //await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        print($"Player Authenticated {AuthenticationService.Instance.PlayerId}");
-
-        economy.Refresh();
-
-        cloud.Init();
-        cloud.LoadPlayerData();
+        //print($"Player Authenticated {AuthenticationService.Instance.PlayerId}");
 
         ServiceLocator.GetService<LoadingManager>().LoadScene(mainMenuScene);
+    }
+
+    private async void InitializeAllServices()
+    {
+        await economy.Refresh();
+
+        await cloud.Init();
+        await cloud.LoadPlayerData();
+    }
+
+    public async Task TrySignUp(string login, string password)
+    {
+        await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(login, password);
+        Debug.Log("SignUp is successful.");
+
+        InitializeAllServices();
+    }
+
+    public async Task TrySignIn(string login, string password)
+    {
+        await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(login, password);
+        Debug.Log("SignIn is successful.");
+
+        InitializeAllServices();
     }
 }

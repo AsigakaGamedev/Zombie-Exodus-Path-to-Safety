@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AdsService : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI rewardText;
     private string appKey = "1ce3ac4fd";
 
     public void Start()
@@ -142,7 +141,7 @@ public class AdsService : MonoBehaviour
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        rewardText.text = "1000";
+
     }
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.Economy;
 using Unity.Services.Economy.Model;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class GameEconomyService : MonoBehaviour
 
     public Action<string, CurrencyDefinition> onCurrencyUpdate;
 
-    public async void Refresh()
+    public async Task Refresh()
     {
         currencies = new Dictionary<string, CurrencyDefinition>();
 
@@ -30,6 +31,12 @@ public class GameEconomyService : MonoBehaviour
 
     public bool TryGetCurrency(string id, out CurrencyDefinition currency)
     {
+        if (currencies == null)
+        {
+            currency = null;
+            return false;
+        }
+
         return currencies.TryGetValue(id, out currency);
     }
 }

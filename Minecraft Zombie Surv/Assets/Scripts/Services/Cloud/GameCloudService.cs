@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models;
 using UnityEngine;
@@ -13,10 +14,13 @@ public class GameCloudService : MonoBehaviour
 
     public Action<PlayerCloudData> onLoadPlayerData;
 
-    public async void Init()
+    public async Task Init()
     {
-        playerManager = ServiceLocator.GetService<PlayerManager>();
-        playerManager.onNicknameChange += OnPlayerChangeNickname;
+        await Task.Run(() =>
+        {
+            playerManager = ServiceLocator.GetService<PlayerManager>();
+            playerManager.onNicknameChange += OnPlayerChangeNickname;
+        });
     }
 
     private void OnDestroy()
@@ -43,14 +47,21 @@ public class GameCloudService : MonoBehaviour
         print($"Player data saved! {playerData.ToString()}");
     }
 
-    public async void LoadPlayerData()
+    public async Task LoadPlayerData()
     {
         Dictionary<string, Item> data = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { PLAYER_DATA_KEY});
 
-        PlayerCloudData playerData = JsonUtility.FromJson<PlayerCloudData>(data[PLAYER_DATA_KEY].Value.GetAsString());
+        try
+        {
+            PlayerCloudData playerData = JsonUtility.FromJson<PlayerCloudData>(data[PLAYER_DATA_KEY].Value.GetAsString());
 
-        print($"Player data loaded! {playerData.ToString()}");
-        onLoadPlayerData?.Invoke(playerData);  
+            print($"Player data loaded! {playerData}");
+            onLoadPlayerData?.Invoke(playerData);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex);
+        }
     }
 }
 
