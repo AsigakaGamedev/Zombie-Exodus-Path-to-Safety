@@ -23,20 +23,29 @@ public class GameEconomyService : MonoBehaviour
         {
             currencies.Add(curCurrency.Id, curCurrency);
             onCurrencyUpdate?.Invoke(curCurrency.Id, curCurrency);
-            print($"Currency {curCurrency.Id} was added!");
+            print($"Currency {curCurrency.Id} was added! {curCurrency.Modified}");
         }
 
         print($"Economy updated\nCurrencies count - {currencies.Count}");
     }
 
-    public bool TryGetCurrency(string id, out CurrencyDefinition currency)
+    public async Task<PlayerBalance> TryGetBalance(string currencyID)
     {
-        if (currencies == null)
+        GetBalancesResult results = await EconomyService.Instance.PlayerBalances.GetBalancesAsync();
+        
+        foreach (PlayerBalance balance in results.Balances)
         {
-            currency = null;
-            return false;
+            if (balance.CurrencyId == currencyID)
+            {
+                return balance;
+            }
         }
 
-        return currencies.TryGetValue(id, out currency);
+        return null;
+    }
+
+    public async Task IncrementBalance(string id, int amount)
+    {
+        await EconomyService.Instance.PlayerBalances.IncrementBalanceAsync(id, amount);
     }
 }

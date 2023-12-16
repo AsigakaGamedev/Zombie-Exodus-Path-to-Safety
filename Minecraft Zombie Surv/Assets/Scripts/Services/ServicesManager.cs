@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ public class ServicesManager : MonoBehaviour
 
     [Space]
     [Scene, SerializeField] private string mainMenuScene;
+
+    public Action onInitialized;
 
     public GameEconomyService Economy { get => economy; }
     public GameCloudService Cloud { get => cloud; }
@@ -33,19 +36,24 @@ public class ServicesManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
 
-        //await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-        //print($"Player Authenticated {AuthenticationService.Instance.PlayerId}");
-
         ServiceLocator.GetService<LoadingManager>().LoadScene(mainMenuScene);
+    }
+
+    private void OnDestroy()
+    {
+        ads.DestroyService();
     }
 
     private async void InitializeAllServices()
     {
+        ads.InitService();
+
         await economy.Refresh();
 
         await cloud.Init();
         await cloud.LoadPlayerData();
+
+        onInitialized?.Invoke();
     }
 
     public async Task TrySignUp(string login, string password)

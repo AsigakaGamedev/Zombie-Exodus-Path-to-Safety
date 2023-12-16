@@ -9,22 +9,33 @@ public class UICurrencyText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI linkedText;
     [SerializeField] private string currencyID;
 
+    private ServicesManager services;
     private GameEconomyService economy;
 
     private void Start()
     {
-        economy = ServiceLocator.GetService<ServicesManager>().Economy;
-        economy.onCurrencyUpdate += OnUpdateCurrency;
-
-        if (economy.TryGetCurrency(currencyID, out CurrencyDefinition currency))
-        {
-            linkedText.text = currency.Initial.ToString();
-        }
+        services = ServiceLocator.GetService<ServicesManager>();
+        services.onInitialized += OnServicesInitialized;
     }
 
     private void OnDestroy()
     {
-        economy.onCurrencyUpdate -= OnUpdateCurrency;
+        services.onInitialized -= OnServicesInitialized;
+
+        if (economy)
+            economy.onCurrencyUpdate -= OnUpdateCurrency;
+    }
+
+    private async void OnServicesInitialized()
+    {
+        economy = ServiceLocator.GetService<ServicesManager>().Economy;
+        economy.onCurrencyUpdate += OnUpdateCurrency;
+
+        PlayerBalance playerBalance = await economy.TryGetBalance(currencyID);
+        if (playerBalance != null)
+        {
+            linkedText.text = playerBalance.Balance.ToString();
+        }
     }
 
     private void OnUpdateCurrency(string id, CurrencyDefinition currency)

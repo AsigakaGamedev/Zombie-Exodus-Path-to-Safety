@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class AdsService : MonoBehaviour
 {
-    private string appKey = "1ce3ac4fd";
+    private const string appKey = "1ce3ac4fd";
 
-    public void Start()
+    private string currencyID;
+    private int currencyIncrement;
+
+    private GameEconomyService economyService;
+
+    public void InitService()
     {
         IronSource.Agent.validateIntegration();
         IronSource.Agent.init(appKey);
@@ -29,9 +34,11 @@ public class AdsService : MonoBehaviour
         IronSourceRewardedVideoEvents.onAdShowFailedEvent += RewardedVideoOnAdShowFailedEvent;
         IronSourceRewardedVideoEvents.onAdRewardedEvent += RewardedVideoOnAdRewardedEvent;
         IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
+
+        economyService = ServiceLocator.GetService<ServicesManager>().Economy;
     }
 
-    private void OnDestroy()
+    public void DestroyService()
     {
         IronSourceEvents.onSdkInitializationCompletedEvent -= OnSDKInitialized;
     }
@@ -117,6 +124,21 @@ public class AdsService : MonoBehaviour
         }
     }
 
+    public IEnumerator LoadAndShowRewarded(string currencyID, int currencyIncrement)
+    {
+        this.currencyID = currencyID;
+        this.currencyIncrement = currencyIncrement;
+
+        LoadRewarded();
+
+        while (!IronSource.Agent.isRewardedVideoAvailable())
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ShowRewarded();
+    }
+
     // Indicates that there’s an available ad.
     // The adInfo object includes information about the ad that was loaded successfully
     // This replaces the RewardedVideoAvailabilityChangedEvent(true) event
@@ -131,6 +153,7 @@ public class AdsService : MonoBehaviour
     // The Rewarded Video ad view has opened. Your activity will loose focus.
     void RewardedVideoOnAdOpenedEvent(IronSourceAdInfo adInfo)
     {
+        
     }
     // The Rewarded Video ad view is about to be closed. Your activity will regain its focus.
     void RewardedVideoOnAdClosedEvent(IronSourceAdInfo adInfo)
@@ -139,8 +162,9 @@ public class AdsService : MonoBehaviour
     // The user completed to watch the video, and should be rewarded.
     // The placement parameter will include the reward data.
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
-    void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
+    async void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
+        await economyService.IncrementBalance(currencyID, currencyIncrement);
 
     }
     // The rewarded video ad was failed to show.
