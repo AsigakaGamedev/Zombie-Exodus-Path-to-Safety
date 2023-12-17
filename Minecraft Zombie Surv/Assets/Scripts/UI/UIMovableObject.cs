@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private CanvasGroup group;
-    [SerializeField] private Image iconImg;
+    [SerializeField] protected Image iconImg;
 
     [Space]
     [SerializeField] private Transform originParent;
@@ -23,11 +23,6 @@ public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         originParent = origin;
         dragParent = drag;
-    }
-
-    public void SetIcon(Sprite icon)
-    {
-        iconImg.sprite = icon;
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)

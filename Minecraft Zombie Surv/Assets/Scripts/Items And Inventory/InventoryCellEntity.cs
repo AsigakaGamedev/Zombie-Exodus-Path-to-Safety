@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,5 +7,13 @@ public class InventoryCellEntity
 {
     [SerializeField] private ItemEntity item;
 
-    public ItemEntity Item { get => item; set => item = value; }
+    public Action<ItemEntity> onItemChange;
+
+    public ItemEntity Item { get => item;
+        set
+        {
+            item = value;
+            onItemChange?.Invoke(item);
+        }
+    }
 }

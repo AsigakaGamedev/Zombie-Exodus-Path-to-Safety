@@ -20,8 +20,10 @@ public class PlayerController : MonoBehaviour
 
     public InventoryController Inventory { get => inventory; }
 
-    private void Start()
+    public void Init()
     {
+        inventory.Init();
+
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;

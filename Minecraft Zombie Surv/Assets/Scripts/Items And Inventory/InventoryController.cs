@@ -10,7 +10,9 @@ public class InventoryController : MonoBehaviour
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
 
-    private void Start()
+    public List<InventoryCellEntity> Cells { get => cells; }
+
+    public void Init()
     {
         cells = new List<InventoryCellEntity>();
 
