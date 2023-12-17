@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class TakeItemInteract : MonoBehaviour
 {
+    [SerializeField] private ItemData itemData;
+
+    [Space]
     [SerializeField] private InteractableObject interactableObject;
+
+    private void OnValidate()
+    {
+        if (!interactableObject) interactableObject = GetComponent<InteractableObject>();
+    }
 
     private void Start()
     {
@@ -18,6 +26,6 @@ public class TakeItemInteract : MonoBehaviour
 
     private void OnInteract(PlayerController player)
     {
-        print("Take Item");
+        player.Inventory.AddItem(itemData);
     }
 }
