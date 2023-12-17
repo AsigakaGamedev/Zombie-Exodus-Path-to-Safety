@@ -31,13 +31,13 @@ public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         transform.SetParent(dragParent);
         group.alpha = dragAlpha;
         group.blocksRaycasts = false;
-        OnBegin();
+        OnBegin(eventData);
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
-        OnDrag();
+        OnDrag(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -46,10 +46,10 @@ public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         group.alpha = 1;
         transform.position = defaultPos;
         group.blocksRaycasts = true;
-        OnEnd();
+        OnEnd(eventData);
     }
 
-    protected virtual void OnBegin() { }
-    protected virtual void OnDrag() { }
-    protected virtual void OnEnd() { }
+    protected virtual void OnBegin(PointerEventData eventData) { }
+    protected virtual void OnDrag(PointerEventData eventData) { }
+    protected virtual void OnEnd(PointerEventData eventData) { }
 }
