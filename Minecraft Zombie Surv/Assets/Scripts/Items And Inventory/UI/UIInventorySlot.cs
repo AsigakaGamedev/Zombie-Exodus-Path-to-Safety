@@ -8,6 +8,8 @@ public class UIInventorySlot : PoolableObject
 
     private InventoryCellEntity entity;
 
+    public UIMovableInventoryItem MovableItem { get => movableItem; }
+
     public void SetEntity(InventoryCellEntity entity)
     {
         if (entity != null)

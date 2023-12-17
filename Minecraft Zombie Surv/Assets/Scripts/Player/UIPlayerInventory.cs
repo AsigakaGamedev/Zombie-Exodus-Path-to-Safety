@@ -27,6 +27,7 @@ public class UIPlayerInventory : MonoBehaviour
             UIInventorySlot newSlot = poolingManager.GetPoolable(slotPrefab);
             newSlot.transform.SetParent(itemsContent);
             newSlot.SetEntity(slotEntity);
+            newSlot.MovableItem.SetParents(newSlot.transform, transform);
             spawnedSlots.Add(newSlot);
         }
     }
