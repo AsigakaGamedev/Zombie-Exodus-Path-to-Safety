@@ -9,6 +9,8 @@ public class InventoryController : MonoBehaviour
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
+   // [SerializeField] private List<CraftInfo> craftInfoList;
+  //  [SerializeField] private CraftInfo curCraftInfo;
 
     public List<InventoryCellEntity> Cells { get => cells; }
 
@@ -57,4 +59,48 @@ public class InventoryController : MonoBehaviour
 
         return null;
     }
+
+    public void CraftItem(CraftInfo craftRecipe)
+    {
+        // Проверить, достаточно ли материалов для крафта
+        if (CanCraftItem(craftRecipe))
+        {
+            // Уменьшить количество материалов в инвентаре
+            foreach (ItemData material in craftRecipe.CreationPriceList)
+            {
+                InventoryCellEntity materialCell = GetCell(material.Info);
+                materialCell.Item.Amount -= material.RandomAmount;
+            }
+
+            // Добавить созданные предметы в инвентарь
+            foreach (ItemData createdItem in craftRecipe.CreatedItemsList)
+            {
+                AddItem(createdItem);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Not enough materials to craft item!");
+        }
+    }
+
+    private bool CanCraftItem(CraftInfo craftRecipe)
+    {
+        foreach (ItemData material in craftRecipe.CreationPriceList)
+        {
+            InventoryCellEntity materialCell = GetCell(material.Info);
+
+            if (materialCell == null || materialCell.Item.Amount < material.RandomAmount)
+            {
+                // Не хватает материалов для крафта
+                return false;
+            }
+        }
+
+        // Достаточно материалов для крафта
+        return true;
+    }
+
+
+
 }
