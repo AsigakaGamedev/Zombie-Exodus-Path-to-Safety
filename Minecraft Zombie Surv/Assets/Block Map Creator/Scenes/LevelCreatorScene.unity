@@ -493,9 +493,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocksDatabase:
-  - {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
+  - {fileID: 11400000, guid: 0f0e2f83ce2be1b45a579c5ff9518faf, type: 2}
   - {fileID: 11400000, guid: 9f6dcfc8a9c3d1f489944bdb122b5b48, type: 2}
   - {fileID: 11400000, guid: 2b6f8a8f902f4c441a28b50d4606201e, type: 2}
+  - {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
   meshFilter: {fileID: 1351325609}
   meshCollider: {fileID: 1351325610}
   blockScale: 0.5
@@ -517,12 +518,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 680363474}
-  selectedBlock: {fileID: 11400000, guid: 2b6f8a8f902f4c441a28b50d4606201e, type: 2}
+  selectedBlock: {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
   mapLayers:
     serializedVersion: 2
     m_Bits: 2048
   creatorRadius: 6
-  startFlatSize: {x: 3, y: 1, z: 3}
+  startFlatSize: {x: 5, y: 1, z: 5}
   startFlatBlock: {fileID: 11400000, guid: 9f6dcfc8a9c3d1f489944bdb122b5b48, type: 2}
 --- !u!114 &680363476
 MonoBehaviour:
