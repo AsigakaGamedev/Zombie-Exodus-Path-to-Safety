@@ -23,7 +23,7 @@ public class UIPlayerInventory : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!player)
+        if (!player && levelContoller)
         {
             player = levelContoller.PlayerInstance;
 
