@@ -19,16 +19,24 @@ public class UIPlayerInventory : MonoBehaviour
 
         poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
         levelContoller = ServiceLocator.GetService<LevelContoller>();
+    }
 
-        player = levelContoller.PlayerInstance;
-
-        foreach (InventoryCellEntity slotEntity in player.Inventory.Cells)
+    private void OnEnable()
+    {
+        if (!player)
         {
-            UIInventorySlot newSlot = poolingManager.GetPoolable(slotPrefab);
-            newSlot.transform.SetParent(itemsContent);
-            newSlot.SetEntity(slotEntity);
-            newSlot.MovableItem.SetParents(newSlot.transform, transform);
-            spawnedSlots.Add(newSlot);
+            player = levelContoller.PlayerInstance;
+
+            if (!player) return;
+
+            foreach (InventoryCellEntity slotEntity in player.Inventory.Cells)
+            {
+                UIInventorySlot newSlot = poolingManager.GetPoolable(slotPrefab);
+                newSlot.transform.SetParent(itemsContent);
+                newSlot.SetEntity(slotEntity);
+                newSlot.MovableItem.SetParents(newSlot.transform, transform);
+                spawnedSlots.Add(newSlot);
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ public class BlockMapManager : MonoBehaviour
     [Space]
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshCollider meshCollider;
-    [SerializeField] private MeshJsonConverter meshCoverter;
 
     [Space]
     [SerializeField] private float blockScale = 1;
@@ -31,12 +30,33 @@ public class BlockMapManager : MonoBehaviour
     private int[,,] blocks;
 
     public float BlockScale { get => blockScale; }
+    public int[,,] Blocks
+    {
+        get => blocks; 
+        set
+        {
+            blocks = value;
+            print(blocks);
+            print(blocks.Length);
+            RegenerateMesh();
+        }
+    }
 
-    private void Awake()
+    [Button]
+    public void CreateMap()
     {
         blocks = new int[mapSize.x, mapSize.y, mapSize.z];
-
         RegenerateMesh();
+    }
+
+    [Button]
+    public void ClearMap()
+    {
+        blocks = null;
+
+        mesh = null;
+        meshFilter.sharedMesh = null;
+        meshCollider.sharedMesh = null;
     }
 
     #region Generation
@@ -56,6 +76,7 @@ public class BlockMapManager : MonoBehaviour
             {
                 for (int z = 0; z < mapSize.z; z++)
                 {
+                    //print(blocksDatabase[blocks[x, y, z]]);
                     GenerateBlock(new Vector3Int(x, y, z), blocksDatabase[blocks[x, y, z]]);
                 }
             }
@@ -210,22 +231,6 @@ public class BlockMapManager : MonoBehaviour
         uvCoordinates[3] = new Vector2(uMax, vMax); // правый верхний угол
 
         return uvCoordinates;
-    }
-
-    #endregion
-
-    #region Save Load
-
-    [Button]
-    public void SaveMap()
-    {
-        meshCoverter.SaveMeshToJSON(mesh);
-    }
-
-    [Button]
-    public void LoadMap()
-    {
-
     }
 
     #endregion
