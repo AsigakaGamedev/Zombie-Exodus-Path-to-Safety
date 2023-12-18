@@ -10,6 +10,7 @@ public class BlockMapManager : MonoBehaviour
     [Space]
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshCollider meshCollider;
+    [SerializeField] private MeshJsonConverter meshCoverter;
 
     [Space]
     [SerializeField] private float blockScale = 1;
@@ -37,6 +38,8 @@ public class BlockMapManager : MonoBehaviour
 
         RegenerateMesh();
     }
+
+    #region Generation
 
     [Button]
     public void RegenerateMesh()
@@ -208,4 +211,22 @@ public class BlockMapManager : MonoBehaviour
 
         return uvCoordinates;
     }
+
+    #endregion
+
+    #region Save Load
+
+    [Button]
+    public void SaveMap()
+    {
+        meshCoverter.SaveMeshToJSON(mesh);
+    }
+
+    [Button]
+    public void LoadMap()
+    {
+
+    }
+
+    #endregion
 }

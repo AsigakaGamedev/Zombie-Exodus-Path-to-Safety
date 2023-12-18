@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 680363474}
   - component: {fileID: 680363475}
   - component: {fileID: 680363476}
+  - component: {fileID: 680363477}
   m_Layer: 0
   m_Name: '[System]'
   m_TagString: Untagged
@@ -499,6 +500,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
   meshFilter: {fileID: 1351325609}
   meshCollider: {fileID: 1351325610}
+  meshCoverter: {fileID: 680363477}
   blockScale: 0.5
   mapSize: {x: 10, y: 50, z: 10}
   blocksAtlas: {fileID: 2800000, guid: 03daa8c41553d1e498e1798c12a96b98, type: 3}
@@ -546,6 +548,19 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 02a8da9bb22999f41a5c0e38f9e7fc15, type: 3}
   - {fileID: 2800000, guid: 4f37bb6cdffd2f445aa712071d4e800f, type: 3}
   maxTexturesPerRow: 7
+--- !u!114 &680363477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680363472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afef44d5b0ed8ee4fa64db351ce5a00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savePath: Assets/Block Map Creator/Saved Maps/map.json
 --- !u!1 &838499092
 GameObject:
   m_ObjectHideFlags: 0
