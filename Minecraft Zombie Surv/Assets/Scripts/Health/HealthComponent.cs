@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
-    [Space]
-    [ReadOnly, SerializeField] private float health;
+    [SerializeField] private bool deactivateOnDie = true;
+
     [Space]
     [SerializeField] private Slider slider;
 
+    [Space]
+    [ReadOnly, SerializeField] private float health;
 
     public Action<float> onDamage;
     public Action onDie;
@@ -32,6 +34,7 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0)
         {
             onDie?.Invoke();
+            if (deactivateOnDie) gameObject.SetActive(false);
         }
     }
 

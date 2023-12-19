@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAttack : MonoBehaviour
+public abstract class BaseAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public virtual void OnInit() { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void OnAttack();
 }

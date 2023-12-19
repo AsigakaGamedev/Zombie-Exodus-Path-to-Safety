@@ -7,10 +7,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private InventoryController inventory;
     [SerializeField] private InteractionsController interactions;
+    [SerializeField] private AnimationsController animations;
+    [SerializeField] private WeaponsController weapons;
 
     [Space]
     [SerializeField] private float moveSpeed = 3;
-    [SerializeField] private float rotateSpeed = 2;
+    [SerializeField] private float rotateSpeed = 5;
+
+    [Space]
+    [SerializeField] private float attackMagnitude = 0.7f;
 
     private UIMobilePlayerInputs playerInputs;
     private Joystick moveJoystick;
@@ -23,6 +28,9 @@ public class PlayerController : MonoBehaviour
     public void Init()
     {
         inventory.Init();
+        
+        weapons.onEquip += OnEquipWeapon;
+        weapons.Init();
 
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
@@ -43,6 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         interactions.onFindInteractable -= OnFindInteractable;
         interactions.onLoseInteractable -= OnLoseInteractable;
+
+        weapons.onEquip -= OnEquipWeapon;
     }
 
     private void Update()
@@ -50,6 +60,7 @@ public class PlayerController : MonoBehaviour
         interactions.CheckInteractions();
 
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
+        animations.MoveTo(moveInput);
         Vector3 lookInput = new Vector3(lookJoystick.Horizontal, 0, lookJoystick.Vertical);
 
         if (lookInput.sqrMagnitude == 0 && moveInput.sqrMagnitude != 0)
@@ -60,11 +71,21 @@ public class PlayerController : MonoBehaviour
         {
             SmoothRotate(lookInput);
         }
+
+        if (lookInput.sqrMagnitude >= attackMagnitude)
+        {
+            weapons.TryAttack();
+        }
     }
 
     private void FixedUpdate()
     {
         rb.velocity = moveInput * moveSpeed;
+    }
+
+    private void OnEquipWeapon(Weapon weapon)
+    {
+        animations.SetAnimType(weapon.AnimTypeIndex);
     }
 
     private void SmoothRotate(Vector3 dir)

@@ -19,9 +19,9 @@ public class AnimationsController : MonoBehaviour
     [ShowIf(nameof(changeAnimSpeed)), SerializeField] private Vector2 animSpeed;
 
     [Space]
-    [SerializeField] private bool changeAnimType = true;
-    [ShowIf(nameof(changeAnimType)), AnimatorParam(nameof(animator)), SerializeField] private string animTypeKey;
-    [ShowIf(nameof(changeAnimType)), SerializeField] private Vector2Int animTypes;
+    [AnimatorParam(nameof(animator)), SerializeField] private string animTypeKey;
+    [SerializeField] private bool changeAnimTypeAtStart = true;
+    [ShowIf(nameof(changeAnimTypeAtStart)), SerializeField] private Vector2Int animTypes;
 
     private Vector3 lastPos;
 
@@ -29,7 +29,7 @@ public class AnimationsController : MonoBehaviour
     {
         if (changeAnimSpeed) animator.SetFloat(animSpeedKey, Random.Range(animSpeed.x, animSpeed.y));
 
-        if (changeAnimType) animator.SetInteger(animTypeKey, Random.Range(animTypes.x, animTypes.y + 1));
+        if (changeAnimTypeAtStart) SetAnimType(Random.Range(animTypes.x, animTypes.y + 1));
 
         lastPos = transform.position;
     }
@@ -52,10 +52,14 @@ public class AnimationsController : MonoBehaviour
         {
             case MoveAnimType.Velocity:
                 float velocityZ = Vector3.Dot(dir, transform.forward);
-                animator.SetFloat(moveKey, -velocityZ);
-                print(-velocityZ);
+                animator.SetFloat(moveKey, velocityZ, 0.1f, Time.deltaTime);
 
                 break;
         }
+    }
+
+    public void SetAnimType(int index)
+    {
+        animator.SetInteger(animTypeKey, index);
     }
 }

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 1351460437862503879}
   - component: {fileID: 579089501169965793}
   - component: {fileID: 7677766760573084984}
-  m_Layer: 0
+  - component: {fileID: 337394379416109308}
+  m_Layer: 9
   m_Name: Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,10 +72,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.4
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6529745582247403917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +160,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randYRotation: {x: 0, y: 360}
+--- !u!114 &337394379416109308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462388458153328716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21eea571a4fe21d4a9d839368f551e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
+  slider: {fileID: 0}
 --- !u!1001 &7516995404390173720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,10 +372,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2417064657626172270}
-  isMoveKey: IsMove
+  moveAnimType: 0
+  moveKey: IsMove
+  changeAnimSpeed: 1
   animSpeedKey: AnimSpeed
   animSpeed: {x: 0.8, y: 1.2}
   animTypeKey: AnimType
+  changeAnimTypeAtStart: 1
   animTypes: {x: 1, y: 2}
 --- !u!4 &2372877693646591367 stripped
 Transform:

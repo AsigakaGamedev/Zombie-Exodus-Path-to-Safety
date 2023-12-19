@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class AttacksHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private BaseAttack[] allAttacks;
+
+    [Space]
+    [SerializeField] private float timeBetweenAttacks;
+
+    private bool canAttack;
+
+    public void Init()
     {
-        
+        canAttack = true;
+
+        foreach (var attack in allAttacks)
+        {
+            attack.OnInit();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool TryAttack()
     {
-        
+        if (!canAttack) return false;
+
+        foreach (var attack in allAttacks)
+        {
+            attack.OnAttack();
+        }
+
+        canAttack = false;
+        Invoke(nameof(ResetCanAttack), timeBetweenAttacks);
+        return true;
+    }
+
+    private void ResetCanAttack()
+    {
+        canAttack = true;
     }
 }

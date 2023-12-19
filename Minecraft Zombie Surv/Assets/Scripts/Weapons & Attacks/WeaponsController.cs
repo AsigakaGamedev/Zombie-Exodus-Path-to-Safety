@@ -1,18 +1,43 @@
+using AYellowpaper.SerializedCollections;
+using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponsController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int startWeaponID = -1;
+    [SerializeField] private SerializedDictionary<int, Weapon> allWeapons;
+
+    [Space]
+    [ReadOnly, SerializeField] private Weapon weaponInHands;
+
+    public Action<Weapon> onEquip;
+
+    public void Init()
     {
-        
+        if (startWeaponID != -1) EquipWeapon(startWeaponID);
+
+        foreach (var weapon in allWeapons.Values)
+        {
+            weapon.Init();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool TryAttack()
     {
-        
+        if (weaponInHands == null) return false;
+
+        return weaponInHands.TryAttack();
+    }
+
+    public void EquipWeapon(int weaponID)
+    {
+        if (weaponInHands) weaponInHands.OnDequip();
+
+        weaponInHands = allWeapons[weaponID];
+        weaponInHands.OnEquip();
+        onEquip?.Invoke(weaponInHands);
     }
 }
