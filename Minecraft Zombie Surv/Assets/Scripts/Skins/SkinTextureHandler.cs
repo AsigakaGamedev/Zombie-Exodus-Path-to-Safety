@@ -10,15 +10,22 @@ public class SkinTextureHandler : MonoBehaviour
 
     private void Start()
     {
-        skinManager = ServiceLocator.GetService<SkinsManager>();
-        OnSkinChange(skinManager.SelectedTexture);
+        try
+        {
+            skinManager = ServiceLocator.GetService<SkinsManager>();
+            OnSkinChange(skinManager.SelectedTexture);
 
-        skinManager.onSelectSkin += OnSkinChange;
+            skinManager.onSelectSkin += OnSkinChange;
+        }
+        catch
+        {
+
+        }
     }
 
     private void OnDestroy()
     {
-        skinManager.onSelectSkin -= OnSkinChange;
+        if (skinManager) skinManager.onSelectSkin -= OnSkinChange;
     }
 
     private void OnSkinChange(Texture2D texture)
