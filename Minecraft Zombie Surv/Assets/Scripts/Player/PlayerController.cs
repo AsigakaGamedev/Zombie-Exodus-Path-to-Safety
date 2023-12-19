@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             if (weapons.TryAttack())
             {
-                animations.SetAttackTrigger();
+                animations.SetAttackTrigger(); 
             }
         }
     }

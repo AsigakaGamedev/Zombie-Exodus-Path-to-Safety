@@ -91,6 +91,8 @@ MonoBehaviour:
   states:
   - {fileID: 1351460437862503879}
   - {fileID: 550053288607681031}
+  health: {fileID: 337394379416109308}
+  mainCollider: {fileID: 1641154708309692709}
   currentState: {fileID: 0}
 --- !u!114 &550053288607681031
 MonoBehaviour:
@@ -173,7 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  deactivateOnDie: 1
+  deactivateOnDie: 0
+  ragdoll: {fileID: 7164925131372379}
   slider: {fileID: 0}
   health: 0
 --- !u!1001 &7516995404390173720
@@ -354,6 +357,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1456856510846732798}
   m_SourcePrefab: {fileID: 100100000, guid: 7436dc7a606e86541ac637c56cf2732b, type: 3}
+--- !u!114 &7164925131372379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7514483613575396163, guid: 7436dc7a606e86541ac637c56cf2732b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7516995404390173720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909186647307427738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bea61f7f10c67441a6d41bd12dba9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &909186647307427738 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7264217198965691266, guid: 7436dc7a606e86541ac637c56cf2732b,
@@ -373,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2417064657626172270}
+  attackKey: 
   moveAnimType: 0
   moveKey: IsMove
   changeAnimSpeed: 1

@@ -2,10 +2,15 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIStatesController : MonoBehaviour
 {
     [SerializeField] private AIStateBase[] states;
+
+    [Space]
+    [SerializeField] private HealthComponent health;
+    [SerializeField] private Collider mainCollider;
 
     [Space]
     [ReadOnly, SerializeField] private AIStateBase currentState;
@@ -18,6 +23,21 @@ public class AIStatesController : MonoBehaviour
         }
 
         currentState = states[0];
+
+        if (health) health.onDie += OnDie;
+    }
+
+    private void OnDestroy()
+    {
+        if (health) health.onDie -= OnDie;
+    }
+
+    private void OnDie()
+    {
+        enabled = false;
+
+        GetComponent<NavMeshAgent>().enabled = false;
+        mainCollider.enabled = false;
     }
 
     private void Update()

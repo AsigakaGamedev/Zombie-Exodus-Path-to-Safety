@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
-    [SerializeField] private bool deactivateOnDie = true;
+    [SerializeField] private bool deactivateOnDie = false;
+    [SerializeField] private RagdollController ragdoll;
 
     [Space]
     [SerializeField] private Slider slider;
@@ -27,6 +28,8 @@ public class HealthComponent : MonoBehaviour
 
     public void Damage(float damage)
     {
+        if (health <= 0) return;
+
         health -= damage;
         onDamage?.Invoke(health);
         SetValue(health);
@@ -35,6 +38,8 @@ public class HealthComponent : MonoBehaviour
         {
             onDie?.Invoke();
             if (deactivateOnDie) gameObject.SetActive(false);
+
+            if (ragdoll) ragdoll.Activate();
         }
     }
 
