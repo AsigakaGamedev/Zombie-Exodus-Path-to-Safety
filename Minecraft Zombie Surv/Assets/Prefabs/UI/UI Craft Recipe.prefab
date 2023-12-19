@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8925611017892195529}
   - component: {fileID: 437700542387110414}
   - component: {fileID: 590342002649486727}
+  - component: {fileID: 8491526133157626283}
   m_Layer: 0
   m_Name: UI Craft Recipe
   m_TagString: Untagged
@@ -121,6 +122,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8491526133157626283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855150029160998691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8666b9acac5e574c985ecfd4014150c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolID: ui_craft_recipe
+  btn: {fileID: 590342002649486727}
 --- !u!1 &4314203046217780289
 GameObject:
   m_ObjectHideFlags: 0

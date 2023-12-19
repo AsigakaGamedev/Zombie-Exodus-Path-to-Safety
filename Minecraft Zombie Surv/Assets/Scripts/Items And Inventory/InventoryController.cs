@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    [SerializeField] private CraftInfo[] allCrafts;
+
+    [Space]
     [SerializeField] private int cellsCount = 24;
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
-   // [SerializeField] private List<CraftInfo> craftInfoList;
-  //  [SerializeField] private CraftInfo curCraftInfo;
 
     public List<InventoryCellEntity> Cells { get => cells; }
+    public CraftInfo[] AllCrafts { get => allCrafts; }
 
     public void Init()
     {

@@ -120,6 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390e6e1e8ee028744802a96d933d982b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allCrafts:
+  - {fileID: 11400000, guid: b1b37d9210a83824f8e066bab03d35ea, type: 2}
+  - {fileID: 11400000, guid: b1b37d9210a83824f8e066bab03d35ea, type: 2}
+  - {fileID: 11400000, guid: b1b37d9210a83824f8e066bab03d35ea, type: 2}
   cellsCount: 15
   cells: []
 --- !u!114 &710103694648830780
@@ -338,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 925908716614716047, guid: 4cc482e6e01b5b7449631984e78eb89f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1732788503113230181, guid: 4cc482e6e01b5b7449631984e78eb89f,
         type: 3}
