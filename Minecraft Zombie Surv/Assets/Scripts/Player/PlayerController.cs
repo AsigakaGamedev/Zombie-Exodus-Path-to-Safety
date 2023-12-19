@@ -83,7 +83,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = moveInput * moveSpeed;
+        moveInput *= moveSpeed;
+        moveInput.y = rb.velocity.y;
+        rb.velocity = moveInput;
     }
 
     private void OnEquipWeapon(Weapon weapon)
