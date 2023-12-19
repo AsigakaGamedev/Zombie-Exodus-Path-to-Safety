@@ -8,6 +8,7 @@ public enum MoveAnimType { Bool, Velocity}
 public class AnimationsController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [AnimatorParam(nameof(animator)), SerializeField] private string attackKey;
 
     [Space]
     [SerializeField] private MoveAnimType moveAnimType;
@@ -61,5 +62,15 @@ public class AnimationsController : MonoBehaviour
     public void SetAnimType(int index)
     {
         animator.SetInteger(animTypeKey, index);
+    }
+
+    public void SetTrigger(string triggerKey)
+    {
+        animator.SetTrigger(triggerKey);
+    }
+
+    public void SetAttackTrigger()
+    {
+        SetTrigger(attackKey);
     }
 }

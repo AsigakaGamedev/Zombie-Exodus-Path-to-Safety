@@ -172,9 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eea571a4fe21d4a9d839368f551e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 0
+  maxHealth: 50
+  deactivateOnDie: 1
   slider: {fileID: 0}
+  health: 0
 --- !u!1001 &7516995404390173720
 PrefabInstance:
   m_ObjectHideFlags: 0

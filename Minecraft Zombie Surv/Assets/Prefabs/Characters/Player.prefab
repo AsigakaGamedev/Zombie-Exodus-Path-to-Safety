@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5469447499170808796}
+  attackKey: attack
   moveAnimType: 1
   moveKey: velocity z
   changeAnimSpeed: 0
@@ -337,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 925908716614716047, guid: 4cc482e6e01b5b7449631984e78eb89f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1732788503113230181, guid: 4cc482e6e01b5b7449631984e78eb89f,
         type: 3}
@@ -455,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allAttacks:
   - {fileID: 2726720725449909377}
-  timeBetweenAttacks: 0.35
+  timeBetweenAttacks: 0.2
 --- !u!114 &2726720725449909377
 MonoBehaviour:
   m_ObjectHideFlags: 0

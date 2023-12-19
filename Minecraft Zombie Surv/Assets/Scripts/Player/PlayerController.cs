@@ -74,7 +74,10 @@ public class PlayerController : MonoBehaviour
 
         if (lookInput.sqrMagnitude >= attackMagnitude)
         {
-            weapons.TryAttack();
+            if (weapons.TryAttack())
+            {
+                animations.SetAttackTrigger();
+            }
         }
     }
 
