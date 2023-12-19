@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class BlockMapManager : MonoBehaviour
@@ -209,7 +210,7 @@ public class BlockMapManager : MonoBehaviour
         triangles.Add(verticies.Count - 2);
     }
 
-    public Vector2[] GetUVForBlock(int x, int y)
+    public Vector2[] GetUVForBlock(int x, int y, float padding = 0.01f)
     {
         // Проверяем, что номер блока находится в пределах текстурного атласа
         if (x < 0 || x >= atlasWidth || y < 0 || y >= atlasHeight)
@@ -219,10 +220,10 @@ public class BlockMapManager : MonoBehaviour
         }
 
         // Вычисляем UV координаты для указанного блока
-        float uMin = (float)(x * blockResol) / (float)(atlasWidth * blockResol);
-        float vMin = (float)(y * blockResol) / (float)(atlasHeight * blockResol);
-        float uMax = (float)((x + 1) * blockResol) / (float)(atlasWidth * blockResol);
-        float vMax = (float)((y + 1) * blockResol) / (float)(atlasHeight * blockResol);
+        float uMin = (float)(x * blockResol) / (float)(atlasWidth * blockResol) + padding;
+        float vMin = (float)(y * blockResol) / (float)(atlasHeight * blockResol) + padding;
+        float uMax = (float)((x + 1) * blockResol) / (float)(atlasWidth * blockResol) - padding;
+        float vMax = (float)((y + 1) * blockResol) / (float)(atlasHeight * blockResol) - padding;
 
         Vector2[] uvCoordinates = new Vector2[4];
         uvCoordinates[0] = new Vector2(uMin, vMin); // левый нижний угол

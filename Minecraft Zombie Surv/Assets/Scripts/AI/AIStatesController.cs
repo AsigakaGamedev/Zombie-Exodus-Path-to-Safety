@@ -18,7 +18,6 @@ public class AIStatesController : MonoBehaviour
         }
 
         currentState = states[0];
-        currentState.OnEnterState();
     }
 
     private void Update()

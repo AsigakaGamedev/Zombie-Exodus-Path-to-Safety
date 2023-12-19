@@ -22,7 +22,8 @@ public class BlockMapCreator : MonoBehaviour
     private void Start()
     {
         creatorCamera = Camera.main;
-        
+
+        manager.CreateMap();
         CreateFlat(startFlatSize);
     }
 

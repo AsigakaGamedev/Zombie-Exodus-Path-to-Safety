@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: brick_block
   m_EditorClassIdentifier: 
   blockName: brick
-  textureTopSideID: 0
-  textureBottomSideID: 0
-  textureHorizontalSideID: 0
+  textureTopSideID: {x: 2, y: 0}
+  textureBottomSideID: {x: 2, y: 0}
+  textureHorizontalSideID: {x: 2, y: 0}

@@ -161,12 +161,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
   meshFilter: {fileID: 8780250934210271946}
   meshCollider: {fileID: 3664552071156524394}
-  blockScale: 0.5
-  mapSize: {x: 10, y: 50, z: 10}
-  blocksAtlas: {fileID: 2800000, guid: 03daa8c41553d1e498e1798c12a96b98, type: 3}
+  blockScale: 1
+  mapSize: {x: 25, y: 50, z: 25}
+  blocksAtlas: {fileID: 2800000, guid: 2ad388bef1b0fa449afedc8cc1a84f7a, type: 3}
   blockResol: 128
   atlasWidth: 7
-  atlasHeight: 1
+  atlasHeight: 4
 --- !u!114 &3070431406725911469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   creatorRadius: 6
-  startFlatSize: {x: 5, y: 1, z: 5}
+  startFlatSize: {x: 25, y: 1, z: 25}
   startFlatBlock: {fileID: 11400000, guid: 9f6dcfc8a9c3d1f489944bdb122b5b48, type: 2}
 --- !u!114 &7557020388162912026
 MonoBehaviour:
@@ -247,11 +247,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
+  - {fileID: 2800000, guid: 5c2082ce378343948bddbd4515a59c59, type: 3}
+  - {fileID: 2800000, guid: 6a514768a8ec9f44eb173977a50c34a2, type: 3}
   - {fileID: 2800000, guid: aa09ea5bc2340314482bc34ed9647b82, type: 3}
+  - {fileID: 2800000, guid: fd8e4276f95d69a4a93c00c0c7978d1a, type: 3}
   - {fileID: 2800000, guid: c197a74a7d00dd842ae628ebf5f7cae3, type: 3}
+  - {fileID: 2800000, guid: cf6a2bf3f96975346895c5f96e47c12c, type: 3}
+  - {fileID: 2800000, guid: 35cc13669f85d754fb42c28b5df0b0fb, type: 3}
+  - {fileID: 2800000, guid: 55c4aa0fa7ddd9640a09758802072676, type: 3}
   - {fileID: 2800000, guid: 16bd1ea2315f7a9499c6b95f3a6cc828, type: 3}
   - {fileID: 2800000, guid: fe027eff1b62cb746b3808a05e674b19, type: 3}
+  - {fileID: 2800000, guid: 2cc7451bad5f1bc41aaecb15a1084b18, type: 3}
+  - {fileID: 2800000, guid: d0400ae92f416b54e88143d1e409511d, type: 3}
+  - {fileID: 2800000, guid: cec89040c5bcd4342b94c9b17f8fba20, type: 3}
+  - {fileID: 2800000, guid: 51b36b2cda9b8e143a8b9efe62574716, type: 3}
+  - {fileID: 2800000, guid: f5498420759676f47beb06849c1c325c, type: 3}
   - {fileID: 2800000, guid: aa4c874719e1ca146bb6b7192652f1b0, type: 3}
+  - {fileID: 2800000, guid: 40e5406ed9c464a44a5c91563ed0fe55, type: 3}
+  - {fileID: 2800000, guid: b74dda6c5efaa6a45b6b51f0cadbafef, type: 3}
+  - {fileID: 2800000, guid: cd40e49e24e847d4aa2c6b1621cd004b, type: 3}
+  - {fileID: 2800000, guid: 8eb06455f1dc62d40abb6ec9202a76e5, type: 3}
   - {fileID: 2800000, guid: 02a8da9bb22999f41a5c0e38f9e7fc15, type: 3}
   - {fileID: 2800000, guid: 4f37bb6cdffd2f445aa712071d4e800f, type: 3}
   maxTexturesPerRow: 7
