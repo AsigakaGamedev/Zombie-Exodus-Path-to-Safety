@@ -298,6 +298,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65919243}
   m_CullTransparentMesh: 1
+--- !u!1 &71380761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71380762}
+  - component: {fileID: 71380763}
+  m_Layer: 0
+  m_Name: Settings Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71380762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71380761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1879711164}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &71380763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71380761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70622b75a00c0b48a5960597bda0f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultLocalization: ru
 --- !u!1 &71479886
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +490,7 @@ GameObject:
   - component: {fileID: 73803712}
   - component: {fileID: 73803711}
   - component: {fileID: 73803710}
+  - component: {fileID: 73803714}
   m_Layer: 0
   m_Name: UI Language Btn (1)
   m_TagString: Untagged
@@ -568,6 +614,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73803708}
   m_CullTransparentMesh: 1
+--- !u!114 &73803714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73803708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e2909504075241949050c77ea89bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: LOCALIZATION
+  value: ru
+  btn: {fileID: 73803711}
 --- !u!1 &133761696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,8 +4151,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2054064313}
   - {fileID: 73803709}
+  - {fileID: 2054064313}
   m_Father: {fileID: 1589707896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4547,6 +4608,7 @@ Transform:
   - {fileID: 1283995860}
   - {fileID: 355709277}
   - {fileID: 1200612156}
+  - {fileID: 71380762}
   - {fileID: 2057554602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4606,7 +4668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f105cbd37fbee241907358216f22db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstTimeLocalization: ru
   localizations:
     _serializedList:
     - Key: ru
@@ -4614,6 +4675,7 @@ MonoBehaviour:
     - Key: en
       Value: {fileID: 11400000, guid: 2a0e683bd2b4c944daccae33311a6e29, type: 2}
   currentLocalization: {fileID: 0}
+  languageID: 
 --- !u!1 &1933752226
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,6 +4856,7 @@ GameObject:
   - component: {fileID: 2054064316}
   - component: {fileID: 2054064315}
   - component: {fileID: 2054064314}
+  - component: {fileID: 2054064318}
   m_Layer: 0
   m_Name: UI Language Btn
   m_TagString: Untagged
@@ -4917,6 +4980,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054064312}
   m_CullTransparentMesh: 1
+--- !u!114 &2054064318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054064312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e2909504075241949050c77ea89bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: LOCALIZATION
+  value: en
+  btn: {fileID: 2054064315}
 --- !u!1 &2057554601
 GameObject:
   m_ObjectHideFlags: 0

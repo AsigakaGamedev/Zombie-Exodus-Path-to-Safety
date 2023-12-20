@@ -27,12 +27,7 @@ public class GameCloudService : MonoBehaviour
         if (playerManager) playerManager.onNicknameChange -= OnPlayerChangeNickname;
     }
 
-    private async void OnPlayerChangeNickname(string newNickname)
-    {
-        await SavePlayerData();
-    }
-
-    public async Task SavePlayerData()
+    private async Task CheckServices()
     {
         if (!playerManager)
         {
@@ -42,10 +37,20 @@ public class GameCloudService : MonoBehaviour
                 playerManager.onNicknameChange += OnPlayerChangeNickname;
             });
         }
+    }
+
+    private async void OnPlayerChangeNickname(string newNickname)
+    {
+        await SavePlayerData();
+    }
+
+    public async Task SavePlayerData()
+    {
+        await CheckServices();
 
         PlayerCloudData playerData = new PlayerCloudData()
         {
-            Nickname = playerManager.PlayerNickname
+            Nickname = playerManager.PlayerNickname,
         };
 
         Dictionary<string, object> data = new Dictionary<string, object>() { {PLAYER_DATA_KEY, playerData } };
@@ -59,17 +64,10 @@ public class GameCloudService : MonoBehaviour
     {
         Dictionary<string, Item> data = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { PLAYER_DATA_KEY});
 
-        try
-        {
-            PlayerCloudData playerData = JsonUtility.FromJson<PlayerCloudData>(data[PLAYER_DATA_KEY].Value.GetAsString());
+        PlayerCloudData playerData = JsonUtility.FromJson<PlayerCloudData>(data[PLAYER_DATA_KEY].Value.GetAsString());
+        print($"Player data loaded! {playerData}");
 
-            print($"Player data loaded! {playerData}");
-            onLoadPlayerData?.Invoke(playerData);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Player data not saved");
-        }
+        onLoadPlayerData?.Invoke(playerData);
     }
 }
 

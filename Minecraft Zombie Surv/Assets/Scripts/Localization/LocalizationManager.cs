@@ -7,17 +7,16 @@ using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
-    [SerializeField] private string firstTimeLocalization = "ru";
-
-    [Space]
     [SerializeField] private SerializedDictionary<string, LocalizationInfo> localizations;
 
     [Space]
     [ReadOnly, SerializeField] private LocalizationInfo currentLocalization;
+    [ReadOnly, SerializeField] private string languageID;
 
-    public Action<LocalizationInfo> onLocalizationChange;
+    public Action<string, LocalizationInfo> onLocalizationChange;
 
     public LocalizationInfo CurrentLocalization { get => currentLocalization; }
+    public string LanguageID { get => languageID; }
 
     private void OnEnable()
     {
@@ -29,14 +28,10 @@ public class LocalizationManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private void Start()
-    {
-        ChangeLocalization(firstTimeLocalization);
-    }
-
     public void ChangeLocalization(string key)
     {
         currentLocalization = localizations[key];
-        onLocalizationChange?.Invoke(currentLocalization);
+        languageID = key;
+        onLocalizationChange?.Invoke(key, currentLocalization);
     }
 }

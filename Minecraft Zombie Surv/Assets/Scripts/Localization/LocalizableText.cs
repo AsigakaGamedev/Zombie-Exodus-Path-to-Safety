@@ -20,7 +20,7 @@ public class LocalizableText : MonoBehaviour
         localizationManager = ServiceLocator.GetService<LocalizationManager>();
         localizationManager.onLocalizationChange += OnLocalizationChange;
 
-        OnLocalizationChange(localizationManager.CurrentLocalization);
+        OnLocalizationChange("", localizationManager.CurrentLocalization);
     }
 
     private void OnDestroy()
@@ -28,7 +28,7 @@ public class LocalizableText : MonoBehaviour
         if (localizationManager) localizationManager.onLocalizationChange -= OnLocalizationChange;
     }
 
-    private void OnLocalizationChange(LocalizationInfo localization)
+    private void OnLocalizationChange(string language, LocalizationInfo localization)
     {
         if (!localization) return;
 
