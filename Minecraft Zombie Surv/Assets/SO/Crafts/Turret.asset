@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b1b8351e085604e893437e474d90d8, type: 3}
-  m_Name: wooden_sword
+  m_Name: Turret
   m_EditorClassIdentifier: 
-  creationPriceList:
-  - info: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - info: {fileID: 0}
-    amount: {x: 0, y: 0}
+  creationPriceList: []
   createdItemsList: []
-  craftName: WoodenSword
-  craftDescription: fewefwfewefwefw
+  craftName: Turret
+  craftDescription: eefwfewfewef
+  craftType: 1
