@@ -26,7 +26,7 @@ public class UINicknameChanger : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerManager.onNicknameChange -= OnNicknameChange;
+        if (playerManager) playerManager.onNicknameChange -= OnNicknameChange;
     }
 
     private void OnNicknameChange(string newNick)

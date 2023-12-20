@@ -18,14 +18,13 @@ public class GameCloudService : MonoBehaviour
     {
         await Task.Run(() =>
         {
-            playerManager = ServiceLocator.GetService<PlayerManager>();
-            playerManager.onNicknameChange += OnPlayerChangeNickname;
+
         });
     }
 
     private void OnDestroy()
     {
-        playerManager.onNicknameChange -= OnPlayerChangeNickname;
+        if (playerManager) playerManager.onNicknameChange -= OnPlayerChangeNickname;
     }
 
     private async void OnPlayerChangeNickname(string newNickname)
@@ -35,6 +34,15 @@ public class GameCloudService : MonoBehaviour
 
     public async Task SavePlayerData()
     {
+        if (!playerManager)
+        {
+            await Task.Run(() =>
+            {
+                playerManager = ServiceLocator.GetService<PlayerManager>();
+                playerManager.onNicknameChange += OnPlayerChangeNickname;
+            });
+        }
+
         PlayerCloudData playerData = new PlayerCloudData()
         {
             Nickname = playerManager.PlayerNickname
@@ -60,7 +68,7 @@ public class GameCloudService : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError(ex);
+            Debug.LogError($"Player data not saved");
         }
     }
 }
