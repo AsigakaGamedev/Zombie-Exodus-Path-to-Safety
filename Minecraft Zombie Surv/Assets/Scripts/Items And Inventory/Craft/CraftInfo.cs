@@ -28,6 +28,11 @@ public class CraftInfo : ScriptableObject
         get => craftDescription;
     }
 
+    public CraftType CraftType
+    {
+        get => craftType;
+    }
+
     public List<ItemData> CreationPriceList { get => creationPriceList; }
     public List<ItemData> CreatedItemsList { get => createdItemsList; }
 }

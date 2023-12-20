@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,16 +20,20 @@ public class UICraftManager : MonoBehaviour
 
     private List<UICraftRecipe> spawnedRecipies;
 
+    [Space]
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private Button craftBtn;
 
     public Action<CraftInfo> onCraft;
 
+    [Space]
     [SerializeField] private Transform craftPriceSlot;
-    [SerializeField] private CraftType craftType;
-    [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private Transform craftTypePanel;
 
+    [SerializeField] private CraftType craftType;
+
+    [SerializeField] private InventoryController inventoryController;
 
     private void Awake()
     {
@@ -67,25 +72,50 @@ public class UICraftManager : MonoBehaviour
             if (!player) return;
         }
 
-        foreach (CraftInfo recipe in player.Inventory.AllCrafts)
+        foreach (Transform child in craftTypePanel)
         {
-            UICraftRecipe newRecipe = poolingManager.GetPoolable(recipePrefab);
-            newRecipe.Init(recipe);
-            newRecipe.transform.SetParent(recipiesContent);
+            UICraftTypeChanger typeChanger = child.GetComponent<UICraftTypeChanger>();
 
-            newRecipe.onClickInfo += OnSelectRecipe;
-
-            spawnedRecipies.Add(newRecipe);
+            if (typeChanger != null)
+            {
+                typeChanger.onClickInfo = null;
+                typeChanger.onClickInfo += SpawnSlots;
+            }
         }
+
+        SpawnSlots();
     }
 
     private void OnDisable()
+    {
+        DeleteSlots();
+    }
+
+    private void SpawnSlots(CraftType _craftType = CraftType.Block)
+    {
+        DeleteSlots();
+        foreach (CraftInfo recipe in player.Inventory.AllCrafts)
+        {
+            if (recipe.CraftType == _craftType)
+            {
+                UICraftRecipe newRecipe = poolingManager.GetPoolable(recipePrefab);
+                newRecipe.Init(recipe);
+                newRecipe.transform.SetParent(recipiesContent);
+
+                newRecipe.onClickInfo += OnSelectRecipe;
+
+                spawnedRecipies.Add(newRecipe);
+            }
+        }
+    }
+
+    private void DeleteSlots()
     {
         foreach (UICraftRecipe recipe in spawnedRecipies)
         {
             recipe.onClickInfo -= OnSelectRecipe;
 
-            recipe.gameObject.SetActive(false); 
+            recipe.gameObject.SetActive(false);
         }
 
         spawnedRecipies.Clear();

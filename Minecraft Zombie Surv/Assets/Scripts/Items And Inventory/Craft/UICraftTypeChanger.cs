@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICraftTypeChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Button btn;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private CraftType craftType;
+
+    public Action<CraftType> onClickInfo;
+
+    private void Awake()
     {
-        
+        btn.onClick.AddListener(() =>
+        {
+            onClickInfo?.Invoke(craftType);
+        });
     }
 }
