@@ -42,4 +42,22 @@ MonoBehaviour:
       Value: Shop
     - Key: settings
       Value: Settings
+    - Key: sign_in
+      Value: Sign In
+    - Key: account_enter
+      Value: Login
+    - Key: sign_up
+      Value: Sign Up
+    - Key: login
+      Value: Login
+    - Key: password
+      Value: Password
+    - Key: change
+      Value: Change
+    - Key: resources
+      Value: Resources
+    - Key: pets
+      Value: Pets
+    - Key: view_advertisement
+      Value: View Advertisement
   copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}

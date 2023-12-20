@@ -80,15 +80,17 @@ public class ServicesManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(existingLogin) && !string.IsNullOrEmpty(existingPassword))
         {
-            try
-            {
-                await TrySignIn(existingLogin, existingPassword);
-            }
-            catch
-            {
-                PlayerPrefs.DeleteKey(loginPrefsKey);
-                PlayerPrefs.DeleteKey(passwordPrefsKey);
-            }
+            await TrySignIn(existingLogin, existingPassword);
+
+            //try
+            //{
+            //    await TrySignIn(existingLogin, existingPassword);
+            //}
+            //catch
+            //{
+            //    PlayerPrefs.DeleteKey(loginPrefsKey);
+            //    PlayerPrefs.DeleteKey(passwordPrefsKey);
+            //}
         }
     }
 

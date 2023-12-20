@@ -64,20 +64,31 @@ public class LoadingManager : MonoBehaviour
     {
         screenObject.SetActive(true);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        loadingHintTxt.text = "Загрузка сцены";
 
         while (!asyncLoad.isDone)
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-            Debug.Log("Прогресс загрузки: " + (progress * 100) + "%");
+            //Debug.Log("Прогресс загрузки: " + (progress * 100) + "%");
+            loadingProgressBar.value = progress;
 
             await Task.Yield();
         }
 
         if (tasks != null)
         {
+            loadingProgressBar.value = 0;
+            loadingHintTxt.text = "Загрузка сервисов";
+            float progressStep = 1f / tasks.Length;
+            float tasksProgress = 0;
+
             foreach (Task task in tasks)
             {
                 await task;
+                tasksProgress += progressStep;
+                await Task.Yield();
+                loadingProgressBar.value = tasksProgress;
+                await Task.Yield();
             }
         }
 

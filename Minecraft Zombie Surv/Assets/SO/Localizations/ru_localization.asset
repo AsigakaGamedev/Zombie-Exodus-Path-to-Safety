@@ -16,6 +16,8 @@ MonoBehaviour:
     _serializedList:
     - Key: start
       Value: "\u041D\u0430\u0447\u0430\u0442\u044C"
+    - Key: view_advertisement
+      Value: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u0443"
     - Key: back
       Value: "\u041D\u0430\u0437\u0430\u0434"
     - Key: shop
@@ -52,4 +54,10 @@ MonoBehaviour:
       Value: "\u041B\u043E\u0433\u0438\u043D"
     - Key: password
       Value: "\u041F\u0430\u0440\u043E\u043B\u044C"
+    - Key: change
+      Value: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C"
+    - Key: resources
+      Value: "\u0420\u0435\u0441\u0443\u0440\u0441\u044B"
+    - Key: pets
+      Value: "\u041F\u0438\u0442\u043E\u043C\u0446\u044B"
   copyLocalization: {fileID: 11400000, guid: 2a0e683bd2b4c944daccae33311a6e29, type: 2}
