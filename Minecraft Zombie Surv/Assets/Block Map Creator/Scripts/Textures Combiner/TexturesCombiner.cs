@@ -8,6 +8,10 @@ public class TexturesCombiner : MonoBehaviour
     public Texture2D[] textures;
     public int maxTexturesPerRow = 10;
 
+    [Space]
+    [SerializeField] private string texturesPath;
+    [SerializeField] private string textureName = "blocks_atlas";
+
     [Button]
     public void CombineTexturesAndSave()
     {
@@ -57,6 +61,7 @@ public class TexturesCombiner : MonoBehaviour
             }
         }
 
+        combinedTexture.filterMode = FilterMode.Point;
         // Применяем изменения
         combinedTexture.Apply();
 
@@ -64,7 +69,7 @@ public class TexturesCombiner : MonoBehaviour
         byte[] bytes = combinedTexture.EncodeToPNG();
 
         // Сохраняем текстуру в папке Assets
-        string filePath = Application.dataPath + "/combinedTexture.png";
+        string filePath = texturesPath + "/" +textureName + ".png";
         System.IO.File.WriteAllBytes(filePath, bytes);
 
         Debug.Log("Текстура успешно объединена и сохранена в " + filePath);

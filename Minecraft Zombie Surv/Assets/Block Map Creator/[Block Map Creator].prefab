@@ -159,14 +159,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f6dcfc8a9c3d1f489944bdb122b5b48, type: 2}
   - {fileID: 11400000, guid: 2b6f8a8f902f4c441a28b50d4606201e, type: 2}
   - {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
+  - {fileID: 11400000, guid: 2b6f8a8f902f4c441a28b50d4606201e, type: 2}
+  - {fileID: 11400000, guid: d83703fe7b3e368428cde386aa9bccdc, type: 2}
   meshFilter: {fileID: 8780250934210271946}
   meshCollider: {fileID: 3664552071156524394}
   blockScale: 1
   mapSize: {x: 25, y: 50, z: 25}
-  blocksAtlas: {fileID: 2800000, guid: 2ad388bef1b0fa449afedc8cc1a84f7a, type: 3}
-  blockResol: 128
+  blocksAtlas: {fileID: 2800000, guid: 332d03a9324a57640911281ad4e2ecbd, type: 3}
+  blockResol: 32
   atlasWidth: 7
   atlasHeight: 4
+  uvPadding: 0.006
 --- !u!114 &3070431406725911469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 2377387349956061882}
-  selectedBlock: {fileID: 11400000, guid: 367820eb19b6f7d41b2c08bd2d4d5531, type: 2}
+  selectedBlock: {fileID: 11400000, guid: d83703fe7b3e368428cde386aa9bccdc, type: 2}
   mapLayers:
     serializedVersion: 2
     m_Bits: 2048
@@ -270,3 +273,5 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 02a8da9bb22999f41a5c0e38f9e7fc15, type: 3}
   - {fileID: 2800000, guid: 4f37bb6cdffd2f445aa712071d4e800f, type: 3}
   maxTexturesPerRow: 7
+  texturesPath: /Block Map Creator/Textures
+  textureName: blocks_atlas

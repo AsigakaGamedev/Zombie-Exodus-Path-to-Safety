@@ -20,6 +20,7 @@ public class BlockMapManager : MonoBehaviour
     [SerializeField] private float blockResol = 128;
     [SerializeField] private int atlasWidth = 4;
     [SerializeField] private int atlasHeight = 1;
+    [SerializeField] private float uvPadding = 0.003f;
 
     private Mesh mesh;
 
@@ -36,8 +37,6 @@ public class BlockMapManager : MonoBehaviour
         set
         {
             blocks = value;
-            print(blocks);
-            print(blocks.Length);
             RegenerateMesh();
         }
     }
@@ -209,7 +208,7 @@ public class BlockMapManager : MonoBehaviour
         triangles.Add(verticies.Count - 2);
     }
 
-    public Vector2[] GetUVForBlock(int x, int y, float padding = 0.01f)
+    public Vector2[] GetUVForBlock(int x, int y)
     {
         // Проверяем, что номер блока находится в пределах текстурного атласа
         if (x < 0 || x >= atlasWidth || y < 0 || y >= atlasHeight)
@@ -219,15 +218,15 @@ public class BlockMapManager : MonoBehaviour
         }
 
         // Вычисляем UV координаты для указанного блока
-        float uMin = (float)(x * blockResol) / (float)(atlasWidth * blockResol) + padding;
-        float vMin = (float)(y * blockResol) / (float)(atlasHeight * blockResol) + padding;
-        float uMax = (float)((x + 1) * blockResol) / (float)(atlasWidth * blockResol) - padding;
-        float vMax = (float)((y + 1) * blockResol) / (float)(atlasHeight * blockResol) - padding;
+        float uMin = (float)(x * blockResol) / (float)(atlasWidth * blockResol) + uvPadding;
+        float vMin = (float)(y * blockResol) / (float)(atlasHeight * blockResol) + uvPadding;
+        float uMax = (float)((x + 1) * blockResol) / (float)(atlasWidth * blockResol) - uvPadding;
+        float vMax = (float)((y + 1) * blockResol) / (float)(atlasHeight * blockResol) - uvPadding;
 
         Vector2[] uvCoordinates = new Vector2[4];
         uvCoordinates[0] = new Vector2(uMin, vMin); // левый нижний угол
-        uvCoordinates[1] = new Vector2(uMax, vMin); // правый нижний угол
-        uvCoordinates[2] = new Vector2(uMin, vMax); // левый верхний угол
+        uvCoordinates[1] = new Vector2(uMin, vMax); // левый верхний угол
+        uvCoordinates[2] = new Vector2(uMax, vMin); // правый нижний угол
         uvCoordinates[3] = new Vector2(uMax, vMax); // правый верхний угол
 
         return uvCoordinates;
