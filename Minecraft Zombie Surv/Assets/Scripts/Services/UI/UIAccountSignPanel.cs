@@ -22,11 +22,15 @@ public class UIAccountSignPanel : MonoBehaviour
 
         signInBtn.onClick.AddListener(async () =>
         {
+            signInBtn.interactable = false;
+            signUpBtn.interactable = false;
             await servicesManager.TrySignIn(loginInput.text, passwordInput.text);
         });
 
         signUpBtn.onClick.AddListener(async () =>
         {
+            signInBtn.interactable = false;
+            signUpBtn.interactable = false;
             await servicesManager.TrySignUp(loginInput.text, passwordInput.text);
         });
     }

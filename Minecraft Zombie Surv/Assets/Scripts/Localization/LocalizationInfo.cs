@@ -20,6 +20,7 @@ public class LocalizationInfo : ScriptableObject
         }
         else
         {
+            values.Add(key, string.Empty);
             return key;
         }
     }
