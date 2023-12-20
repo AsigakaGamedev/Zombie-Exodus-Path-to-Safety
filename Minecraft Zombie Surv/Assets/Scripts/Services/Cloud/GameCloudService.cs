@@ -14,20 +14,7 @@ public class GameCloudService : MonoBehaviour
 
     public Action<PlayerCloudData> onLoadPlayerData;
 
-    public async Task Init()
-    {
-        await Task.Run(() =>
-        {
-
-        });
-    }
-
-    private void OnDestroy()
-    {
-        if (playerManager) playerManager.onNicknameChange -= OnPlayerChangeNickname;
-    }
-
-    private async Task CheckServices()
+    public async Task CheckServices()
     {
         if (!playerManager)
         {
@@ -39,8 +26,14 @@ public class GameCloudService : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (playerManager) playerManager.onNicknameChange -= OnPlayerChangeNickname;
+    }
+
     private async void OnPlayerChangeNickname(string newNickname)
     {
+        print($"Player nickname saved");
         await SavePlayerData();
     }
 
@@ -48,12 +41,18 @@ public class GameCloudService : MonoBehaviour
     {
         await CheckServices();
 
-        PlayerCloudData playerData = new PlayerCloudData()
-        {
-            Nickname = playerManager.PlayerNickname,
-        };
+        PlayerCloudData playerData = null;
+        Dictionary<string, object> data = null;
 
-        Dictionary<string, object> data = new Dictionary<string, object>() { {PLAYER_DATA_KEY, playerData } };
+        await Task.Run(() =>
+        {
+            playerData = new PlayerCloudData()
+            {
+                Nickname = playerManager.PlayerNickname,
+            };
+
+            data = new Dictionary<string, object>() { { PLAYER_DATA_KEY, playerData } };
+        });
 
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
 

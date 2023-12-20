@@ -66,7 +66,7 @@ public class ServicesManager : MonoBehaviour
 
         await economy.Refresh();
 
-        await cloud.Init();
+        await cloud.CheckServices();
 
         onInitialized?.Invoke();
         IsInitialized = true;
