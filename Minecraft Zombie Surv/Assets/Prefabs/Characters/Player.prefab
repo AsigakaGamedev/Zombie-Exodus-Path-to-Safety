@@ -105,7 +105,7 @@ MonoBehaviour:
   interactions: {fileID: 710103694648830780}
   animations: {fileID: 6296110567586613174}
   weapons: {fileID: 2399057622477615184}
-  moveSpeed: 3
+  moveSpeed: 2.5
   rotateSpeed: 5
   attackMagnitude: 0.7
 --- !u!114 &1152877912600899954

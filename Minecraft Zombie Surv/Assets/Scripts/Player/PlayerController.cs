@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveInput *= moveSpeed;
+        moveInput *= moveSpeed * Time.deltaTime * 100;
         moveInput.y = rb.velocity.y;
         rb.velocity = moveInput;
     }
