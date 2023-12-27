@@ -53,9 +53,11 @@ public class BlockMapCreator : MonoBehaviour
             {
                 for (int z = 0; z < size.z; z++)
                 {
-                    manager.PlaceBlock(new Vector3Int(x, y, z), startFlatBlock);
+                    manager.PlaceBlock(new Vector3Int(x, y, z), startFlatBlock, false);
                 }
             }
         }
+
+        manager.RegenerateMesh();
     }
 }

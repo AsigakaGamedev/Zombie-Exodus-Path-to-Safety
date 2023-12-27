@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
         animations.MoveTo(moveInput);
+
         Vector3 lookInput = new Vector3(lookJoystick.Horizontal, 0, lookJoystick.Vertical);
 
         if (lookInput.sqrMagnitude == 0 && moveInput.sqrMagnitude != 0)
@@ -79,10 +80,7 @@ public class PlayerController : MonoBehaviour
                 animations.SetAttackTrigger(); 
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
         moveInput *= moveSpeed * Time.deltaTime * 100;
         moveInput.y = rb.velocity.y;
         rb.velocity = moveInput;

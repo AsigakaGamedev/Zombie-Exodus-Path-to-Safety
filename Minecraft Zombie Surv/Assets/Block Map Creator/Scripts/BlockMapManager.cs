@@ -45,7 +45,6 @@ public class BlockMapManager : MonoBehaviour
     public void CreateMap()
     {
         blocks = new int[mapSize.x, mapSize.y, mapSize.z];
-        RegenerateMesh();
     }
 
     [Button]
@@ -75,7 +74,6 @@ public class BlockMapManager : MonoBehaviour
             {
                 for (int z = 0; z < mapSize.z; z++)
                 {
-                    //print(blocksDatabase[blocks[x, y, z]]);
                     GenerateBlock(new Vector3Int(x, y, z), blocksDatabase[blocks[x, y, z]]);
                 }
             }
@@ -95,10 +93,11 @@ public class BlockMapManager : MonoBehaviour
         meshCollider.sharedMesh = mesh;
     }
 
-    public void PlaceBlock(Vector3Int pos, BlockInfo blockInfo)
+    public void PlaceBlock(Vector3Int pos, BlockInfo blockInfo, bool regenerateMesh = true)
     {
         blocks[pos.x, pos.y, pos.z] = blocksDatabase.IndexOf(blockInfo);
-        RegenerateMesh();
+        
+        if (regenerateMesh) RegenerateMesh();
     }
 
     public void DestroyBlock(Vector3Int pos)

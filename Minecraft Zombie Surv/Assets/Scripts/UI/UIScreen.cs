@@ -39,6 +39,8 @@ public class UIScreen : MonoBehaviour
     {
         gameObject.SetActive(true);
 
+        if (listeners == null) return;
+
         foreach (IScreenListener listener in listeners)
         {
             if (listener is IScreenShowListener showListener) showListener.OnScreenShow();

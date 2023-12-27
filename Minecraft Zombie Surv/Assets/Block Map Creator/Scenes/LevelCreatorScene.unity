@@ -769,6 +769,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2377387349956061882, guid: 0f24f40ce875e98458b022674e7da0b3,
+        type: 3}
+      propertyPath: mapSize.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377387349956061882, guid: 0f24f40ce875e98458b022674e7da0b3,
+        type: 3}
+      propertyPath: mapSize.z
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3070431406725911469, guid: 0f24f40ce875e98458b022674e7da0b3,
         type: 3}
       propertyPath: selectedBlock
@@ -781,6 +791,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2b6f8a8f902f4c441a28b50d4606201e,
         type: 2}
+    - target: {fileID: 3070431406725911469, guid: 0f24f40ce875e98458b022674e7da0b3,
+        type: 3}
+      propertyPath: startFlatSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070431406725911469, guid: 0f24f40ce875e98458b022674e7da0b3,
+        type: 3}
+      propertyPath: startFlatSize.z
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3664552071156524394, guid: 0f24f40ce875e98458b022674e7da0b3,
         type: 3}
       propertyPath: m_Mesh
