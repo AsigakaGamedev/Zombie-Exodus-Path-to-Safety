@@ -10,8 +10,6 @@ public class MonologsController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI monologText;
     [SerializeField] private List<MonologData> curMonologList;
     [SerializeField] private MonologData curMonolog;
-    
-    public static MonologsController instance;
 
     private void OnEnable()
     {
@@ -30,7 +28,6 @@ public class MonologsController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
         StartCoroutine(EShowMonolog());
     }
 
