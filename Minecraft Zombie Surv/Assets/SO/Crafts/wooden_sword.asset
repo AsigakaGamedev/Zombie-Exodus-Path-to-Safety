@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: wooden_sword
   m_EditorClassIdentifier: 
   creationPriceList:
-  - info: {fileID: 0}
-    amount: {x: 0, y: 0}
-  - info: {fileID: 0}
-    amount: {x: 0, y: 0}
-  createdItemsList: []
+  - info: {fileID: -3399545887386218251, guid: e7622bba23bdcc84e982f1b7b502d0f1, type: 3}
+    amount: {x: 2, y: 2}
+  createdItemsList:
+  - info: {fileID: -3399545887386218251, guid: 4a6e8cce3926f4d479bb36ebade3ebe6, type: 3}
+    amount: {x: 3, y: 3}
   craftName: WoodenSword
   craftDescription: fewefwfewefwefw
+  craftType: 0

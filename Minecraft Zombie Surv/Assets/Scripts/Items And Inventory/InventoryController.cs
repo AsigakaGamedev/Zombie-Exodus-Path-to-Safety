@@ -12,9 +12,14 @@ public class InventoryController : MonoBehaviour
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
+    //[SerializeField] private List<InventoryCellEntity> quickCells;
+   // [SerializeField] private Transform quickCellsPales;
 
     public List<InventoryCellEntity> Cells { get => cells; }
     public CraftInfo[] AllCrafts { get => allCrafts; }
+
+
+
 
     public void Init()
     {
@@ -49,8 +54,8 @@ public class InventoryController : MonoBehaviour
     public InventoryCellEntity GetCell(ItemInfo info)
     {
         foreach (InventoryCellEntity cell in cells) 
-            if (cell.Item != null && cell.Item.InfoPrefab == info) return cell; 
-
+            if (cell.Item != null && cell.Item.InfoPrefab == info) return cell;
+        print("Null тут");
         return null;
     }
 
@@ -62,8 +67,30 @@ public class InventoryController : MonoBehaviour
         return null;
     }
 
+    public int GetMaterialCount(ItemInfo materialInfo)
+    {
+        InventoryCellEntity materialCell = GetCell(materialInfo);
+        print("1");
+        if (materialCell != null)
+        {
+            print("2");
+            if (materialCell.Item != null && materialCell.Item.InfoPrefab != null)
+            {
+                print("3");
+                return materialCell.Item.Amount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
     public void CraftItem(CraftInfo craftRecipe)
     {
+        print($"ВЫзвалась функция {craftRecipe.CraftName}");
         // Проверить, достаточно ли материалов для крафта
         if (CanCraftItem(craftRecipe))
         {
@@ -94,12 +121,14 @@ public class InventoryController : MonoBehaviour
 
             if (materialCell == null || materialCell.Item.Amount < material.RandomAmount)
             {
+                print("Не прошел проверку");
                 // Не хватает материалов для крафта
                 return false;
             }
         }
 
         // Достаточно материалов для крафта
+        print("Прошел проверку");
         return true;
     }
 

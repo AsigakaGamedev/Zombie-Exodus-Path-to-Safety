@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b1b8351e085604e893437e474d90d8, type: 3}
-  m_Name: Turret
+  m_Name: Other
   m_EditorClassIdentifier: 
-  creationPriceList:
-  - info: {fileID: -3399545887386218251, guid: e7622bba23bdcc84e982f1b7b502d0f1, type: 3}
-    amount: {x: 2, y: 4}
-  - info: {fileID: -3399545887386218251, guid: 4a6e8cce3926f4d479bb36ebade3ebe6, type: 3}
-    amount: {x: 3, y: 7}
+  creationPriceList: []
   createdItemsList: []
-  craftName: Turret
-  craftDescription: eefwfewfewef
-  craftType: 1
+  craftName: wre
+  craftDescription: wre
+  craftType: 2

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.CloudSave.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,8 @@ public class UICraftManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private Button craftBtn;
+    [SerializeField] private Sprite enoughtMaterialSprite;
+    [SerializeField] private Sprite notEnoughtMaterialSprite;
 
     public Action<CraftInfo> onCraft;
 
@@ -33,7 +36,6 @@ public class UICraftManager : MonoBehaviour
 
     [SerializeField] private CraftType craftType;
 
-    [SerializeField] private InventoryController inventoryController;
 
     private void Awake()
     {
@@ -41,16 +43,15 @@ public class UICraftManager : MonoBehaviour
         {
             onCraft?.Invoke(curCraftInfo);
         });
+        spawnedRecipies = new List<UICraftRecipe>();
+
+        poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
+        DeactivateChildObjects();
     }
 
     private void Start()
     {
-        onCraft += inventoryController.CraftItem;
-        spawnedRecipies = new List<UICraftRecipe>();
-
-        poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
         levelContoller = ServiceLocator.GetService<LevelContoller>();
-        DeactivateChildObjects();
     }
 
     private void DeactivateChildObjects()
@@ -63,13 +64,12 @@ public class UICraftManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!levelContoller) return;
-
         if (!player && levelContoller)
         {
             player = levelContoller.PlayerInstance;
 
             if (!player) return;
+            onCraft += levelContoller.PlayerInstance.Inventory.CraftItem;
         }
 
         foreach (Transform child in craftTypePanel)
@@ -89,10 +89,16 @@ public class UICraftManager : MonoBehaviour
     private void OnDisable()
     {
         DeleteSlots();
+
+        if (player)
+        {
+            onCraft -= player.Inventory.CraftItem;
+        }
     }
 
     private void SpawnSlots(CraftType _craftType = CraftType.Block)
     {
+        if (!player) return;
         DeleteSlots();
         foreach (CraftInfo recipe in player.Inventory.AllCrafts)
         {
@@ -123,6 +129,7 @@ public class UICraftManager : MonoBehaviour
 
     private void OnSelectRecipe(CraftInfo craftInfo)
     {
+        if (!player) return;
         curCraftInfo = craftInfo;
         itemName.text = craftInfo.CraftName;
         itemDescription.text = craftInfo.CraftDescription;
@@ -132,7 +139,29 @@ public class UICraftManager : MonoBehaviour
         {
             if (i < craftPriceSlot.transform.childCount)
             {
-                craftPriceSlot.transform.GetChild(i).gameObject.SetActive(true);
+                GameObject childObject = craftPriceSlot.transform.GetChild(i).gameObject;
+                childObject.SetActive(true);
+
+                int craftPrice = craftInfo.CreationPriceList[i].RandomAmount;
+                int amountInInventory = player.Inventory.GetMaterialCount(craftInfo.CreationPriceList[i].Info);
+
+                TextMeshProUGUI textMeshPro1 = childObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI textMeshPro2 = childObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                Image imageComponent = childObject.transform.GetChild(2).GetComponent<Image>();
+
+                if (textMeshPro1 != null && textMeshPro2 != null)
+                {
+                    textMeshPro1.text = craftInfo.CreationPriceList[i].Info.ItemNameKey;
+                    textMeshPro2.text = $"{amountInInventory}/{craftPrice}";
+
+                    imageComponent.gameObject.SetActive(true);
+                    imageComponent.sprite = notEnoughtMaterialSprite;
+
+                    if (amountInInventory >= craftPrice)
+                    {
+                        imageComponent.sprite = enoughtMaterialSprite;
+                    }
+                }
             }
         }
     }
