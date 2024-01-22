@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class BlockMapManager : MonoBehaviour
@@ -80,17 +81,23 @@ public class BlockMapManager : MonoBehaviour
         }
 
         mesh.vertices = verticies.ToArray();
-        mesh.uv = uvs.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.uv = uvs.ToArray();
 
         mesh.Optimize();
+        //mesh.OptimizeIndexBuffers();
+        mesh.OptimizeReorderVertexBuffer();
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
-
+        mesh.RecalculateTangents();
+        mesh.RecalculateUVDistributionMetrics();
+        
         meshFilter.sharedMesh = mesh;
         meshCollider.sharedMesh = null;
         meshCollider.sharedMesh = mesh;
+
+        print($"Mesh was created!\nVerticies = {mesh.vertices.Length}\nUvs = {mesh.uv.Length}");
     }
 
     public void PlaceBlock(Vector3Int pos, BlockInfo blockInfo, bool regenerateMesh = true)
@@ -229,6 +236,46 @@ public class BlockMapManager : MonoBehaviour
         uvCoordinates[3] = new Vector2(uMax, vMax); // правый верхний угол
 
         return uvCoordinates;
+    }
+
+    #endregion
+
+    #region Optimization
+
+    private Vector3[] RemoveDuplicateVectors(Vector3[] vertices)
+    {
+        List<Vector3> uniqueVertices = new List<Vector3>();
+        List<Vector3> seenVertices = new List<Vector3>();
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 vertex = vertices[i];
+            if (!seenVertices.Contains(vertex))
+            {
+                seenVertices.Add(vertex);
+                uniqueVertices.Add(vertex);
+            }
+        }
+
+        return uniqueVertices.ToArray();
+    }
+
+    private Vector2[] RemoveDuplicateVectors(Vector2[] vertices)
+    {
+        List<Vector2> uniqueVertices = new List<Vector2>();
+        List<Vector2> seenVertices = new List<Vector2>();
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector2 vertex = vertices[i];
+            if (!seenVertices.Contains(vertex))
+            {
+                seenVertices.Add(vertex);
+                uniqueVertices.Add(vertex);
+            }
+        }
+
+        return uniqueVertices.ToArray();
     }
 
     #endregion
