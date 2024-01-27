@@ -35,7 +35,7 @@ public class LevelContoller : MonoBehaviour
 
     private void Start()
     {
-        SpawnPlayer(playerSpawnPos.position);
+        //SpawnPlayer(playerSpawnPos.position);
 
         timelineController = ServiceLocator.GetService<TimelineController>();
 
@@ -52,6 +52,6 @@ public class LevelContoller : MonoBehaviour
 
         playerInstance = Instantiate(playerPrefab, spawnPos, Quaternion.identity, playerSpawnPos);
         levelCamera.m_Follow = playerInstance.transform;
-        playerInstance.Init();
+        //playerInstance.Init();
     }
 }

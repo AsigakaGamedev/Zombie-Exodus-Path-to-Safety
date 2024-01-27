@@ -10,11 +10,13 @@ public class UIMobilePlayerInputs : MonoBehaviour
 
     [Space]
     [SerializeField] private Button interactBtn;
+    [SerializeField] private Button attackBtn;
 
     public Joystick MoveJoystick { get => moveJoystick; }
     public Joystick LookJoystick { get => lookJoystick; }
 
     public Button InteractBtn { get => interactBtn; }
+    public Button AttackBtn { get => attackBtn; }
 
     private void OnEnable()
     {

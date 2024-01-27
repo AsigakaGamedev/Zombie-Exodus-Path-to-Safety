@@ -14,6 +14,7 @@ public class WeaponsController : MonoBehaviour
     [ReadOnly, SerializeField] private Weapon weaponInHands;
 
     public Action<Weapon> onEquip;
+    public Action onDequip;
 
     public void Init()
     {
@@ -34,10 +35,18 @@ public class WeaponsController : MonoBehaviour
 
     public void EquipWeapon(int weaponID)
     {
-        if (weaponInHands) weaponInHands.OnDequip();
+        if (weaponInHands) onDequip?.Invoke(); ;
 
         weaponInHands = allWeapons[weaponID];
         weaponInHands.OnEquip();
         onEquip?.Invoke(weaponInHands);
+        onDequip += weaponInHands.OnDequip;
+        onDequip += DequipWeapon;
+    }
+
+    public void DequipWeapon()
+    {
+        onDequip -= weaponInHands.OnDequip;
+        onDequip -= DequipWeapon;
     }
 }

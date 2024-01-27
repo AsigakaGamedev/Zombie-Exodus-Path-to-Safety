@@ -24,24 +24,34 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveInput;
 
     public InventoryController Inventory { get => inventory; }
-
-    public void Init()
+ 
+    public void Start()
     {
-        inventory.Init();
-        
-        weapons.onEquip += OnEquipWeapon;
-        weapons.Init();
-
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;
+
+        inventory.Init();
+        
+        weapons.onEquip += OnEquipWeapon;
+        weapons.onDequip += OnDequipWeapon;
+        weapons.Init();
 
         playerInputs.InteractBtn.onClick.AddListener(() =>
         {
             interactions.InteractWithCurrent(this);
         });
 
+        playerInputs.AttackBtn.onClick.AddListener(() =>
+        {
+            if (weapons.TryAttack())
+            {
+                animations.SetAttackTrigger();
+            }
+        });
+
         playerInputs.InteractBtn.gameObject.SetActive(false);
+        //playerInputs.AttackBtn.gameObject.SetActive(false);
 
         interactions.onFindInteractable += OnFindInteractable;
         interactions.onLoseInteractable += OnLoseInteractable;
@@ -53,11 +63,12 @@ public class PlayerController : MonoBehaviour
         interactions.onLoseInteractable -= OnLoseInteractable;
 
         weapons.onEquip -= OnEquipWeapon;
+        weapons.onDequip -= OnDequipWeapon;
     }
 
     private void Update()
     {
-        interactions.CheckInteractions();
+        interactions.CheckInteractionsFront();
 
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
         animations.MoveTo(moveInput);
@@ -66,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if (lookInput.sqrMagnitude == 0 && moveInput.sqrMagnitude != 0)
         {
-            SmoothRotate(moveInput);
+            //SmoothRotate(moveInput);
         }
         else if (lookInput.sqrMagnitude != 0)
         {
@@ -86,15 +97,22 @@ public class PlayerController : MonoBehaviour
         rb.velocity = moveInput;
     }
 
-    private void OnEquipWeapon(Weapon weapon)
-    {
-        animations.SetAnimType(weapon.AnimTypeIndex);
-    }
-
     private void SmoothRotate(Vector3 dir)
     {
         Quaternion lookRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, Time.deltaTime * rotateSpeed);
+    }
+
+
+    private void OnEquipWeapon(Weapon weapon)
+    {
+        animations.SetAnimType(weapon.AnimTypeIndex);
+        playerInputs.AttackBtn.gameObject.SetActive(true);
+    }
+
+    private void OnDequipWeapon()
+    {
+        playerInputs.AttackBtn.gameObject.SetActive(false);
     }
 
     private void OnFindInteractable()
