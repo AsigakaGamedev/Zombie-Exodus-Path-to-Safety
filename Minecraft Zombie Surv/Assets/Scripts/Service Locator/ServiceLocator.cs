@@ -31,4 +31,17 @@ public static class ServiceLocator
 
         throw new System.Exception($"Service {typeof(T)} not found!");
     }
+
+    /// <summary>
+    /// Не кидает ошибку
+    /// </summary>
+    public static T GetServiceSafe<T>()
+    {
+        foreach (object service in servises)
+        {
+            if (service is T) return (T)service;
+        }
+
+        return default(T);
+    }
 }
