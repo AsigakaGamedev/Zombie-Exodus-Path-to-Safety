@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4ae5fad93d80d488cb7a0098d4c966, type: 3}
   m_Name: level_1
   m_EditorClassIdentifier: 
-  sceneName: Test Tutorial Level
+  sceneName: level_1_main
   levelPreview: {fileID: 0}
   levelName: Level 1
   levelDescription: Level 1 Description
