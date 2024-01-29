@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Transform camBody;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private InventoryController inventory;
     [SerializeField] private InteractionsController interactions;
@@ -12,10 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Space]
     [SerializeField] private float moveSpeed = 3;
-    [SerializeField] private float rotateSpeed = 5;
-
-    [Space]
-    [SerializeField] private float attackMagnitude = 0.7f;
+    [SerializeField] private float lookSensitivity = 100;
 
     private UIMobilePlayerInputs playerInputs;
     private Joystick moveJoystick;
@@ -23,10 +21,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveInput;
 
+    private float xRotation;
+
     public InventoryController Inventory { get => inventory; }
  
     public void Start()
     {
+        Application.targetFrameRate = 60;
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         });
 
         playerInputs.InteractBtn.gameObject.SetActive(false);
-        //playerInputs.AttackBtn.gameObject.SetActive(false);
+        playerInputs.AttackBtn.gameObject.SetActive(false);
 
         interactions.onFindInteractable += OnFindInteractable;
         interactions.onLoseInteractable += OnLoseInteractable;
@@ -70,37 +71,33 @@ public class PlayerController : MonoBehaviour
     {
         interactions.CheckInteractionsFront();
 
+        Looking();
+    }
+
+    private void FixedUpdate()
+    {
+        Movement();
+    }
+
+    private void Looking()
+    {
+        transform.Rotate(0, lookJoystick.Horizontal * Time.deltaTime * lookSensitivity, 0);
+
+        xRotation -= lookJoystick.Vertical * Time.deltaTime * lookSensitivity;
+        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        camBody.localRotation = Quaternion.Euler(xRotation, 0, 0);
+    }
+
+    private void Movement()
+    {
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
         animations.MoveTo(moveInput);
 
-        Vector3 lookInput = new Vector3(lookJoystick.Horizontal, 0, lookJoystick.Vertical);
+        Vector3 movement = moveInput.x * transform.right + moveInput.z * transform.forward;
+        movement *= moveSpeed;
+        movement.y = rb.velocity.y;
 
-        if (lookInput.sqrMagnitude == 0 && moveInput.sqrMagnitude != 0)
-        {
-            //SmoothRotate(moveInput);
-        }
-        else if (lookInput.sqrMagnitude != 0)
-        {
-            SmoothRotate(lookInput);
-        }
-
-        if (lookInput.sqrMagnitude >= attackMagnitude)
-        {
-            if (weapons.TryAttack())
-            {
-                animations.SetAttackTrigger(); 
-            }
-        }
-
-        moveInput *= moveSpeed * Time.deltaTime * 100;
-        moveInput.y = rb.velocity.y;
-        rb.velocity = moveInput;
-    }
-
-    private void SmoothRotate(Vector3 dir)
-    {
-        Quaternion lookRot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, Time.deltaTime * rotateSpeed);
+        rb.velocity = movement;
     }
 
 
