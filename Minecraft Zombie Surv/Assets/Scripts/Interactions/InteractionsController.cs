@@ -7,8 +7,10 @@ using UnityEngine;
 public class InteractionsController : MonoBehaviour
 {
     [SerializeField] private LayerMask interactLayers;
-    [SerializeField] private float interactRadius;
     [SerializeField] private float interactDistance;
+
+    [Space]
+    [SerializeField] private Transform checkPoint;
 
     [Space]
     [ReadOnly, SerializeField] private InteractableObject curInteractable;
@@ -18,7 +20,7 @@ public class InteractionsController : MonoBehaviour
 
     public void CheckInteractions()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRadius, interactLayers);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactDistance, interactLayers);
 
         if (colliders.Length > 0)
         {
@@ -49,7 +51,7 @@ public class InteractionsController : MonoBehaviour
 
     public void CheckInteractionsFront()
     {
-        Ray attackRay = new Ray(transform.position, transform.forward);
+        Ray attackRay = new Ray(checkPoint.position, checkPoint.forward);
 
         if (Physics.Raycast(attackRay, out RaycastHit hit, interactDistance, interactLayers))
         {
