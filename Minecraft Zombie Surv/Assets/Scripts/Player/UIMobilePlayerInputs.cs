@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIMobilePlayerInputs : MonoBehaviour
@@ -18,6 +20,9 @@ public class UIMobilePlayerInputs : MonoBehaviour
     public Button InteractBtn { get => interactBtn; }
     public Button AttackBtn { get => attackBtn; }
 
+    public Action onStartRun;
+    public Action onEndRun;
+
     private void OnEnable()
     {
         ServiceLocator.AddService(this);
@@ -26,5 +31,15 @@ public class UIMobilePlayerInputs : MonoBehaviour
     private void OnDisable()
     {
         ServiceLocator.RemoveService(this);
+    }
+
+    public void OnStartRun()
+    {
+        onStartRun?.Invoke();
+    }
+
+    public void OnEndRun()
+    {
+        onEndRun?.Invoke();
     }
 }
