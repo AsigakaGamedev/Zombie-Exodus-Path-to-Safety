@@ -28,6 +28,12 @@ public class LocalizationManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
+    private void Awake()
+    {
+        currentLocalization = localizations["ru"];
+        languageID = "ru";
+    }
+
     public void ChangeLocalization(string key)
     {
         currentLocalization = localizations[key];

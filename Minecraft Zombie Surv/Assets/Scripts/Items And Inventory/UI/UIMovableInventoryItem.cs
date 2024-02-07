@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class UIMovableInventoryItem : UIMovableObject
 {
-    private UIInventorySlot slot;
+    private UIInventoryCell slot;
     private ItemEntity item;
 
-    public UIInventorySlot Slot { get => slot; }
+    public UIInventoryCell Slot { get => slot; }
 
-    public void SetSlot(UIInventorySlot slot)
+    public void SetSlot(UIInventoryCell slot)
     {
         this.slot = slot;
     }

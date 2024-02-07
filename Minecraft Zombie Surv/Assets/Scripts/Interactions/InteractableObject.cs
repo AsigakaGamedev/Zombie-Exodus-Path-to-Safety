@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(QuickOutline))]
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private bool deactivateOnInteract = true;
+    [SerializeField] private UnityEvent interactEvent;
 
     [Space]
     [SerializeField] private QuickOutline outline;
@@ -35,6 +37,7 @@ public class InteractableObject : MonoBehaviour
 
     public void Interact(PlayerController player)
     {
+        interactEvent.Invoke();
         onInteract?.Invoke(player);
 
         if (deactivateOnInteract) gameObject.SetActive(false);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIInventorySlot : PoolableObject, IDropHandler
+public class UIInventoryCell : PoolableObject, IDropHandler
 {
     [SerializeField] private UIMovableInventoryItem movableItem;
 

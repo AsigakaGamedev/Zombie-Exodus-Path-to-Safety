@@ -16,6 +16,8 @@ public class LocalizationInfo : ScriptableObject
     {
         if (values.ContainsKey(key))
         {
+            if (string.IsNullOrEmpty(values[key])) return key;
+
             return values[key];
         }
         else

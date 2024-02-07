@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryController : AInventory
 {
     [SerializeField] private CraftInfo[] allCrafts;
 
@@ -12,14 +12,10 @@ public class InventoryController : MonoBehaviour
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
-    //[SerializeField] private List<InventoryCellEntity> quickCells;
-   // [SerializeField] private Transform quickCellsPales;
 
-    public List<InventoryCellEntity> Cells { get => cells; }
+    public override List<InventoryCellEntity> Cells { get => cells; }
+
     public CraftInfo[] AllCrafts { get => allCrafts; }
-
-
-
 
     public void Init()
     {
@@ -55,7 +51,7 @@ public class InventoryController : MonoBehaviour
     {
         foreach (InventoryCellEntity cell in cells) 
             if (cell.Item != null && cell.Item.InfoPrefab == info) return cell;
-        print("Null тут");
+
         return null;
     }
 
@@ -131,7 +127,4 @@ public class InventoryController : MonoBehaviour
         print("Прошел проверку");
         return true;
     }
-
-
-
 }

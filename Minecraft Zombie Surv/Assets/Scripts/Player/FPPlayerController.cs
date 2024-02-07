@@ -60,7 +60,7 @@ public class FPPlayerController : MonoBehaviour
         interactions.CheckInteractions();
 
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
-        animations.MoveTo(moveInput);
+        animations.MoveToWithDots(moveInput);
 
         Vector3 lookInput = new Vector3(lookJoystick.Horizontal, 0, lookJoystick.Vertical);
 

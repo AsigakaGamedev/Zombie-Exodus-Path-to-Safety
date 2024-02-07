@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class UITerminalManager : MonoBehaviour
@@ -19,7 +18,7 @@ public class UITerminalManager : MonoBehaviour
     private LocalizationManager localizationManager;
     private ObjectPoolingManager poolingManager;
 
-    private List<UITerminalComponent> showedComponents;
+    private List<UITerminalComponent> showedComponents = new List<UITerminalComponent>();
 
     private void OnEnable()
     {
@@ -29,14 +28,6 @@ public class UITerminalManager : MonoBehaviour
     private void OnDisable()
     {
         ServiceLocator.RemoveService(this);
-    }
-
-    private void Start()
-    {
-        showedComponents = new List<UITerminalComponent>();
-
-        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
-        poolingManager = ServiceLocator.GetServiceSafe<ObjectPoolingManager>();
     }
 
     public void OpenTerminal(TerminalController terminal)
@@ -49,7 +40,11 @@ public class UITerminalManager : MonoBehaviour
 
         showedComponents.Clear();
 
+        if (!localizationManager) localizationManager = ServiceLocator.GetService<LocalizationManager>();
+
         labelText.text = localizationManager.CurrentLocalization.GetValue(terminal.TerminalLabelKey);
+
+        if (!poolingManager) poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
 
         foreach (var logicComponent in terminal.Components)
         {
@@ -58,14 +53,17 @@ public class UITerminalManager : MonoBehaviour
             newUIComp.transform.localScale = Vector3.one;
             newUIComp.SetLink(logicComponent, localizationManager.CurrentLocalization.GetValue(logicComponent.LabelKey));
             newUIComp.onComponentClick += OnComponentClick;
+            showedComponents.Add(newUIComp);
         }
+
+        contentText.text = "";
     }
 
     private void OnComponentClick(UITerminalComponent clickedComponent)
     {
         StopAllCoroutines();
-
-        StartCoroutine(WriteContentSmooth(clickedComponent.LinkedComponent.ContentKey));
+        
+        StartCoroutine(WriteContentSmooth(localizationManager.CurrentLocalization.GetValue(clickedComponent.LinkedComponent.ContentKey)));
     }
 
     private IEnumerator WriteContentSmooth(string content)
