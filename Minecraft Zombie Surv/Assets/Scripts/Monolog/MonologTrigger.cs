@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class MonologTrigger : MonoBehaviour
 {
-    private MonologsController monologsController;
     [SerializeField] private List<MonologData> monologList;
+
+    private MonologsManager monologsController;
 
     private void Start()
     {
-        monologsController = ServiceLocator.GetService<MonologsController>();
+        monologsController = ServiceLocator.GetService<MonologsManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartMonolog();
+            monologsController.SetMonolog(monologList);
+            Destroy(gameObject);
         }
-    }
-
-
-    private void StartMonolog()
-    {
-        Debug.Log("Игрок вошел в триггер! Выполняем ваш код.");
-        monologsController.SetMonolog(monologList);
-       
     }
 }

@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6232868338297412915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2466031312588118110}
+  - component: {fileID: 7881011671369741377}
+  - component: {fileID: 8985752920922797452}
+  m_Layer: 0
+  m_Name: Monolog Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2466031312588118110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232868338297412915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.204, y: 1.399, z: -17.752}
+  m_LocalScale: {x: 4.9885097, y: 1.6187, z: 1.6187}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7881011671369741377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232868338297412915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3becdbfc179834681570a5d3e788f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monologList:
+  - text: "\u0413\u0434\u0435 \u044F \u0451\u043B\u043A\u0438 \u043F\u043B\u0430\u043A\u0438???"
+    time: 2
+  - text: "\u041A\u0430\u043A\u0430\u044F \u043A\u043B\u0430\u0441\u0441\u043D\u0430\u044F
+      \u043A\u043E\u043C\u043D\u0430\u0442\u0430"
+    time: 1
+  - text: "\u041A\u0430\u043A\u0438\u0435 \u043A\u043B\u0430\u0441\u0441\u043D\u044B\u0435
+      \u043C\u043E\u0434\u0435\u043B\u0438"
+    time: 1
+--- !u!65 &8985752920922797452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232868338297412915}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

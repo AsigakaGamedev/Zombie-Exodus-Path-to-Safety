@@ -4,12 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonologsController : MonoBehaviour
+public class MonologsManager : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI monologText;
+    [SerializeField] private float monologCharDelay = 0.1f;
+
+    [Space]
     [SerializeField] private List<MonologData> curMonologList;
-    [SerializeField] private MonologData curMonolog;
 
     private void OnEnable()
     {
@@ -28,6 +29,7 @@ public class MonologsController : MonoBehaviour
 
     private void Awake()
     {
+        monologText.text = "";
         StartCoroutine(EShowMonolog());
     }
 
@@ -35,17 +37,28 @@ public class MonologsController : MonoBehaviour
     {
         while (true) 
         {
-            if (curMonologList.Count == 0) yield return new WaitForEndOfFrame();
+            if (curMonologList.Count == 0)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
             foreach (MonologData monologData in curMonologList)
             {
-                string text = monologData.Text;
-                float time = monologData.Time;
-                monologText.text = text;
-                yield return new WaitForSeconds(time);
+                string monologResultText = "";
+
+                foreach (char monologChar in monologData.Text)
+                {
+                    monologResultText += monologChar;
+                    monologText.text = monologResultText;
+                    yield return new WaitForSeconds(monologCharDelay);
+                }
+
+                yield return new WaitForSeconds(monologData.Time);
                 monologText.text = "";
             }
+
             curMonologList.Clear();
-            yield return null;
         }
     }
 
