@@ -5448,29 +5448,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1634918665308481083, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 1066665865063924524, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1634918665308481083, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 1066665865063924524, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054390623671239905, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054390623671239905, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054390623671239905, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2162720527896718519, guid: 1393785bc3bf73a43992f2c55a0f31d2,
@@ -5488,11 +5473,6 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 591134850}
-    - target: {fileID: 5430743825518120500, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000579834
-      objectReference: {fileID: 0}
     - target: {fileID: 6590070956158509233, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5543,10 +5523,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8926266338630128267, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 6879636148678774700, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
-      propertyPath: m_Value
-      value: 1
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879636148678774700, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
