@@ -16,7 +16,7 @@ public class UICameraChangeBtn : MonoBehaviour
         btn = GetComponent<Button>();
         btn.onClick.AddListener(() =>
         {
-            ServiceLocator.GetService<CamerasManager>().SetCamera(targetCamera);
+            ServiceLocator.GetService<CamerasManager>().SetCameraByPriority(targetCamera);
         });
     }
 }
