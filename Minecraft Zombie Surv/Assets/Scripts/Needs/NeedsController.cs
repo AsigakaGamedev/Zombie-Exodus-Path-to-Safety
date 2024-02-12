@@ -1,16 +1,32 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NeedsController : MonoBehaviour
 {
-    [SerializeField] private List<NeedsData> needsDataList;
+    [SerializeField] private SerializedDictionary<string, NeedData> allNeeds;
 
-    void Update()
+    [Space]
+    [SerializeField] private float needsChangeDelay = 1; 
+
+    private void Start()
     {
-        foreach (NeedsData needsData in needsDataList)
+        StartCoroutine(EStartNeedsChange());
+    }
+
+    private IEnumerator EStartNeedsChange()
+    {
+        foreach (NeedData needsData in allNeeds.Values)
         {
             needsData.Value -= needsData.ChangeValue * Time.deltaTime;
         }
+
+        yield return new WaitForSeconds(needsChangeDelay);
+    }
+
+    public NeedData GetNeed(string id)
+    {
+        return allNeeds[id];
     }
 }
