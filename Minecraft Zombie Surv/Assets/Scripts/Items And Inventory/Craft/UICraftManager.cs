@@ -15,7 +15,6 @@ public class UICraftManager : MonoBehaviour
     [SerializeField] private Transform recipiesContent;
 
     private ObjectPoolingManager poolingManager;
-    private LevelContoller levelContoller;
     private PlayerController player;
     private CraftInfo curCraftInfo;
 
@@ -51,7 +50,7 @@ public class UICraftManager : MonoBehaviour
 
     private void Start()
     {
-        levelContoller = ServiceLocator.GetService<LevelContoller>();
+        player = ServiceLocator.GetService<PlayerController>();
     }
 
     private void DeactivateChildObjects()
@@ -64,12 +63,12 @@ public class UICraftManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!player && levelContoller)
+        if (!player)
         {
-            player = levelContoller.PlayerInstance;
+            player = ServiceLocator.GetService<PlayerController>();
 
             if (!player) return;
-            onCraft += levelContoller.PlayerInstance.Inventory.CraftItem;
+            onCraft += player.Inventory.CraftItem;
         }
 
         foreach (Transform child in craftTypePanel)

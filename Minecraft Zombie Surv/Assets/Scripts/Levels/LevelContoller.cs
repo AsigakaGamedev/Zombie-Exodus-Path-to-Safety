@@ -1,4 +1,3 @@
-using Cinemachine;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +6,6 @@ using UnityEngine.Playables;
 
 public class LevelContoller : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerPrefab; 
-    [SerializeField] private Transform playerSpawnPos;
-
-    [Space]
-    [SerializeField] private CinemachineVirtualCamera levelCamera;
-
-    [Space]
     [SerializeField] private PlayableDirector startTimeline;
 
     [Space]
@@ -35,8 +27,6 @@ public class LevelContoller : MonoBehaviour
 
     private void Start()
     {
-        //SpawnPlayer(playerSpawnPos.position);
-
         timelineController = ServiceLocator.GetService<TimelineController>();
 
         if (startTimeline)
@@ -44,14 +34,5 @@ public class LevelContoller : MonoBehaviour
             timelineController.SetTimeline(startTimeline);
             timelineController.Play();
         }
-    }
-
-    public void SpawnPlayer(Vector3 spawnPos)
-    {
-        if (playerInstance) Destroy(playerInstance.gameObject);
-
-        playerInstance = Instantiate(playerPrefab, spawnPos, Quaternion.identity, playerSpawnPos);
-        levelCamera.m_Follow = playerInstance.transform;
-        //playerInstance.Init();
     }
 }
