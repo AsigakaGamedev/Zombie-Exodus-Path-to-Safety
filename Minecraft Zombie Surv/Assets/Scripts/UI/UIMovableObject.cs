@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField] private CanvasGroup group;
     [SerializeField] protected Image iconImg;
@@ -49,7 +49,13 @@ public class UIMovableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         OnEnd(eventData);
     }
 
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        OnClick(eventData);
+    }
+
     protected virtual void OnBegin(PointerEventData eventData) { }
     protected virtual void OnDrag(PointerEventData eventData) { }
     protected virtual void OnEnd(PointerEventData eventData) { }
+    protected virtual void OnClick(PointerEventData eventData) { }
 }

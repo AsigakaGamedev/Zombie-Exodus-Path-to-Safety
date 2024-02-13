@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class UIMovableInventoryItem : UIMovableObject
 {
     private UIInventoryCell slot;
-    private ItemEntity item;
+
+    protected ItemEntity item;
 
     public UIInventoryCell Slot { get => slot; }
 
