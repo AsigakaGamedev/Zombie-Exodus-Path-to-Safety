@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Economy.Model;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class UISelectedItemPopup : APopup
     [SerializeField] private Button dropItemBtn;
 
     private UIPopupsManager popupsManager;
+    private ItemEntity selectedItem;
 
     public override void OnInit()
     {
@@ -19,6 +21,7 @@ public class UISelectedItemPopup : APopup
 
         useItemBtn.onClick.AddListener(() =>
         {
+            selectedItem.UseItem();
             popupsManager.CloseCurrentPopup();
         });
 
@@ -35,6 +38,9 @@ public class UISelectedItemPopup : APopup
 
     public void SelectItem(ItemEntity item)
     {
-        print($"Item Selected {item.InfoPrefab}");
+        selectedItem = item;
+
+        useItemBtn.gameObject.SetActive(item.InfoPrefab.CanUse);
+        equipItemBtn.gameObject.SetActive(item.InfoPrefab.CanEquip);
     }
 }

@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
         weapons.onEquip -= OnEquipWeapon;
         weapons.onDequip -= OnDequipWeapon;
+
+        inventory.Destroy();
     }
 
     private void Update()

@@ -142,7 +142,7 @@ public class UICraftManager : MonoBehaviour
                 childObject.SetActive(true);
 
                 int craftPrice = craftInfo.CreationPriceList[i].RandomAmount;
-                int amountInInventory = player.Inventory.GetMaterialCount(craftInfo.CreationPriceList[i].Info);
+                int amountInInventory = player.Inventory.GetItemsAmount(craftInfo.CreationPriceList[i].Info);
 
                 TextMeshProUGUI textMeshPro1 = childObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 TextMeshProUGUI textMeshPro2 = childObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();

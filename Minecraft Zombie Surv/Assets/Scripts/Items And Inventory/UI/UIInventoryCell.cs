@@ -12,7 +12,7 @@ public class UIInventoryCell : PoolableObject, IDropHandler
     public UIMovableInventoryItem MovableItem { get => movableItem; }
     public InventoryCellEntity Entity { get => entity; }
 
-    public void SetEntity(InventoryCellEntity entity)
+    public void SetValues(InventoryCellEntity entity)
     {
         if (entity != null)
         {
@@ -22,7 +22,7 @@ public class UIInventoryCell : PoolableObject, IDropHandler
         this.entity = entity;
         this.entity.onItemChange += OnSlotItemChange;
 
-        movableItem.SetSlot(this);
+        movableItem.SetCell(this);
         movableItem.SetItem(this.entity.Item);
     }
 
@@ -30,8 +30,8 @@ public class UIInventoryCell : PoolableObject, IDropHandler
     {
         if (eventData.pointerDrag.TryGetComponent(out UIMovableInventoryItem droppedItem))
         {
-            ItemEntity transferItem = new ItemEntity(droppedItem.Slot.Entity.Item.InfoPrefab, droppedItem.Slot.Entity.Item.Amount);
-            droppedItem.Slot.Entity.Item = this.entity.Item;
+            ItemEntity transferItem = new ItemEntity(droppedItem.Cell.Entity.Item.InfoPrefab, droppedItem.Cell.Entity.Item.Amount);
+            droppedItem.Cell.Entity.Item = this.entity.Item;
             droppedItem.OnEndDrag(null);
             this.entity.Item = transferItem;
         }

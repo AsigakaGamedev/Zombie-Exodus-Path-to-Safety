@@ -47,3 +47,6 @@ MonoBehaviour:
   itemCellSprite: {fileID: 0}
   itemNameKey: canned_veget_name
   itemDescriptionKey: canned_veget_desc
+  canEquip: 0
+  equipmentSlotID: 0
+  canUse: 1

@@ -28,7 +28,7 @@ public class UIInventoryPanel : MonoBehaviour
             UIInventoryCell newSlot = poolingManager.GetPoolable(cellPrefab);
             newSlot.transform.SetParent(cellsContent);
             newSlot.transform.localScale = Vector3.one;
-            newSlot.SetEntity(slotEntity);
+            newSlot.SetValues(slotEntity);
             newSlot.MovableItem.SetParents(newSlot.transform, transform.parent);
             spawnedSlots.Add(newSlot);
         }

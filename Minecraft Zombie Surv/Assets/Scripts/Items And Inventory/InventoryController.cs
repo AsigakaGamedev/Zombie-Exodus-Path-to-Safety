@@ -24,9 +24,20 @@ public class InventoryController : AInventory
         for (int i = 0; i < cellsCount; i++)
         {
             InventoryCellEntity newCell = new InventoryCellEntity();
+            newCell.onItemUse += OnItemUsed;
             cells.Add(newCell);
         }
     }
+
+    public void Destroy()
+    {
+        foreach (var cell in cells)
+        {
+            cell.onItemUse -= OnItemUsed;
+        }
+    }
+
+    #region Items
 
     public void AddItem(ItemData data)
     {
@@ -47,9 +58,37 @@ public class InventoryController : AInventory
         }
     }
 
+    public int GetItemsAmount(ItemInfo itemInfo)
+    {
+        InventoryCellEntity itemCell = GetCell(itemInfo);
+
+        if (itemCell != null)
+        {
+            if (itemCell.Item != null && itemCell.Item.InfoPrefab != null)
+            {
+                return itemCell.Item.Amount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    public void OnItemUsed(ItemEntity item)
+    {
+        print("Предмет использован");
+    }
+
+    #endregion
+
+    #region Cells
+
     public InventoryCellEntity GetCell(ItemInfo info)
     {
-        foreach (InventoryCellEntity cell in cells) 
+        foreach (InventoryCellEntity cell in cells)
             if (cell.Item != null && cell.Item.InfoPrefab == info) return cell;
 
         return null;
@@ -63,41 +102,20 @@ public class InventoryController : AInventory
         return null;
     }
 
-    public int GetMaterialCount(ItemInfo materialInfo)
-    {
-        InventoryCellEntity materialCell = GetCell(materialInfo);
-        print("1");
-        if (materialCell != null)
-        {
-            print("2");
-            if (materialCell.Item != null && materialCell.Item.InfoPrefab != null)
-            {
-                print("3");
-                return materialCell.Item.Amount;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+    #endregion
 
-        return 0;
-    }
+    #region Crafting
 
     public void CraftItem(CraftInfo craftRecipe)
     {
-        print($"ВЫзвалась функция {craftRecipe.CraftName}");
-        // Проверить, достаточно ли материалов для крафта
         if (CanCraftItem(craftRecipe))
         {
-            // Уменьшить количество материалов в инвентаре
             foreach (ItemData material in craftRecipe.CreationPriceList)
             {
                 InventoryCellEntity materialCell = GetCell(material.Info);
                 materialCell.Item.Amount -= material.RandomAmount;
             }
 
-            // Добавить созданные предметы в инвентарь
             foreach (ItemData createdItem in craftRecipe.CreatedItemsList)
             {
                 AddItem(createdItem);
@@ -117,14 +135,12 @@ public class InventoryController : AInventory
 
             if (materialCell == null || materialCell.Item.Amount < material.RandomAmount)
             {
-                print("Не прошел проверку");
-                // Не хватает материалов для крафта
                 return false;
             }
         }
 
-        // Достаточно материалов для крафта
-        print("Прошел проверку");
         return true;
     }
+
+    #endregion
 }
