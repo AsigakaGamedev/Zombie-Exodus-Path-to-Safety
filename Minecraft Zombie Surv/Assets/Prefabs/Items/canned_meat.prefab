@@ -50,3 +50,6 @@ MonoBehaviour:
   canEquip: 0
   equipmentSlotID: 0
   canUse: 1
+  useDatas:
+  - needID: hunger
+    needIncreaseValue: 25

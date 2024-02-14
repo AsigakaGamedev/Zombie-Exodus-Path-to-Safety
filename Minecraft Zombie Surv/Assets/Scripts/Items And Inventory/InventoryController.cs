@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class InventoryController : AInventory
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
+
+    public Action<ItemEntity> onItemUse;
 
     public override List<InventoryCellEntity> Cells { get => cells; }
 
@@ -79,7 +82,7 @@ public class InventoryController : AInventory
 
     public void OnItemUsed(ItemEntity item)
     {
-        print("Предмет использован");
+        onItemUse?.Invoke(item);
     }
 
     #endregion

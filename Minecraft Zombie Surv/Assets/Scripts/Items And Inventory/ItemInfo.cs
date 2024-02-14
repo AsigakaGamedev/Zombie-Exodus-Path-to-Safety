@@ -16,6 +16,7 @@ public class ItemInfo : MonoBehaviour
 
     [Space]
     [SerializeField] private bool canUse;
+    [SerializeField] private ItemUseData[] useDatas;
 
     public Sprite ItemCellSprite { get => itemCellSprite; }
     public string ItemNameKey { get => itemNameKey; }
@@ -25,4 +26,15 @@ public class ItemInfo : MonoBehaviour
     public int EquipmentSlotID { get => equipmentSlotID; }
 
     public bool CanUse { get => canUse; }
+    public ItemUseData[] UseDatas { get => useDatas; }
+}
+
+[System.Serializable]
+public class ItemUseData
+{
+    [SerializeField] private string needID;
+    [SerializeField] private float needIncreaseValue;
+
+    public string NeedID { get => needID; }
+    public float NeedIncreaseValue { get => needIncreaseValue; }
 }

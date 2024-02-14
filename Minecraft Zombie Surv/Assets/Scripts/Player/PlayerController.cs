@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour
         lookJoystick = playerInputs.LookJoystick;
 
         inventory.Init();
-        
+        inventory.onItemUse += OnItemUse;
+
         weapons.onEquip += OnEquipWeapon;
         weapons.onDequip += OnDequipWeapon;
         weapons.Init();
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
         weapons.onEquip -= OnEquipWeapon;
         weapons.onDequip -= OnDequipWeapon;
 
+        inventory.onItemUse -= OnItemUse;
         inventory.Destroy();
     }
 
@@ -161,6 +163,14 @@ public class PlayerController : MonoBehaviour
     private void OnDequipWeapon()
     {
         playerInputs.AttackBtn.gameObject.SetActive(false);
+    }
+
+    private void OnItemUse(ItemEntity item)
+    {
+        foreach (ItemUseData useData in item.InfoPrefab.UseDatas)
+        {
+            needs.GetNeed(useData.NeedID).Value += useData.NeedIncreaseValue;
+        }
     }
 
     private void OnFindInteractable()
