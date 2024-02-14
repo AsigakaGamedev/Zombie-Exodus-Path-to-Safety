@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InteractionsController interactions;
     [SerializeField] private AnimationsController animations;
     [SerializeField] private WeaponsController weapons;
+    [SerializeField] private NeedsController needs;
 
     [Space]
     [SerializeField] private float walkSpeed = 2.6f;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private float xRotation;
 
     public InventoryController Inventory { get => inventory; }
+    public NeedsController Needs { get => needs; }
 
     private void OnEnable()
     {
@@ -51,8 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         currentSpeed = walkSpeed;
         state = PlayerState.Walk;
-
-        Application.targetFrameRate = 60;
 
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
         interactions.onFindInteractable += OnFindInteractable;
         interactions.onLoseInteractable += OnLoseInteractable;
+
+        needs.Init();
     }
 
     private void OnDestroy()

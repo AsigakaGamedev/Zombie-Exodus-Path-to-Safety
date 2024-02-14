@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UINeedProgressBar : MonoBehaviour
+public class UINeedPlayerBar : MonoBehaviour
 {
-    [SerializeField] private NeedsController needsController;
     [SerializeField] private Slider slider;
 
     [Space]
     [SerializeField] private string needID;
 
+    private PlayerController player;
     private NeedData linkedNeed;
 
     private void Start()
     {
-        linkedNeed = needsController.GetNeed(needID);
+        player = ServiceLocator.GetService<PlayerController>();
+        linkedNeed = player.Needs.GetNeed(needID);
 
         slider.maxValue = linkedNeed.MaxValue;
         slider.value = linkedNeed.Value;

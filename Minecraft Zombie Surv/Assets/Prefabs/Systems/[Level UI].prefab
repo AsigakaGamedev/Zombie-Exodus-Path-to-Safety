@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 3731857492148635052}
   - component: {fileID: 100329839360691462}
   - component: {fileID: 8186296336455917983}
+  - component: {fileID: 736412678895758175}
   m_Layer: 0
   m_Name: Hunger Btn
   m_TagString: Untagged
@@ -230,6 +231,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &736412678895758175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431982584416610135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e62beced3a87b40bdf673aebc44fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 8186296336455917983}
+  needID: hunger
 --- !u!1 &439817956986827191
 GameObject:
   m_ObjectHideFlags: 0
@@ -8137,6 +8152,7 @@ GameObject:
   - component: {fileID: 6974090607890455022}
   - component: {fileID: 7174790017653338244}
   - component: {fileID: 4846696924244025603}
+  - component: {fileID: 3134134763494302352}
   m_Layer: 0
   m_Name: Hunger Btn
   m_TagString: Untagged
@@ -8253,6 +8269,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3134134763494302352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036063545337378717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e62beced3a87b40bdf673aebc44fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 4846696924244025603}
+  needID: hunger
 --- !u!1 &6061507227969606607
 GameObject:
   m_ObjectHideFlags: 0

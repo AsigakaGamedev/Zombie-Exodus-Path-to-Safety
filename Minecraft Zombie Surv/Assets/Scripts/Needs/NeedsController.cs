@@ -10,19 +10,27 @@ public class NeedsController : MonoBehaviour
     [Space]
     [SerializeField] private float needsChangeDelay = 1; 
 
-    private void Start()
+    public void Init()
     {
+        foreach (NeedData needsData in allNeeds.Values)
+        {
+            needsData.Value = needsData.MaxValue;
+        }
+
         StartCoroutine(EStartNeedsChange());
     }
 
     private IEnumerator EStartNeedsChange()
     {
-        foreach (NeedData needsData in allNeeds.Values)
+        while (true)
         {
-            needsData.Value -= needsData.ChangeValue * Time.deltaTime;
-        }
+            foreach (NeedData needsData in allNeeds.Values)
+            {
+                needsData.Value += needsData.ChangeValue;
+            }
 
-        yield return new WaitForSeconds(needsChangeDelay);
+            yield return new WaitForSeconds(needsChangeDelay);
+        }
     }
 
     public NeedData GetNeed(string id)
