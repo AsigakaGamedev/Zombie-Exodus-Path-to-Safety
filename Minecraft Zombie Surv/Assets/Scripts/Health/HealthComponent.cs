@@ -12,18 +12,18 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private RagdollController ragdoll;
 
     [Space]
-    [SerializeField] private Slider slider;
-
-    [Space]
     [ReadOnly, SerializeField] private float health;
 
-    public Action<float> onDamage;
+    public Action<float> onHealthChange;
+    public Action<float> onMaxHealthChange;
     public Action onDie;
+
+    public float MaxHealth { get => maxHealth; }
+    public float Health { get => health; }
 
     private void Start()
     {
         health = maxHealth;
-        SetMaxValue(health);
     }
 
     public void Damage(float damage)
@@ -31,32 +31,21 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0) return;
 
         health -= damage;
-        onDamage?.Invoke(health);
-        SetValue(health);
+        onHealthChange?.Invoke(health);
 
         if (health <= 0)
         {
-            onDie?.Invoke();
-            if (deactivateOnDie) gameObject.SetActive(false);
-
-            if (ragdoll) ragdoll.Activate();
+            Kill();
         }
     }
 
-    public void SetMaxValue(float maxValue)
+    [Button]
+    public void Kill()
     {
-        if (slider)
-        {
-            slider.maxValue = maxValue;
-            slider.value = maxValue;
-        }
-    }
+        health = 0;
+        onDie?.Invoke();
+        if (deactivateOnDie) gameObject.SetActive(false);
 
-    public void SetValue(float value)
-    {
-        if (slider)
-        {
-            slider.value = value;
-        }
+        if (ragdoll) ragdoll.Activate();
     }
 }

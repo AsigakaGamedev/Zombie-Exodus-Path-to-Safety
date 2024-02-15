@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AnimationsController animations;
     [SerializeField] private WeaponsController weapons;
     [SerializeField] private NeedsController needs;
+    [SerializeField] private HealthComponent health;
 
     [Space]
     [SerializeField] private float walkSpeed = 2.6f;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [ReadOnly, SerializeField] private float currentSpeed;
     [ReadOnly, SerializeField] private PlayerState state;
 
+    private UIManager uiManager;
     private UIMobilePlayerInputs playerInputs;
     private Joystick moveJoystick;
     private Joystick lookJoystick;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public InventoryController Inventory { get => inventory; }
     public NeedsController Needs { get => needs; }
+    public HealthComponent Health { get => health; }
 
     private void OnEnable()
     {
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour
     {
         currentSpeed = walkSpeed;
         state = PlayerState.Walk;
+        
+        uiManager = ServiceLocator.GetService<UIManager>();
 
         playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
@@ -88,6 +93,8 @@ public class PlayerController : MonoBehaviour
         interactions.onLoseInteractable += OnLoseInteractable;
 
         needs.Init();
+
+        health.onDie += OnDie;
     }
 
     private void OnDestroy()
@@ -103,6 +110,8 @@ public class PlayerController : MonoBehaviour
 
         inventory.onItemUse -= OnItemUse;
         inventory.Destroy();
+
+        health.onDie -= OnDie;
     }
 
     private void Update()
@@ -141,6 +150,8 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = movement;
     }
+
+    #region Listeners
 
     private void OnStartRun()
     {
@@ -182,4 +193,11 @@ public class PlayerController : MonoBehaviour
     {
         playerInputs.InteractBtn.gameObject.SetActive(false);
     }
+
+    private void OnDie()
+    {
+        uiManager.ChangeScreen("die");
+    }
+
+    #endregion
 }
