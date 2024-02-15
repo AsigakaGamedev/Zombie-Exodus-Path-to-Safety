@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using AYellowpaper.SerializedCollections;
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,15 +7,20 @@ using UnityEngine;
 
 public class InventoryController : AInventory
 {
+    [Header("Caft")]
     [SerializeField] private CraftInfo[] allCrafts;
 
-    [Space]
+    [Header("Equipment And Weapon")]
+    [SerializeField] private SerializedDictionary<int, EquipmentSlot> equipmentSlots;
+
+    [Header("Cells")]
     [SerializeField] private int cellsCount = 24;
 
     [Space]
     [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
 
     public Action<ItemEntity> onItemUse;
+    public Action<ItemEntity> onItemEquip;
 
     public override List<InventoryCellEntity> Cells { get => cells; }
 
@@ -28,6 +34,7 @@ public class InventoryController : AInventory
         {
             InventoryCellEntity newCell = new InventoryCellEntity();
             newCell.onItemUse += OnItemUsed;
+            newCell.onItemEquip += OnItemEquiped;
             cells.Add(newCell);
         }
     }
@@ -37,6 +44,7 @@ public class InventoryController : AInventory
         foreach (var cell in cells)
         {
             cell.onItemUse -= OnItemUsed;
+            cell.onItemEquip -= OnItemEquiped;
         }
     }
 
@@ -83,6 +91,26 @@ public class InventoryController : AInventory
     public void OnItemUsed(ItemEntity item)
     {
         onItemUse?.Invoke(item);
+    }
+
+    #endregion
+
+    #region Equipment And Weapon
+
+    private void OnItemEquiped(ItemEntity item)
+    {
+        ItemInfo info = item.InfoPrefab;
+
+        if (info.IsWeapon)
+        {
+            print("Оружие экипировано");
+        }
+        else
+        {
+            print("Предмет экипирован");
+        }
+
+        onItemEquip?.Invoke(item);
     }
 
     #endregion

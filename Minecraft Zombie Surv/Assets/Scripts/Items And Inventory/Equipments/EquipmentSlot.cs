@@ -10,6 +10,7 @@ public class EquipmentSlot : MonoBehaviour
 
     [Space]
     [ReadOnly, SerializeField] private EquipmentModel equipedModel;
+    [ReadOnly, SerializeField] private ItemEntity equipedItem;
 
     public void Equip(string equipmentID)
     {

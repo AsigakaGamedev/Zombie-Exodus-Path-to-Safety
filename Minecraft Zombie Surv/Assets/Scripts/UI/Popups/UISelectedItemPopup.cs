@@ -57,6 +57,6 @@ public class UISelectedItemPopup : APopup
         itemDesc.text = localizationManager.CurrentLocalization.GetValue(info.ItemDescriptionKey);
 
         useItemBtn.gameObject.SetActive(info.CanUse);
-        equipItemBtn.gameObject.SetActive(info.CanEquip);
+        equipItemBtn.gameObject.SetActive(info.CanEquip || info.IsWeapon);
     }
 }

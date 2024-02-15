@@ -8,12 +8,12 @@ using UnityEngine;
 public class WeaponsController : MonoBehaviour
 {
     [SerializeField] private int startWeaponID = -1;
-    [SerializeField] private SerializedDictionary<int, Weapon> allWeapons;
+    [SerializeField] private SerializedDictionary<int, WeaponModel> allWeapons;
 
     [Space]
-    [ReadOnly, SerializeField] private Weapon weaponInHands;
+    [ReadOnly, SerializeField] private WeaponModel weaponInHands;
 
-    public Action<Weapon> onEquip;
+    public Action<WeaponModel> onEquip;
     public Action onDequip;
 
     public void Init()

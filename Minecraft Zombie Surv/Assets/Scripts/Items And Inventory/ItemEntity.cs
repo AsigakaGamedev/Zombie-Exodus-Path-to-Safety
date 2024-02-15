@@ -9,6 +9,7 @@ public class ItemEntity
     [SerializeField] private int amount;
 
     public Action onUse;
+    public Action onEquip;
     public Action onItemIsOut; //Когда предмет закончился
 
     public ItemInfo InfoPrefab { get => infoPrefab; }
@@ -38,5 +39,12 @@ public class ItemEntity
         {
             onItemIsOut?.Invoke();
         }
+    }
+
+    public void EquipItem()
+    {
+        if (!infoPrefab.CanEquip && !infoPrefab.IsWeapon) return;
+
+        onEquip?.Invoke();
     }
 }

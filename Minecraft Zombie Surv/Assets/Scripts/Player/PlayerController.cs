@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [Space]
     [SerializeField] private float walkSpeed = 2.6f;
     [SerializeField] private float runSpeed = 3.5f;
-    [SerializeField] private float lookSensitivity = 100;
+    [SerializeField] private float lookSensitivity = 115;
 
     [Space]
     [ReadOnly, SerializeField] private float currentSpeed;
@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
         inventory.Init();
         inventory.onItemUse += OnItemUse;
+        inventory.onItemEquip += OnItemEquiped;
 
         weapons.onEquip += OnEquipWeapon;
         weapons.onDequip += OnDequipWeapon;
@@ -105,11 +106,12 @@ public class PlayerController : MonoBehaviour
         interactions.onFindInteractable -= OnFindInteractable;
         interactions.onLoseInteractable -= OnLoseInteractable;
 
+        inventory.onItemUse -= OnItemUse;
+        inventory.onItemEquip -= OnItemEquiped;
+        inventory.Destroy();
+
         weapons.onEquip -= OnEquipWeapon;
         weapons.onDequip -= OnDequipWeapon;
-
-        inventory.onItemUse -= OnItemUse;
-        inventory.Destroy();
 
         health.onDie -= OnDie;
     }
@@ -165,15 +167,23 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.Walk;
     }
 
-    private void OnEquipWeapon(Weapon weapon)
+    private void OnEquipWeapon(WeaponModel weapon)
     {
-        animations.SetAnimType(weapon.AnimTypeIndex);
+        //animations.SetAnimType(weapon.AnimTypeIndex);
         playerInputs.AttackBtn.gameObject.SetActive(true);
     }
 
     private void OnDequipWeapon()
     {
         playerInputs.AttackBtn.gameObject.SetActive(false);
+    }
+
+    private void OnItemEquiped(ItemEntity item)
+    {
+        if (item.InfoPrefab.IsWeapon)
+        {
+            weapons.EquipWeapon(item.InfoPrefab.WeaponID);
+        }
     }
 
     private void OnItemUse(ItemEntity item)

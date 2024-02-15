@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
-public class Weapon : MonoBehaviour
+public enum WeaponType { Pistol, Rifle}
+
+public class WeaponModel : EquipmentModel
 {
     [SerializeField] private AttacksHandler attacksHandler;
 
     [Space]
-    [Tooltip("1 - non weapon\n2 - rifle\n3 - pistol")]
-    [SerializeField] private int animTypeIndex;
+    [SerializeField] private WeaponType weaponType;
 
-    public int AnimTypeIndex { get => animTypeIndex; }
+    public WeaponType WeaponType { get => weaponType; }
 
     public void Init()
     {
@@ -21,15 +22,5 @@ public class Weapon : MonoBehaviour
     public bool TryAttack()
     {
         return attacksHandler.TryAttack();
-    }
-
-    public void OnEquip()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void OnDequip()
-    {
-        gameObject.SetActive(false);
     }
 }

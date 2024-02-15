@@ -9,6 +9,7 @@ public class InventoryCellEntity
 
     public Action<ItemEntity> onItemChange;
     public Action<ItemEntity> onItemUse;
+    public Action<ItemEntity> onItemEquip;
 
     public ItemEntity Item { get => item;
         set
@@ -16,6 +17,7 @@ public class InventoryCellEntity
             if (item != null)
             {
                 item.onUse -= OnItemUse;
+                item.onEquip -= OnItemEquip;
                 item.onItemIsOut -= OnItemIsOut;
             }
 
@@ -25,6 +27,7 @@ public class InventoryCellEntity
             if (item != null)
             {
                 item.onUse += OnItemUse;
+                item.onEquip += OnItemEquip;
                 item.onItemIsOut += OnItemIsOut;
             }
         }
@@ -33,6 +36,11 @@ public class InventoryCellEntity
     private void OnItemUse()
     {
         onItemUse?.Invoke(item);
+    }
+
+    private void OnItemEquip()
+    {
+        onItemEquip?.Invoke(item);
     }
 
     private void OnItemIsOut()

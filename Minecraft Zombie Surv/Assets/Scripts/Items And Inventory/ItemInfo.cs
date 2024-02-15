@@ -11,12 +11,16 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] private string itemDescriptionKey;
 
     [Space]
-    [SerializeField] private bool canEquip;
+    [HideIf(nameof(isWeapon)), SerializeField] private bool canEquip;
     [ShowIf(nameof(canEquip)), SerializeField] private int equipmentSlotID;
 
     [Space]
+    [HideIf(nameof(canEquip)), SerializeField] private bool isWeapon;
+    [ShowIf(nameof(isWeapon)), SerializeField] private int weaponID;
+
+    [Space]
     [SerializeField] private bool canUse;
-    [SerializeField] private ItemUseData[] useDatas;
+    [ShowIf(nameof(canUse)), SerializeField] private ItemUseData[] useDatas;
 
     public Sprite ItemCellSprite { get => itemCellSprite; }
     public string ItemNameKey { get => itemNameKey; }
@@ -24,6 +28,9 @@ public class ItemInfo : MonoBehaviour
 
     public bool CanEquip { get => canEquip; }
     public int EquipmentSlotID { get => equipmentSlotID; }
+
+    public bool IsWeapon { get => isWeapon; }
+    public int WeaponID { get => weaponID; }
 
     public bool CanUse { get => canUse; }
     public ItemUseData[] UseDatas { get => useDatas; }
