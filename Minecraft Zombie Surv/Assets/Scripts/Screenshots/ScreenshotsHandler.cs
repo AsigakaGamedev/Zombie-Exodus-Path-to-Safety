@@ -19,7 +19,7 @@ public class ScreenshotsHandler : MonoBehaviour
         }
 
         string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-        string screenshotPath = folderPath + "/" + screenshotName + "_" + timestamp + ".png";
+        string screenshotPath = folderPath + "/" + screenshotName + ".png";
         ScreenCapture.CaptureScreenshot(screenshotPath);
     }
 }

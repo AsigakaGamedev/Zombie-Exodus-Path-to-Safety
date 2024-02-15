@@ -18,7 +18,7 @@ public class NeedData
         set 
         {
             this.value = Mathf.Clamp(value, 0, maxValue);
-            onNeedValueChange.Invoke(this.value);
+            onNeedValueChange?.Invoke(this.value);
         }
     }
 
