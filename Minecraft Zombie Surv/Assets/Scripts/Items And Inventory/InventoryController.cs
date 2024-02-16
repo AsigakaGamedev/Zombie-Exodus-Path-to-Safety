@@ -13,35 +13,47 @@ public class InventoryController : AInventory
     [Header("Equipment And Weapon")]
     [SerializeField] private SerializedDictionary<int, EquipmentSlot> equipmentSlots;
 
-    [Header("Cells")]
-    [SerializeField] private int cellsCount = 24;
+    [Header("Main Cells")]
+    [SerializeField] private int mainCellsCount = 12;
+
+    [Header("Quick Cells")]
+    [SerializeField] private int quickCellsCount = 5;
 
     [Space]
-    [ReadOnly, SerializeField] private List<InventoryCellEntity> cells;
+    [ReadOnly, SerializeField] private List<InventoryCellEntity> mainCells;
+    [ReadOnly, SerializeField] private List<InventoryCellEntity> quickCells;
 
     public Action<ItemEntity> onItemUse;
     public Action<ItemEntity> onItemEquip;
 
-    public override List<InventoryCellEntity> Cells { get => cells; }
+    public override List<InventoryCellEntity> MainCells { get => mainCells; }
+    public List<InventoryCellEntity> QuickCells { get => quickCells; }
 
     public CraftInfo[] AllCrafts { get => allCrafts; }
 
     public void Init()
     {
-        cells = new List<InventoryCellEntity>();
+        mainCells = new List<InventoryCellEntity>();
+        quickCells = new List<InventoryCellEntity>();
 
-        for (int i = 0; i < cellsCount; i++)
+        for (int i = 0; i < mainCellsCount; i++)
         {
-            InventoryCellEntity newCell = new InventoryCellEntity();
-            newCell.onItemUse += OnItemUsed;
-            newCell.onItemEquip += OnItemEquiped;
-            cells.Add(newCell);
+            InventoryCellEntity newMainCell = new InventoryCellEntity();
+            newMainCell.onItemUse += OnItemUsed;
+            newMainCell.onItemEquip += OnItemEquiped;
+            mainCells.Add(newMainCell);
+        }
+
+        for (int i = 0; i < quickCellsCount; i++)
+        {
+            InventoryCellEntity newQuickCell = new InventoryCellEntity();
+            quickCells.Add(newQuickCell);
         }
     }
 
     public void Destroy()
     {
-        foreach (var cell in cells)
+        foreach (var cell in mainCells)
         {
             cell.onItemUse -= OnItemUsed;
             cell.onItemEquip -= OnItemEquiped;
@@ -119,7 +131,7 @@ public class InventoryController : AInventory
 
     public InventoryCellEntity GetCell(ItemInfo info)
     {
-        foreach (InventoryCellEntity cell in cells)
+        foreach (InventoryCellEntity cell in mainCells)
             if (cell.Item != null && cell.Item.InfoPrefab == info) return cell;
 
         return null;
@@ -127,7 +139,7 @@ public class InventoryController : AInventory
 
     public InventoryCellEntity GetFreeCell()
     {
-        foreach (InventoryCellEntity cell in cells)
+        foreach (InventoryCellEntity cell in mainCells)
             if (cell.Item == null) return cell;
 
         return null;

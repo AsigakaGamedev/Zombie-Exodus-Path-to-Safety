@@ -9,6 +9,6 @@ public class UIInventoryListener : MonoBehaviour
 
     private void OnEnable()
     {
-        panel.OpenList(inventory.Cells);
+        panel.OpenList(inventory.MainCells);
     }
 }

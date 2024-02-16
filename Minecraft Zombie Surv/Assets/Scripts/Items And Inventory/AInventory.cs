@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class AInventory : MonoBehaviour
 {
-    public abstract List<InventoryCellEntity> Cells { get; }
+    public abstract List<InventoryCellEntity> MainCells { get; }
 }
