@@ -12,7 +12,8 @@ public class AnimationsController : MonoBehaviour
 
     [Space]
     [SerializeField] private MoveAnimType moveAnimType;
-    [AnimatorParam(nameof(animator)), SerializeField] private string moveKey;
+    [AnimatorParam(nameof(animator)), SerializeField] private string moveZKey;
+    [AnimatorParam(nameof(animator)), SerializeField] private string moveXKey;
 
     [Space]
     [SerializeField] private bool changeAnimSpeed = true;
@@ -37,26 +38,34 @@ public class AnimationsController : MonoBehaviour
 
     private void LateUpdate()
     {
-        switch (moveAnimType)
-        {
-            case MoveAnimType.Bool:
-                animator.SetBool(moveKey, lastPos != transform.position);
-                break;
-        }
+        //switch (moveAnimType)
+        //{
+        //    case MoveAnimType.Bool:
+        //        animator.SetBool(moveZKey, lastPos != transform.position);
+        //        break;
+        //}
 
-        lastPos = transform.position;
+        //lastPos = transform.position;
     }
 
-    public void MoveTo(Vector3 dir)
+    public void MoveToWithDots(Vector3 dir)
     {
         switch (moveAnimType)
         {
             case MoveAnimType.Velocity:
                 float velocityZ = Vector3.Dot(dir, transform.forward);
-                animator.SetFloat(moveKey, velocityZ, 0.1f, Time.deltaTime);
+                float velocityX = Vector3.Dot(dir, transform.right);
+                animator.SetFloat(moveZKey, velocityZ, 0.1f, Time.deltaTime);
+                animator.SetFloat(moveXKey, velocityX, 0.1f, Time.deltaTime);
 
                 break;
         }
+    }
+
+    public void MoveTo(Vector3 dir)
+    {
+        animator.SetFloat(moveZKey, dir.z, 0.1f, Time.deltaTime);
+        animator.SetFloat(moveXKey, dir.x, 0.1f, Time.deltaTime);
     }
 
     public void SetAnimType(int index)
