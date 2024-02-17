@@ -33,7 +33,7 @@ public class GameCloudService : MonoBehaviour
 
     private async void OnPlayerChangeNickname(string newNickname)
     {
-        print($"Player nickname saved");
+        //print($"Player nickname saved");
         await SavePlayerData();
     }
 
@@ -56,7 +56,7 @@ public class GameCloudService : MonoBehaviour
 
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
 
-        print($"Player data saved! {playerData.ToString()}");
+       // print($"Player data saved! {playerData.ToString()}");
     }
 
     public async Task LoadPlayerData()
@@ -66,7 +66,7 @@ public class GameCloudService : MonoBehaviour
         PlayerCloudData playerData = JsonUtility.FromJson<PlayerCloudData>(data[PLAYER_DATA_KEY].Value.GetAsString());
         print($"Player data loaded! {playerData}");
 
-        onLoadPlayerData?.Invoke(playerData);
+        //onLoadPlayerData?.Invoke(playerData);
     }
 }
 

@@ -97,7 +97,7 @@ public class ServicesManager : MonoBehaviour
     public async Task TrySignUp(string login, string password)
     {
         await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(login, password);
-        Debug.Log("SignUp is successful.");
+        //Debug.Log("SignUp is successful.");
 
         PlayerPrefs.SetString(loginPrefsKey, login);
         PlayerPrefs.SetString(passwordPrefsKey, password);
@@ -117,7 +117,7 @@ public class ServicesManager : MonoBehaviour
     public async Task TrySignIn(string login, string password)
     {
         await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(login, password);
-        Debug.Log("SignIn is successful.");
+        //Debug.Log("SignIn is successful.");
 
         PlayerPrefs.SetString(loginPrefsKey, login);
         PlayerPrefs.SetString(passwordPrefsKey,password);

@@ -56,6 +56,12 @@ MonoBehaviour:
       Value: Change
     - Key: resources
       Value: Resources
+    - Key: music
+      Value: Music
+    - Key: effects
+      Value: Effects
+    - Key: characters
+      Value: Characters
     - Key: pets
       Value: Pets
     - Key: view_advertisement

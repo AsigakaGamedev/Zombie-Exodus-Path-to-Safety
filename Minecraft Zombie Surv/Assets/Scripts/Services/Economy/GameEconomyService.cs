@@ -22,14 +22,14 @@ public class GameEconomyService : MonoBehaviour
         foreach (CurrencyDefinition curCurrency in rawCurrencies)
         {
             currencies.Add(curCurrency.Id, curCurrency);
-            print($"Currency {curCurrency.Id} was added!");
+            //print($"Currency {curCurrency.Id} was added!");
         }
 
         GetBalancesResult results = await EconomyService.Instance.PlayerBalances.GetBalancesAsync();
 
         foreach (PlayerBalance balance in results.Balances)
         {
-            print($"Balance {balance.CurrencyId} is {balance.Balance}");
+            //print($"Balance {balance.CurrencyId} is {balance.Balance}");
             onPlayerBalanceUpdate?.Invoke(balance);
         }
     }

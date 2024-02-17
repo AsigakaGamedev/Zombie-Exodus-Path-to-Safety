@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ public class LoadingManager : MonoBehaviour
     [SerializeField] private Slider loadingProgressBar;
     [SerializeField] private TextMeshProUGUI loadingHintTxt;
     [SerializeField] private Image loadingPreviewImg;
+
+    public Action onLoadingStart;
+    public Action onLoadingFinish;
 
     private void OnEnable()
     {
@@ -38,6 +42,7 @@ public class LoadingManager : MonoBehaviour
     public IEnumerator ELoadScene(string sceneName)
     {
         screenObject.SetActive(true);
+        onLoadingStart?.Invoke();
 
         AsyncOperation loadingOp = SceneManager.LoadSceneAsync(sceneName);
         
@@ -48,6 +53,7 @@ public class LoadingManager : MonoBehaviour
         }
 
         screenObject.SetActive(false);
+        onLoadingFinish?.Invoke();
     }
 
     public async Task LoadSceneAsync(string sceneName)
@@ -63,6 +69,7 @@ public class LoadingManager : MonoBehaviour
     private async Task LoadSceneAsyncTask(string sceneName, Task[] tasks)
     {
         screenObject.SetActive(true);
+        onLoadingStart?.Invoke();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         loadingHintTxt.text = "Загрузка сцены";
 
@@ -94,5 +101,6 @@ public class LoadingManager : MonoBehaviour
 
         Debug.Log("Сцена загружена!");
         screenObject.SetActive(false);
+        onLoadingFinish?.Invoke();
     }
 }
