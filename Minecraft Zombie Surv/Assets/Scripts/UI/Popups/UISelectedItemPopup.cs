@@ -1,7 +1,9 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Economy.Model;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +11,11 @@ public class UISelectedItemPopup : APopup
 {
     [SerializeField] private Image itemIcon; 
     [SerializeField] private TextMeshProUGUI itemName; 
-    [SerializeField] private TextMeshProUGUI itemDesc; 
+    [SerializeField] private TextMeshProUGUI itemDesc;
+
+    [Space]
+    [SerializeField] private SerializedDictionary<string, Color> needsColors;
+    [SerializeField] private Color healthColor;
 
     [Space]
     [SerializeField] private Button useItemBtn;
@@ -54,7 +60,35 @@ public class UISelectedItemPopup : APopup
         itemIcon.sprite = info.ItemCellSprite;
 
         itemName.text = localizationManager.CurrentLocalization.GetValue(info.ItemNameKey);
-        itemDesc.text = localizationManager.CurrentLocalization.GetValue(info.ItemDescriptionKey);
+
+        string resultDescription = localizationManager.CurrentLocalization.GetValue(info.ItemDescriptionKey);
+        
+        if (info.CanUse)
+        {
+            foreach (ItemUseData useData in info.UseDatas)
+            {
+                string hexColor = ColorUtility.ToHtmlStringRGB(needsColors[useData.NeedID]);
+
+                string valueOperator = useData.NeedIncreaseValue > 0 ? "+" : "";
+
+                string valueName = localizationManager.CurrentLocalization.GetValue(useData.NeedID);
+
+                resultDescription += $"\n<color=#{hexColor}>{valueOperator}{useData.NeedIncreaseValue}  {valueName}</color>";
+            }
+
+            if (info.HealthIncrease != 0)
+            {
+                string hexColor = ColorUtility.ToHtmlStringRGB(healthColor);
+
+                string valueOperator = info.HealthIncrease > 0 ? "+" : "";
+
+                string valueName = localizationManager.CurrentLocalization.GetValue("health");
+
+                resultDescription += $"\n<color=#{hexColor}>{valueOperator}{info.HealthIncrease}  {valueName}</color>";
+            }
+        }
+
+        itemDesc.text = resultDescription;
 
         useItemBtn.gameObject.SetActive(info.CanUse);
         equipItemBtn.gameObject.SetActive(info.CanEquip || info.IsWeapon);

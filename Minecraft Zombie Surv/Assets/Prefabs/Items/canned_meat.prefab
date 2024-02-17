@@ -49,7 +49,11 @@ MonoBehaviour:
   itemDescriptionKey: canned_meat_desc
   canEquip: 0
   equipmentSlotID: 0
+  equipmentModelID: 
+  isWeapon: 0
+  weaponID: 0
   canUse: 1
   useDatas:
   - needID: hunger
     needIncreaseValue: 25
+  healthIncrease: -15

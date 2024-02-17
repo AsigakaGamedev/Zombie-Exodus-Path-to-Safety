@@ -192,6 +192,11 @@ public class PlayerController : MonoBehaviour
         {
             needs.GetNeed(useData.NeedID).Value += useData.NeedIncreaseValue;
         }
+
+        if (item.InfoPrefab.HealthIncrease != 0)
+        {
+            health.IncreaseHealth(item.InfoPrefab.HealthIncrease);
+        }
     }
 
     private void OnFindInteractable()

@@ -22,6 +22,7 @@ public class ItemInfo : MonoBehaviour
     [Space]
     [SerializeField] private bool canUse;
     [ShowIf(nameof(canUse)), SerializeField] private ItemUseData[] useDatas;
+    [ShowIf(nameof(canUse)), SerializeField] private float healthIncrease;
 
     public Sprite ItemCellSprite { get => itemCellSprite; }
     public string ItemNameKey { get => itemNameKey; }
@@ -36,6 +37,7 @@ public class ItemInfo : MonoBehaviour
 
     public bool CanUse { get => canUse; }
     public ItemUseData[] UseDatas { get => useDatas; }
+    public float HealthIncrease { get => healthIncrease; }
 }
 
 [System.Serializable]
