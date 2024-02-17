@@ -177,7 +177,6 @@ MonoBehaviour:
   maxHealth: 50
   deactivateOnDie: 0
   ragdoll: {fileID: 7164925131372379}
-  slider: {fileID: 0}
   health: 0
 --- !u!1001 &7516995404390173720
 PrefabInstance:
@@ -196,6 +195,41 @@ PrefabInstance:
         type: 3}
       propertyPath: moveZKey
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animSpeed.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animSpeed.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animTypeKey
+      value: AnimType
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animTypes.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animTypes.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: moveBoolKey
+      value: IsMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951238630372453716, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animSpeedKey
+      value: AnimSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 2781102578989624980, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
@@ -404,9 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2417064657626172270}
   attackKey: 
-  moveAnimType: 0
-  moveZKey: 
-  moveXKey: 
+  moveBoolKey: 
   changeAnimSpeed: 1
   animSpeedKey: AnimSpeed
   animSpeed: {x: 0.8, y: 1.2}

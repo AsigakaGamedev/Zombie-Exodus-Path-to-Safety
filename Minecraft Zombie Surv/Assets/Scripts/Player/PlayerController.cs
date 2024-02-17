@@ -140,12 +140,12 @@ public class PlayerController : MonoBehaviour
     private void Movement()
     {
         moveInput = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);
+        animations.SetMove(moveInput.sqrMagnitude >= 0.2f);
 
         float zMove = moveInput.z;
         if (state == PlayerState.Run) zMove = 1;
 
         Vector3 movement = moveInput.x * transform.right + zMove * transform.forward;
-        animations.MoveTo(movement);
 
         movement *= currentSpeed;
         movement.y = rb.velocity.y;

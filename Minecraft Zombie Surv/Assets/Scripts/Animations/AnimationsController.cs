@@ -3,17 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MoveAnimType { Bool, Velocity}
-
 public class AnimationsController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [AnimatorParam(nameof(animator)), SerializeField] private string attackKey;
 
     [Space]
-    [SerializeField] private MoveAnimType moveAnimType;
-    [AnimatorParam(nameof(animator)), SerializeField] private string moveZKey;
-    [AnimatorParam(nameof(animator)), SerializeField] private string moveXKey;
+    [AnimatorParam(nameof(animator)), SerializeField] private string moveBoolKey;
 
     [Space]
     [SerializeField] private bool changeAnimSpeed = true;
@@ -36,36 +32,9 @@ public class AnimationsController : MonoBehaviour
         lastPos = transform.position;
     }
 
-    private void LateUpdate()
+    public void SetMove(bool value)
     {
-        //switch (moveAnimType)
-        //{
-        //    case MoveAnimType.Bool:
-        //        animator.SetBool(moveZKey, lastPos != transform.position);
-        //        break;
-        //}
-
-        //lastPos = transform.position;
-    }
-
-    public void MoveToWithDots(Vector3 dir)
-    {
-        switch (moveAnimType)
-        {
-            case MoveAnimType.Velocity:
-                float velocityZ = Vector3.Dot(dir, transform.forward);
-                float velocityX = Vector3.Dot(dir, transform.right);
-                animator.SetFloat(moveZKey, velocityZ, 0.1f, Time.deltaTime);
-                animator.SetFloat(moveXKey, velocityX, 0.1f, Time.deltaTime);
-
-                break;
-        }
-    }
-
-    public void MoveTo(Vector3 dir)
-    {
-        animator.SetFloat(moveZKey, dir.z, 0.1f, Time.deltaTime);
-        animator.SetFloat(moveXKey, dir.x, 0.1f, Time.deltaTime);
+        animator.SetBool(moveBoolKey, value);
     }
 
     public void SetAnimType(int index)
