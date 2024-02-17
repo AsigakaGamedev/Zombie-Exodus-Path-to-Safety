@@ -2541,6 +2541,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacksHandler: {fileID: 689684656}
   weaponType: 0
+  hasReloading: 0
+  needAmmo: 0
+  ammoInfo: {fileID: 0}
 --- !u!114 &689684656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6524,9 +6527,24 @@ PrefabInstance:
       propertyPath: _minimapAgents.Array.data[0]
       value: 
       objectReference: {fileID: 1460332044}
-    - target: {fileID: 448624191459518661, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 470419389814437441, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
-      propertyPath: m_IsActive
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470419389814437441, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1066665865063924524, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1066665865063924524, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2162720527896718519, guid: 1393785bc3bf73a43992f2c55a0f31d2,
@@ -6538,6 +6556,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '[Level UI]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577645578928893318, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577645578928893318, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577645578928893318, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3508925291230611285, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
@@ -6559,16 +6592,6 @@ PrefabInstance:
       propertyPath: _minimapAgents.Array.data[0]
       value: 
       objectReference: {fileID: 1460332044}
-    - target: {fileID: 6024700614271151060, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6024700614271151060, guid: 1393785bc3bf73a43992f2c55a0f31d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6590070956158509233, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6619,12 +6642,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6659782621884710069, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 6879636148678774700, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6659782621884710069, guid: 1393785bc3bf73a43992f2c55a0f31d2,
+    - target: {fileID: 6879636148678774700, guid: 1393785bc3bf73a43992f2c55a0f31d2,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
         playerInputs.InteractBtn.gameObject.SetActive(false);
         playerInputs.AttackBtn.gameObject.SetActive(false);
+        playerInputs.ReloadBtn.gameObject.SetActive(false);
 
         playerInputs.onStartRun += OnStartRun;
         playerInputs.onEndRun += OnEndRun;
@@ -171,11 +172,13 @@ public class PlayerController : MonoBehaviour
     {
         //animations.SetAnimType(weapon.AnimTypeIndex);
         playerInputs.AttackBtn.gameObject.SetActive(true);
+        playerInputs.ReloadBtn.gameObject.SetActive(weapon.HasReloading);
     }
 
     private void OnDequipWeapon()
     {
         playerInputs.AttackBtn.gameObject.SetActive(false);
+        playerInputs.ReloadBtn.gameObject.SetActive(false);
     }
 
     private void OnItemEquiped(ItemEntity item)

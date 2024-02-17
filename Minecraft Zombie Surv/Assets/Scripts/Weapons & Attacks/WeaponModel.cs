@@ -12,7 +12,19 @@ public class WeaponModel : EquipmentModel
     [Space]
     [SerializeField] private WeaponType weaponType;
 
+    [Header("Reloading")]
+    [SerializeField] private bool hasReloading;
+
+    [Header("Ammo")]
+    [SerializeField] private bool needAmmo;
+    [SerializeField] private ItemInfo ammoInfo;
+
     public WeaponType WeaponType { get => weaponType; }
+
+    public bool HasReloading { get => hasReloading; }
+
+    public bool NeedAmmo { get => needAmmo; }
+    public ItemInfo AmmoInfo { get => ammoInfo; }
 
     public void Init()
     {

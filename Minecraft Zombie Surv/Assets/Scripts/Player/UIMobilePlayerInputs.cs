@@ -13,12 +13,14 @@ public class UIMobilePlayerInputs : MonoBehaviour
     [Space]
     [SerializeField] private Button interactBtn;
     [SerializeField] private Button attackBtn;
+    [SerializeField] private Button reloadBtn;
 
     public Joystick MoveJoystick { get => moveJoystick; }
     public Joystick LookJoystick { get => lookJoystick; }
 
     public Button InteractBtn { get => interactBtn; }
     public Button AttackBtn { get => attackBtn; }
+    public Button ReloadBtn { get => reloadBtn; }
 
     public Action onStartRun;
     public Action onEndRun;
