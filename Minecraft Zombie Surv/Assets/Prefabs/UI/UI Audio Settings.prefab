@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8416891838633620747}
+  - component: {fileID: 130330064384578742}
   m_Layer: 0
-  m_Name: Audio Settings
+  m_Name: UI Audio Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +40,22 @@ RectTransform:
   m_AnchoredPosition: {x: 6.0321045, y: -102.5}
   m_SizeDelta: {x: -103.53589, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &130330064384578742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826594695576366091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea1039e0759ad34b9fd467436afd676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioType: 0
+  volumeBtn: {fileID: 2042885850785755489}
+  volumeSlider: {fileID: 4108853431849809016}
+  volumeText: {fileID: 209397336813433329}
 --- !u!1 &2261514762179983352
 GameObject:
   m_ObjectHideFlags: 0

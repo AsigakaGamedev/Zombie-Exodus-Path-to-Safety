@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class AudioSourceContainer : MonoBehaviour
 
     [Space]
     [Range(0, 1), SerializeField] private float volume;
+
+    public Action<float> onVolumeChanged;
+
+    public float Volume { get => volume; }
 
     private void OnValidate()
     {
@@ -27,11 +32,12 @@ public class AudioSourceContainer : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        volume = Mathf.Clamp01(volume);
+        this.volume = Mathf.Clamp01(volume);
+        onVolumeChanged?.Invoke(this.volume);
 
         foreach (var source in sources)
         {
-            source.volume = volume;
+            source.volume = this.volume;
         }
     }
 }

@@ -62,4 +62,14 @@ public class AudioManager : MonoBehaviour
     {
         sources[type].PlayAudio(clip);
     }
+
+    public void SetVolume(float volume, AudioType type)
+    {
+        sources[type].SetVolume(volume);
+    }
+
+    public AudioSourceContainer GetSource(AudioType type)
+    {
+        return sources[type];
+    }
 }

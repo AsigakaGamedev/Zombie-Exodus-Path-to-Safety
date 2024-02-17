@@ -9415,6 +9415,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 432092234}
     m_Modifications:
+    - target: {fileID: 130330064384578742, guid: 30f23269a5aa07f4e92a4120b41dd87d,
+        type: 3}
+      propertyPath: audioType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 732866550298466120, guid: 30f23269a5aa07f4e92a4120b41dd87d,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -10106,6 +10111,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 432092234}
     m_Modifications:
+    - target: {fileID: 130330064384578742, guid: 30f23269a5aa07f4e92a4120b41dd87d,
+        type: 3}
+      propertyPath: audioType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 732866550298466120, guid: 30f23269a5aa07f4e92a4120b41dd87d,
         type: 3}
       propertyPath: m_AnchorMax.x
