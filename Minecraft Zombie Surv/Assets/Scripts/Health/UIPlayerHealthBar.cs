@@ -11,7 +11,12 @@ public class UIPlayerHealthBar : MonoBehaviour
 
     private void Start()
     {
-        health = ServiceLocator.GetService<PlayerController>().Health;
+        PlayerController player = ServiceLocator.GetServiceSafe<PlayerController>();
+
+        if (!player) return;
+
+        health = player.Health;
+
         slider.maxValue = health.MaxHealth;
         slider.value = health.Health;
 
@@ -19,8 +24,28 @@ public class UIPlayerHealthBar : MonoBehaviour
         health.onMaxHealthChange += OnMaxHealthChange;
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
+        if (!health)
+        {
+            PlayerController player = ServiceLocator.GetServiceSafe<PlayerController>();
+
+            if (!player) return;
+
+            health = player.Health;
+        }
+
+        slider.maxValue = health.MaxHealth;
+        slider.value = health.Health;
+
+        health.onHealthChange += OnHealthChange;
+        health.onMaxHealthChange += OnMaxHealthChange;
+    }
+
+    private void OnDisable()
+    {
+        if (!health) return;
+
         health.onHealthChange -= OnHealthChange;
         health.onMaxHealthChange -= OnMaxHealthChange;
     }

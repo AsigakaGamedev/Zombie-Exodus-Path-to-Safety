@@ -11,7 +11,7 @@ public class InventoryController : AInventory
     [SerializeField] private CraftInfo[] allCrafts;
 
     [Header("Equipment And Weapon")]
-    [SerializeField] private SerializedDictionary<int, EquipmentSlot> equipmentSlots;
+    [SerializeField] private EquipmentSlot[] equipmentSlots;
 
     [Header("Main Cells")]
     [SerializeField] private int mainCellsCount = 12;
@@ -123,6 +123,11 @@ public class InventoryController : AInventory
         }
 
         onItemEquip?.Invoke(item);
+    }
+
+    public EquipmentSlot GetEquipmentSlot(int index)
+    {
+        return equipmentSlots[index];
     }
 
     #endregion
