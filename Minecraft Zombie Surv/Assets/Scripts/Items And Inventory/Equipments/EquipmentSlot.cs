@@ -1,5 +1,6 @@
 using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,26 @@ public class EquipmentSlot : MonoBehaviour
     
     private ItemEntity equipedItem;
 
+    public Action<ItemEntity> onEquipedItemChange;
+
     public ItemEntity EquipedItem { get => equipedItem; }
 
-    public void Equip(string equipmentID)
+    public void Equip(ItemEntity item)
     {
-        if (!models.ContainsKey(equipmentID)) return;
+        ItemInfo info = item.InfoPrefab;
+
+        if (!info.CanEquip) return;
+
+        equipedItem = item;
+
+        if (!models.ContainsKey(info.EquipmentModelID)) return;
 
         DequipCurrentModel();
 
-        equipedModel = models[equipmentID];
+        equipedModel = models[info.EquipmentModelID];
         equipedModel.OnEquip();
+
+        onEquipedItemChange?.Invoke(item);
     }
 
     private void DequipCurrentModel()
@@ -31,5 +42,8 @@ public class EquipmentSlot : MonoBehaviour
 
         equipedModel.OnDequip();
         equipedModel = null;
+
+        equipedItem = null;
+        onEquipedItemChange?.Invoke(equipedItem);
     }
 }

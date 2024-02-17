@@ -119,6 +119,7 @@ public class InventoryController : AInventory
         }
         else
         {
+            equipmentSlots[info.EquipmentSlotID].Equip(item);
             print("Предмет экипирован");
         }
 

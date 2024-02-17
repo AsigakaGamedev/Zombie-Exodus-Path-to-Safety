@@ -13,6 +13,7 @@ public class ItemInfo : MonoBehaviour
     [Space]
     [HideIf(nameof(isWeapon)), SerializeField] private bool canEquip;
     [ShowIf(nameof(canEquip)), SerializeField] private int equipmentSlotID;
+    [ShowIf(nameof(canEquip)), SerializeField] private string equipmentModelID;
 
     [Space]
     [HideIf(nameof(canEquip)), SerializeField] private bool isWeapon;
@@ -28,6 +29,7 @@ public class ItemInfo : MonoBehaviour
 
     public bool CanEquip { get => canEquip; }
     public int EquipmentSlotID { get => equipmentSlotID; }
+    public string EquipmentModelID { get => equipmentModelID; }
 
     public bool IsWeapon { get => isWeapon; }
     public int WeaponID { get => weaponID; }

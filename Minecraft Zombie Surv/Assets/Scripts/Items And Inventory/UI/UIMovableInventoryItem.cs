@@ -11,6 +11,7 @@ public class UIMovableInventoryItem : UIMovableObject
     protected ItemEntity item;
 
     public UIInventoryCell Cell { get => cell; }
+    public ItemEntity Item { get => item; }
 
     public void SetCell(UIInventoryCell cell)
     {
