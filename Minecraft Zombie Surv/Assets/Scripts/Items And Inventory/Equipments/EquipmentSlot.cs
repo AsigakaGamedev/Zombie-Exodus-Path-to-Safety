@@ -25,6 +25,7 @@ public class EquipmentSlot : MonoBehaviour
         if (!info.CanEquip) return;
 
         equipedItem = item;
+        onEquipedItemChange?.Invoke(item);
 
         if (!models.ContainsKey(info.EquipmentModelID)) return;
 
@@ -32,18 +33,16 @@ public class EquipmentSlot : MonoBehaviour
 
         equipedModel = models[info.EquipmentModelID];
         equipedModel.OnEquip();
-
-        onEquipedItemChange?.Invoke(item);
     }
 
     private void DequipCurrentModel()
     {
+        equipedItem = null;
+        onEquipedItemChange?.Invoke(equipedItem);
+
         if (!equipedModel) return;
 
         equipedModel.OnDequip();
         equipedModel = null;
-
-        equipedItem = null;
-        onEquipedItemChange?.Invoke(equipedItem);
     }
 }

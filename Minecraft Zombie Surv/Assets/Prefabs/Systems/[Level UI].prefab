@@ -13984,6 +13984,11 @@ PrefabInstance:
       propertyPath: equipmentIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7148039235197549923, guid: e3f9738724365b646ac86ec724fbe1dd,
+        type: 3}
+      propertyPath: equipmentSlotIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9106161525036291068, guid: e3f9738724365b646ac86ec724fbe1dd,
         type: 3}
       propertyPath: m_Pivot.x
@@ -15791,6 +15796,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI Equipment Slot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148039235197549923, guid: e3f9738724365b646ac86ec724fbe1dd,
+        type: 3}
+      propertyPath: equipmentSlotIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9106161525036291068, guid: e3f9738724365b646ac86ec724fbe1dd,
         type: 3}
