@@ -17,25 +17,40 @@ public class HealthComponent : MonoBehaviour
     public Action<float> onHealthChange;
     public Action<float> onMaxHealthChange;
     public Action onDie;
+    public Action onDamage;
+    public Action onHeal;
 
     public float MaxHealth { get => maxHealth; }
-    public float Health { get => health; }
+    public float Health { get => health;
+        private set
+        {
+            health = Mathf.Clamp(value, 0, maxHealth);
+
+            if (health <= 0)
+            {
+                Kill();
+            }
+        }
+    }
 
     private void Start()
     {
-        health = maxHealth;
+        Health = maxHealth;
+        onHealthChange?.Invoke(health);
     }
 
-    public void Damage(float damage)
+    public void IncreaseHealth(float increaseValue)
     {
-        if (health <= 0) return;
-
-        health -= damage;
+        Health += increaseValue;
         onHealthChange?.Invoke(health);
 
-        if (health <= 0)
+        if (increaseValue > 0)
         {
-            Kill();
+            onHeal?.Invoke();
+        }
+        else if (increaseValue < 0)
+        {
+            onDamage?.Invoke();
         }
     }
 
