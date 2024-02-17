@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [ReadOnly, SerializeField] private PlayerState state;
 
     private UIManager uiManager;
+
     private UIMobilePlayerInputs playerInputs;
     private Joystick moveJoystick;
     private Joystick lookJoystick;
@@ -97,6 +98,8 @@ public class PlayerController : MonoBehaviour
         needs.Init();
 
         health.onDie += OnDie;
+
+        playerInputs.SetAmmoPanel(false);
     }
 
     private void OnDestroy()
@@ -173,12 +176,19 @@ public class PlayerController : MonoBehaviour
         //animations.SetAnimType(weapon.AnimTypeIndex);
         playerInputs.AttackBtn.gameObject.SetActive(true);
         playerInputs.ReloadBtn.gameObject.SetActive(weapon.HasReloading);
+        playerInputs.SetAmmoPanel(weapon.NeedAmmo);
+
+        if (weapon.NeedAmmo)
+        {
+
+        }
     }
 
     private void OnDequipWeapon()
     {
         playerInputs.AttackBtn.gameObject.SetActive(false);
         playerInputs.ReloadBtn.gameObject.SetActive(false);
+        playerInputs.SetAmmoPanel(false);
     }
 
     private void OnItemEquiped(ItemEntity item)
