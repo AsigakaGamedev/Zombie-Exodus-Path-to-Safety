@@ -50,7 +50,7 @@ MonoBehaviour:
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 
-  isWeapon: 1
+  isWeapon: 0
   weaponID: 0
   canUse: 0
   useDatas: []

@@ -14,6 +14,9 @@ public class ServicesManager : MonoBehaviour
     [SerializeField] private AdsService ads;
 
     [Space]
+    [SerializeField] private GameObject loadingScreen; 
+
+    [Space]
     [SerializeField] private bool autoSignIn = true;
 
     [Space]
@@ -44,10 +47,13 @@ public class ServicesManager : MonoBehaviour
 
     private async void Start()
     {
+        loadingScreen.SetActive(false);
         loadingManager = ServiceLocator.GetService<LoadingManager>();
 
         IsInitialized = false;
+        loadingScreen.SetActive(true);
         await UnityServices.InitializeAsync();
+        loadingScreen.SetActive(false);
 
         if (autoSignIn)
         {
@@ -75,6 +81,7 @@ public class ServicesManager : MonoBehaviour
 
     private async Task TryAutoSignIn()
     {
+        loadingScreen.SetActive(true);
         string existingLogin = PlayerPrefs.GetString(loginPrefsKey, "");
         string existingPassword = PlayerPrefs.GetString(passwordPrefsKey, "");
 
@@ -91,6 +98,7 @@ public class ServicesManager : MonoBehaviour
             //    PlayerPrefs.DeleteKey(loginPrefsKey);
             //    PlayerPrefs.DeleteKey(passwordPrefsKey);
             //}
+            loadingScreen.SetActive(false);
         }
     }
 
