@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,15 @@ public class WeaponModel : EquipmentModel
 
     [Header("Reloading")]
     [SerializeField] private bool hasReloading;
+    [ShowIf(nameof(hasReloading)), SerializeField] private float reloadingTime;
 
     [Header("Ammo")]
     [SerializeField] private bool needAmmo;
-    [SerializeField] private ItemInfo ammoInfo;
+    [ShowIf(nameof(needAmmo)), SerializeField] private int magazineCapacity = 8;
+    [ShowIf(nameof(needAmmo)), SerializeField] private ItemInfo ammoInfo;
+
+    [Space]
+    [ShowIf(nameof(needAmmo)), ReadOnly, SerializeField] private int ammoInMagazine;
 
     public WeaponType WeaponType { get => weaponType; }
 
@@ -25,6 +31,7 @@ public class WeaponModel : EquipmentModel
 
     public bool NeedAmmo { get => needAmmo; }
     public ItemInfo AmmoInfo { get => ammoInfo; }
+    public int AmmoInMagazine { get => ammoInMagazine; }
 
     public void Init()
     {

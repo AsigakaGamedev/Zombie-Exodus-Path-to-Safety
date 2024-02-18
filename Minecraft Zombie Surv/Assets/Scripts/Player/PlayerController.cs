@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
         if (weapon.NeedAmmo)
         {
-
+            playerInputs.UpdateAmmoInfo(weapon.AmmoInMagazine, inventory.GetItemsAmount(weapon.AmmoInfo));
         }
     }
 

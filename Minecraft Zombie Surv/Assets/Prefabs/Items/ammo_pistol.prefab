@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5082583571862850010}
   - component: {fileID: 436101377098982996}
   m_Layer: 0
-  m_Name: weapon_pistol
+  m_Name: ammo_pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemNameKey: pistol_weapon_name
-  itemDescriptionKey: pistol_weapon_description
+  itemNameKey: pistol_ammo_name
+  itemDescriptionKey: pistol_ammo_description
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 
