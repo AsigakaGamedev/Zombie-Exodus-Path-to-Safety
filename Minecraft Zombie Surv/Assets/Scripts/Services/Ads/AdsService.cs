@@ -35,6 +35,14 @@ public class AdsService : MonoBehaviour
         IronSourceRewardedVideoEvents.onAdRewardedEvent += RewardedVideoOnAdRewardedEvent;
         IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
 
+        //Add AdInfo Banner Events
+        IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
+        IronSourceBannerEvents.onAdLoadFailedEvent += BannerOnAdLoadFailedEvent;
+        IronSourceBannerEvents.onAdClickedEvent += BannerOnAdClickedEvent;
+        IronSourceBannerEvents.onAdScreenPresentedEvent += BannerOnAdScreenPresentedEvent;
+        IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
+        IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
+
         economyService = ServiceLocator.GetService<ServicesManager>().Economy;
     }
 
@@ -52,6 +60,56 @@ public class AdsService : MonoBehaviour
     {
         print("IronSource initialized");
     }
+
+    #region Banner
+
+    public void LoadBanner(IronSourceBannerSize bannerSize, IronSourceBannerPosition bannerPosition)
+    {
+        IronSource.Agent.loadBanner(bannerSize, bannerPosition);
+    }
+
+    public void DestroyBanner()
+    {
+        IronSource.Agent.destroyBanner();
+    }
+
+    public void ShowBanner()
+    {
+        IronSource.Agent.displayBanner();
+    }
+
+    public void HideBanner()
+    {
+        IronSource.Agent.hideBanner();
+    }
+
+    /************* Banner AdInfo Delegates *************/
+    //Invoked once the banner has loaded
+    void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
+    {
+    }
+    //Invoked when the banner loading process has failed.
+    void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
+    {
+    }
+    // Invoked when end user clicks on the banner ad
+    void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
+    {
+    }
+    //Notifies the presentation of a full screen content following user click
+    void BannerOnAdScreenPresentedEvent(IronSourceAdInfo adInfo)
+    {
+    }
+    //Notifies the presented screen has been dismissed
+    void BannerOnAdScreenDismissedEvent(IronSourceAdInfo adInfo)
+    {
+    }
+    //Invoked when the user leaves the app
+    void BannerOnAdLeftApplicationEvent(IronSourceAdInfo adInfo)
+    {
+    }
+
+    #endregion
 
     #region Interstitial
 
