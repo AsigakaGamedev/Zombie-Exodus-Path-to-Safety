@@ -67,3 +67,4 @@ MonoBehaviour:
     - Key: view_advertisement
       Value: View Advertisement
   copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}
+  addNonContainsValue: 1

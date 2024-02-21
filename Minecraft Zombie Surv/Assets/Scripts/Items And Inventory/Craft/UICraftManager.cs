@@ -9,159 +9,93 @@ using UnityEngine.UI;
 
 public class UICraftManager : MonoBehaviour
 {
-    [SerializeField] private UICraftRecipe recipePrefab;
-
-    [Space]
+    [SerializeField] private UICraftRecipe uiCraftPrefab;
     [SerializeField] private Transform recipiesContent;
+    [SerializeField] private UICraftTypeChanger[] typeChangers;
+
+    [Header("Selected Craft")]
+    [SerializeField] private GameObject selectedCraftPanel;
+    [SerializeField] private Image selectedCraftImg;
+    [SerializeField] private TextMeshProUGUI selectedCraftName;
+    [SerializeField] private TextMeshProUGUI selectedCraftDesc;
+    [SerializeField] private Button craftBtn;
 
     private ObjectPoolingManager poolingManager;
-    private PlayerController player;
-    private CraftInfo curCraftInfo;
+    private InventoryController playerInventory;
+    private CraftsManager craftsManager;
+    private LocalizationManager localizationManager;
+
+    private CraftInfo selectedCraft;
 
     private List<UICraftRecipe> spawnedRecipies;
 
-    [Space]
-    [SerializeField] private TextMeshProUGUI itemName;
-    [SerializeField] private TextMeshProUGUI itemDescription;
-    [SerializeField] private Button craftBtn;
-    [SerializeField] private Sprite enoughtMaterialSprite;
-    [SerializeField] private Sprite notEnoughtMaterialSprite;
-
-    public Action<CraftInfo> onCraft;
-
-    [Space]
-    [SerializeField] private Transform craftPriceSlot;
-    [SerializeField] private Transform craftTypePanel;
-
-    [SerializeField] private CraftType craftType;
-
-
-    private void Awake()
-    {
-        craftBtn.onClick.AddListener(() =>
-        {
-            onCraft?.Invoke(curCraftInfo);
-        });
-        spawnedRecipies = new List<UICraftRecipe>();
-
-        poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
-        DeactivateChildObjects();
-    }
-
     private void Start()
     {
-        player = ServiceLocator.GetService<PlayerController>();
+        spawnedRecipies = new List<UICraftRecipe>();
+
+        playerInventory = ServiceLocator.GetService<PlayerController>().Inventory;
+        poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
+        craftsManager = ServiceLocator.GetService<CraftsManager>();
+        localizationManager = ServiceLocator.GetService<LocalizationManager>();
+
+        craftBtn.onClick.AddListener(() =>
+        {
+            playerInventory.CraftItem(selectedCraft);
+            ShowSelectedCraft(selectedCraft);
+        });
+
+        foreach (var typeChanger in typeChangers)
+        {
+            typeChanger.onClickInfo += ShowByCraftType;
+        }
+
+        ShowByCraftType(CraftType.Weapon);
+        selectedCraftPanel.SetActive(false);
     }
 
-    private void DeactivateChildObjects()
+    private void OnDestroy()
     {
-        foreach (Transform child in craftPriceSlot)
+        foreach (var typeChanger in typeChangers)
         {
-            child.gameObject.SetActive(false);
+            typeChanger.onClickInfo -= ShowByCraftType;
         }
-    }
-
-    private void OnEnable()
-    {
-        if (!player)
-        {
-            player = ServiceLocator.GetService<PlayerController>();
-
-            if (!player) return;
-            onCraft += player.Inventory.CraftItem;
-        }
-
-        foreach (Transform child in craftTypePanel)
-        {
-            UICraftTypeChanger typeChanger = child.GetComponent<UICraftTypeChanger>();
-
-            if (typeChanger != null)
-            {
-                typeChanger.onClickInfo = null;
-                typeChanger.onClickInfo += SpawnSlots;
-            }
-        }
-
-        SpawnSlots();
     }
 
     private void OnDisable()
     {
-        DeleteSlots();
-
-        if (player)
-        {
-            onCraft -= player.Inventory.CraftItem;
-        }
+        selectedCraftPanel.SetActive(false);
     }
 
-    private void SpawnSlots(CraftType _craftType = CraftType.Block)
+    public void ShowSelectedCraft(CraftInfo craftInfo)
     {
-        if (!player) return;
-        DeleteSlots();
-        foreach (CraftInfo recipe in player.Inventory.AllCrafts)
-        {
-            if (recipe.CraftType == _craftType)
-            {
-                UICraftRecipe newRecipe = poolingManager.GetPoolable(recipePrefab);
-                newRecipe.Init(recipe);
-                newRecipe.transform.SetParent(recipiesContent);
+        selectedCraft = craftInfo;
+        selectedCraftPanel.SetActive(true);
 
-                newRecipe.onClickInfo += OnSelectRecipe;
+        selectedCraftImg.sprite = craftInfo.CraftSprite;
+        selectedCraftName.text = localizationManager.CurrentLocalization.GetValue(craftInfo.CraftNameKey);
+        selectedCraftDesc.text = localizationManager.CurrentLocalization.GetValue(craftInfo.CraftDescKey);
 
-                spawnedRecipies.Add(newRecipe);
-            }
-        }
+        craftBtn.interactable = playerInventory.CanCraftItem(selectedCraft);
     }
 
-    private void DeleteSlots()
+    public void ShowByCraftType(CraftType craftType)
     {
-        foreach (UICraftRecipe recipe in spawnedRecipies)
+        foreach (UICraftRecipe spawnedCraft in spawnedRecipies)
         {
-            recipe.onClickInfo -= OnSelectRecipe;
-
-            recipe.gameObject.SetActive(false);
+            spawnedCraft.onClickInfo -= ShowSelectedCraft;
+            spawnedCraft.gameObject.SetActive(false);
         }
 
         spawnedRecipies.Clear();
-    }
 
-    private void OnSelectRecipe(CraftInfo craftInfo)
-    {
-        if (!player) return;
-        curCraftInfo = craftInfo;
-        itemName.text = craftInfo.CraftName;
-        itemDescription.text = craftInfo.CraftDescription;
-
-        DeactivateChildObjects();
-        for (int i = 0; i < craftInfo.CreationPriceList.Count; i++)
+        foreach (CraftInfo craftInfo in craftsManager.GetCrafts(craftType))
         {
-            if (i < craftPriceSlot.transform.childCount)
-            {
-                GameObject childObject = craftPriceSlot.transform.GetChild(i).gameObject;
-                childObject.SetActive(true);
-
-                int craftPrice = craftInfo.CreationPriceList[i].RandomAmount;
-                int amountInInventory = player.Inventory.GetItemsAmount(craftInfo.CreationPriceList[i].Info);
-
-                TextMeshProUGUI textMeshPro1 = childObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                TextMeshProUGUI textMeshPro2 = childObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-                Image imageComponent = childObject.transform.GetChild(2).GetComponent<Image>();
-
-                if (textMeshPro1 != null && textMeshPro2 != null)
-                {
-                    textMeshPro1.text = craftInfo.CreationPriceList[i].Info.ItemNameKey;
-                    textMeshPro2.text = $"{amountInInventory}/{craftPrice}";
-
-                    imageComponent.gameObject.SetActive(true);
-                    imageComponent.sprite = notEnoughtMaterialSprite;
-
-                    if (amountInInventory >= craftPrice)
-                    {
-                        imageComponent.sprite = enoughtMaterialSprite;
-                    }
-                }
-            }
+            UICraftRecipe newUICraft = poolingManager.GetPoolable(uiCraftPrefab);
+            newUICraft.transform.SetParent(recipiesContent);
+            newUICraft.transform.localScale = Vector3.one;
+            newUICraft.Init(craftInfo);
+            newUICraft.onClickInfo += ShowSelectedCraft;
+            spawnedRecipies.Add(newUICraft);
         }
     }
 }

@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,34 +6,38 @@ using UnityEngine;
 public enum CraftType
 {
     Weapon,
-    Block,
+    Food,
+    Materials,
     Other
 }
 
 [CreateAssetMenu(menuName ="Craft")]
-public class CraftInfo : ScriptableObject 
+public class CraftInfo : ScriptableObject
 {
-    [SerializeField] private List<ItemData> creationPriceList;
-    [SerializeField] private List<ItemData> createdItemsList;
-    [SerializeField] private string craftName;
-    [SerializeField] private string craftDescription;
+    [ShowAssetPreview, SerializeField] private Sprite craftSprite;
+
+    [Space]
+    [SerializeField] private string craftNameKey;
+    [SerializeField] private string craftDescKey;
     [SerializeField] private CraftType craftType;
 
-    public string CraftName
-    {
-        get => craftName;
-    }
+    [Space]
+    [SerializeField] private List<ItemData> creationPriceList;
+    [SerializeField] private List<ItemData> createdItemsList;
 
-    public string CraftDescription
-    {
-        get => craftDescription;
-    }
+    public Sprite CraftSprite { get => craftSprite; }
 
-    public CraftType CraftType
-    {
-        get => craftType;
-    }
+    public string CraftNameKey { get => craftNameKey; }
+    public string CraftDescKey { get => craftDescKey; }
+    public CraftType CraftType { get => craftType; }
 
     public List<ItemData> CreationPriceList { get => creationPriceList; }
     public List<ItemData> CreatedItemsList { get => createdItemsList; }
+
+    [Button]
+    public void Initialize()
+    {
+        craftNameKey = name + "_name";
+        craftDescKey = name + "_desc";
+    }
 }

@@ -10,7 +10,10 @@ public class LocalizationInfo : ScriptableObject
     [SerializeField] private SerializedDictionary<string, string> values;
 
     [Space]
-    [SerializeField] private LocalizationInfo copyLocalization; 
+    [SerializeField] private LocalizationInfo copyLocalization;
+
+    [Space]
+    [SerializeField] private bool addNonContainsValue; 
 
     public string GetValue(string key)
     {
@@ -34,7 +37,7 @@ public class LocalizationInfo : ScriptableObject
 
         foreach (string key in copyLocalization.values.Keys)
         {
-            if (!values.ContainsKey(key)) values.Add(key, "");
+            if (addNonContainsValue && !values.ContainsKey(key)) values.Add(key, "");
         }
     }
 }

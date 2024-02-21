@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b1b8351e085604e893437e474d90d8, type: 3}
+  m_Name: pistol_ammo
+  m_EditorClassIdentifier: 
+  craftSprite: {fileID: 1427448931, guid: e7d62f1eb6ea25840a9883e3a3914192, type: 3}
+  craftNameKey: pistol_ammo_name
+  craftDescKey: pistol_ammo_desc
+  craftType: 0
+  creationPriceList:
+  - info: {fileID: 436101377098982996, guid: 2f5267f8b3f502b4f90b658fab39cf19, type: 3}
+    amount: {x: 1, y: 1}
+  - info: {fileID: 436101377098982996, guid: 43f4c4e6fff0d8e43979842915b7f67f, type: 3}
+    amount: {x: 1, y: 1}
+  createdItemsList:
+  - info: {fileID: 436101377098982996, guid: d1ead4a84c8e3554eb3459636d56df90, type: 3}
+    amount: {x: 16, y: 16}

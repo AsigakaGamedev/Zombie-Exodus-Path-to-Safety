@@ -8,6 +8,7 @@ public class UICraftTypeChanger : MonoBehaviour
 {
     [SerializeField] private Button btn;
 
+    [Space]
     [SerializeField] private CraftType craftType;
 
     public Action<CraftType> onClickInfo;

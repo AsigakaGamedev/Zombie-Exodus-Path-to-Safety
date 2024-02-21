@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UICraftRecipe : PoolableObject
 {
+    [SerializeField] private Image image;
     [SerializeField] private Button btn;
 
     private CraftInfo craftInfo;
@@ -23,5 +24,6 @@ public class UICraftRecipe : PoolableObject
     public void Init(CraftInfo craftInfo)
     {
         this.craftInfo = craftInfo;
+        image.sprite = craftInfo.CraftSprite;
     }
 }

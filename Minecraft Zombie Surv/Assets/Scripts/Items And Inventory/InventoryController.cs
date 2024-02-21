@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class InventoryController : AInventory
 {
-    [Header("Caft")]
-    [SerializeField] private CraftInfo[] allCrafts;
-
     [Header("Equipment And Weapon")]
     [SerializeField] private EquipmentSlot[] equipmentSlots;
 
@@ -28,8 +25,6 @@ public class InventoryController : AInventory
 
     public override List<InventoryCellEntity> MainCells { get => mainCells; }
     public List<InventoryCellEntity> QuickCells { get => quickCells; }
-
-    public CraftInfo[] AllCrafts { get => allCrafts; }
 
     public void Init()
     {
@@ -176,7 +171,7 @@ public class InventoryController : AInventory
         }
     }
 
-    private bool CanCraftItem(CraftInfo craftRecipe)
+    public bool CanCraftItem(CraftInfo craftRecipe)
     {
         foreach (ItemData material in craftRecipe.CreationPriceList)
         {
