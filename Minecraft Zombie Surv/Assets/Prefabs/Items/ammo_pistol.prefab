@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemNameKey: pistol_ammo_name
-  itemDescriptionKey: pistol_ammo_description
+  itemNameKey: ammo_pistol_name
+  itemDescriptionKey: ammo_pistol_desc
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 
-  isWeapon: 1
+  isWeapon: 0
   weaponID: 0
   canUse: 0
   useDatas: []

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemNameKey: weapon_axe
+  itemNameKey: weapon_axe_name
   itemDescriptionKey: weapon_axe_desc
   canEquip: 0
   equipmentSlotID: 0

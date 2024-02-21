@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemNameKey: name
-  itemDescriptionKey: description
+  itemNameKey: walkie_talkie_name
+  itemDescriptionKey: walkie_talkie_desc
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 

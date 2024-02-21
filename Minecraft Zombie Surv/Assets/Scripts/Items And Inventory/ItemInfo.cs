@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemInfo : MonoBehaviour
 {
-    [SerializeField] private Sprite itemCellSprite;
+    [ShowAssetPreview, SerializeField] private Sprite itemCellSprite;
 
     [Space]
     [SerializeField] private string itemNameKey;
@@ -38,6 +38,13 @@ public class ItemInfo : MonoBehaviour
     public bool CanUse { get => canUse; }
     public ItemUseData[] UseDatas { get => useDatas; }
     public float HealthIncrease { get => healthIncrease; }
+
+    [Button]
+    public void Initialize()
+    {
+        itemNameKey = gameObject.name + "_name";
+        itemDescriptionKey = gameObject.name + "_desc";
+    }
 }
 
 [System.Serializable]

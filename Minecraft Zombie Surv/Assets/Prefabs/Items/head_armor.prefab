@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCellSprite: {fileID: 0}
-  itemNameKey: 
-  itemDescriptionKey: 
+  itemNameKey: head_armor_name
+  itemDescriptionKey: head_armor_desc
   canEquip: 1
   equipmentSlotID: 0
   equipmentModelID: head_armor
@@ -54,3 +54,4 @@ MonoBehaviour:
   weaponID: 0
   canUse: 0
   useDatas: []
+  healthIncrease: 0
