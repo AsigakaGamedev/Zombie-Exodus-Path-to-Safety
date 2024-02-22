@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum PlayerState { Walk, Run}
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : AInitializable
 {
     [SerializeField] private Transform camBody;
     [SerializeField] private float camMinRotAngle = -70;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WeaponsController weapons;
     [SerializeField] private NeedsController needs;
     [SerializeField] private HealthComponent health;
+    [SerializeField] private UIMobilePlayerInputs playerInputs;
 
     [Space]
     [SerializeField] private float walkSpeed = 2.6f;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     private UIManager uiManager;
 
-    private UIMobilePlayerInputs playerInputs;
     private Joystick moveJoystick;
     private Joystick lookJoystick;
 
@@ -53,14 +53,13 @@ public class PlayerController : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    public void Start()
+    public override void OnInit()
     {
         currentSpeed = walkSpeed;
         state = PlayerState.Walk;
         
         uiManager = ServiceLocator.GetService<UIManager>();
 
-        playerInputs = ServiceLocator.GetService<UIMobilePlayerInputs>();
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;
 

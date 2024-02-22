@@ -7,7 +7,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 
-public class ServicesManager : MonoBehaviour
+public class ServicesManager : AInitializable
 {
     [SerializeField] private GameEconomyService economy;
     [SerializeField] private GameCloudService cloud;
@@ -18,11 +18,6 @@ public class ServicesManager : MonoBehaviour
 
     [Space]
     [SerializeField] private bool autoSignIn = true;
-
-    [Space]
-    [Scene, SerializeField] private string mainMenuScene;
-
-    private LoadingManager loadingManager;
 
     private const string loginPrefsKey = "PLAYER_LOGIN";
     private const string passwordPrefsKey = "PLAYER_PASSWORD";
@@ -45,14 +40,23 @@ public class ServicesManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private async void Start()
+    public override void OnInit()
     {
         loadingScreen.SetActive(false);
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
 
         IsInitialized = false;
+    }
+
+    private void OnDestroy()
+    {
+        ads.DestroyService();
+    }
+
+    public async Task StartServices()
+    {
         loadingScreen.SetActive(true);
         await UnityServices.InitializeAsync();
+        await InitializeAllServices();
         loadingScreen.SetActive(false);
 
         if (autoSignIn)
@@ -61,22 +65,14 @@ public class ServicesManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        ads.DestroyService();
-    }
-
     private async Task InitializeAllServices()
     {
         ads.InitService();
-
-        await economy.Refresh();
 
         await cloud.CheckServices();
 
         onInitialized?.Invoke();
         IsInitialized = true;
-        await economy.Refresh();
     }
 
     private async Task TryAutoSignIn()
@@ -110,16 +106,10 @@ public class ServicesManager : MonoBehaviour
         PlayerPrefs.SetString(loginPrefsKey, login);
         PlayerPrefs.SetString(passwordPrefsKey, password);
 
-
         ServiceLocator.GetService<PlayerManager>().SetNickname(login);
 
-        Task[] tasks = new Task[]
-        {
-             InitializeAllServices(),
-             cloud.SavePlayerData()
-        };
-
-        await loadingManager.LoadSceneAsync(mainMenuScene, tasks);
+        await cloud.SavePlayerData();
+        await economy.Refresh();
     }
 
     public async Task TrySignIn(string login, string password)
@@ -130,12 +120,7 @@ public class ServicesManager : MonoBehaviour
         PlayerPrefs.SetString(loginPrefsKey, login);
         PlayerPrefs.SetString(passwordPrefsKey,password);
 
-        Task[] tasks = new Task[]
-        {
-            InitializeAllServices(),
-             cloud.LoadPlayerData()
-        };
-
-        await loadingManager.LoadSceneAsync(mainMenuScene, tasks);
+        await cloud.LoadPlayerData();
+        await economy.Refresh();
     }
 }

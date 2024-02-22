@@ -2,8 +2,11 @@
 using UnityEngine.Playables;
 using NaughtyAttributes;
 
-public class TimelineController : MonoBehaviour
+public class TimelineController : AInitializable
 {
+    [SerializeField] private PlayableDirector startTimeline;
+
+    [Space]
     [ReadOnly, SerializeField] private PlayableDirector currentTimeline;
 
     private UIManager uiManager;
@@ -18,9 +21,14 @@ public class TimelineController : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private void Start()
+    public override void OnInit()
     {
         uiManager = ServiceLocator.GetService<UIManager>();
+
+        if (startTimeline)
+        {
+            SetTimeline(startTimeline);
+        }
     }
 
     public void SetTimeline(PlayableDirector timeline)

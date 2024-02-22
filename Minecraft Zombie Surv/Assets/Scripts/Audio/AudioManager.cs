@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public enum AudioType { Music, Effects, Characters}
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : AInitializable
 {
     [SerializeField] private SerializedDictionary<AudioType, AudioSourceContainer> sources = new SerializedDictionary<AudioType, AudioSourceContainer>();
 
@@ -21,9 +21,10 @@ public class AudioManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private void Start()
+    public override void OnInit()
     {
         loadingManager = ServiceLocator.GetService<LoadingManager>();
+
         loadingManager.onLoadingStart += OnLoadingStart;
         loadingManager.onLoadingFinish += OnLoadingFinish;
 

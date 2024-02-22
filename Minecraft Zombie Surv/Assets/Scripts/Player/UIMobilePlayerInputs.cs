@@ -31,16 +31,6 @@ public class UIMobilePlayerInputs : MonoBehaviour
     public Action onStartRun;
     public Action onEndRun;
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     public void OnStartRun()
     {
         onStartRun?.Invoke();

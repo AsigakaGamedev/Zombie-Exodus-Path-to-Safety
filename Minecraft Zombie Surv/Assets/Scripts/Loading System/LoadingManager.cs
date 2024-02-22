@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingManager : MonoBehaviour
+public class LoadingManager : AInitializable
 {
     [SerializeField] private GameObject screenObject;
 
@@ -29,7 +29,7 @@ public class LoadingManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private void Start()
+    public override void OnInit()
     {
         screenObject.SetActive(false);
     }
@@ -70,6 +70,7 @@ public class LoadingManager : MonoBehaviour
     {
         screenObject.SetActive(true);
         onLoadingStart?.Invoke();
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         loadingHintTxt.text = "Загрузка сцены";
 
