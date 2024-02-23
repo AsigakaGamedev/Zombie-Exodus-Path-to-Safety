@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5082583571862850010}
   - component: {fileID: 436101377098982996}
   m_Layer: 0
-  m_Name: ammo_pistol
+  m_Name: weapon_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b49a3c1f269d54eafe36350a637edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCellSprite: {fileID: 1471704955, guid: e7d62f1eb6ea25840a9883e3a3914192, type: 3}
-  itemNameKey: ammo_pistol_name
-  itemDescriptionKey: ammo_pistol_desc
+  itemCellSprite: {fileID: -636082222, guid: e7d62f1eb6ea25840a9883e3a3914192, type: 3}
+  itemNameKey: weapon_shotgun_name
+  itemDescriptionKey: weapon_shotgun_desc
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 

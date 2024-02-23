@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b49a3c1f269d54eafe36350a637edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCellSprite: {fileID: 0}
+  itemCellSprite: {fileID: 331275995, guid: e7d62f1eb6ea25840a9883e3a3914192, type: 3}
   itemNameKey: bandage_name
   itemDescriptionKey: bandage_desc
   canEquip: 0
