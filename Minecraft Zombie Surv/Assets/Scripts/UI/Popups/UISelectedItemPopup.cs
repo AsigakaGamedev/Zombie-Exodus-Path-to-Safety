@@ -31,7 +31,7 @@ public class UISelectedItemPopup : APopup
         base.OnInit();
 
         popupsManager = ServiceLocator.GetService<UIPopupsManager>();
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
+        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
 
         useItemBtn.onClick.AddListener(() =>
         {
@@ -53,6 +53,13 @@ public class UISelectedItemPopup : APopup
 
     public void SelectItem(ItemEntity item)
     {
+        if (!localizationManager)
+        {
+            localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
+
+            if (!localizationManager) return;
+        }
+
         selectedItem = item;
 
         ItemInfo info = item.InfoPrefab;

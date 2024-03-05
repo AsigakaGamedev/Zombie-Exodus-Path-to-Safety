@@ -24,7 +24,7 @@ public class UINeedPlayerBar : MonoBehaviour
 
     private void OnDestroy()
     {
-        linkedNeed.onNeedValueChange -= OnNeedValueChange;
+        if (linkedNeed != null) linkedNeed.onNeedValueChange -= OnNeedValueChange;
     }
 
     private void OnNeedValueChange(float value)

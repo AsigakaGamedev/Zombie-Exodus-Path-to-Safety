@@ -12,13 +12,16 @@ public abstract class AInteractableComponent : MonoBehaviour
 
     protected virtual void Start()
     {
-        interactableObject.onInteract += OnInteract;
+        interactableObject.onSuccessInteract += OnSuccessInteract;
+        interactableObject.onFailedInteract += OnFailedInteract;
     }
 
     protected virtual void OnDestroy()
     {
-        interactableObject.onInteract -= OnInteract;
+        interactableObject.onSuccessInteract -= OnSuccessInteract;
+        interactableObject.onFailedInteract -= OnFailedInteract;
     }
 
-    protected abstract void OnInteract(PlayerController player);
+    protected virtual void OnSuccessInteract(PlayerController player) { }
+    protected virtual void OnFailedInteract(PlayerController player) { }
 }

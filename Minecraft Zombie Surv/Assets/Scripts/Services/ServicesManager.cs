@@ -94,8 +94,9 @@ public class ServicesManager : AInitializable
             //    PlayerPrefs.DeleteKey(loginPrefsKey);
             //    PlayerPrefs.DeleteKey(passwordPrefsKey);
             //}
-            loadingScreen.SetActive(false);
         }
+
+        loadingScreen.SetActive(false);
     }
 
     public async Task TrySignUp(string login, string password)

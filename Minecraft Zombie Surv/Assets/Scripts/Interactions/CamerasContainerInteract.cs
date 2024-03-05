@@ -17,7 +17,7 @@ public class CamerasContainerInteract : AInteractableComponent
         uiContainersManager = ServiceLocator.GetService<UICamerasContainerManager>();
     }
 
-    protected override void OnInteract(PlayerController player)
+    protected override void OnSuccessInteract(PlayerController player)
     {
         uiContainersManager.OpenContainer(camerasContainer);
         uiManager.ChangeScreen("sequrity_cameras");

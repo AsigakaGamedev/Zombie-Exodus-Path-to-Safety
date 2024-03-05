@@ -75,7 +75,7 @@ public class UICraftManager : MonoBehaviour
         selectedCraftName.text = localizationManager.CurrentLocalization.GetValue(craftInfo.CraftNameKey);
         selectedCraftDesc.text = localizationManager.CurrentLocalization.GetValue(craftInfo.CraftDescKey);
 
-        craftBtn.interactable = playerInventory.CanCraftItem(selectedCraft);
+        craftBtn.interactable = playerInventory.HasItems(selectedCraft.CreationPriceList.ToArray());
     }
 
     public void ShowByCraftType(CraftType craftType)

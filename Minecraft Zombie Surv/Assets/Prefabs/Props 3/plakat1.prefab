@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: plakat1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55826e39eab3d694f8c4c9e059f175b1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 55826e39eab3d694f8c4c9e059f175b1,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -96,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 8164078558771037576, guid: 55826e39eab3d694f8c4c9e059f175b1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 1
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -130,7 +135,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.33, y: 1.62, z: 0.09999999}
   m_Center: {x: 0.049996134, y: 1.9999999, z: 0.34999618}

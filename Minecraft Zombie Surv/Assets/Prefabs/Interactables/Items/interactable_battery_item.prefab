@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2169631188826011682}
   - component: {fileID: 7609308459989393739}
   - component: {fileID: 9135773792866052623}
+  - component: {fileID: 6789475530889127409}
   m_Layer: 7
   m_Name: interactable_battery_item
   m_TagString: Untagged
@@ -67,10 +68,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 1
-  interactEvent:
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  failedInteractEvent:
     m_PersistentCalls:
       m_Calls: []
   outline: {fileID: 2304477606378020725}
+  validators: []
 --- !u!114 &7609308459989393739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,8 +111,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.41, z: 0.13}
-  m_Center: {x: 0.05, y: 0.34, z: 0.06}
+  m_Size: {x: 0.12104997, y: 0.2088263, z: 0.13}
+  m_Center: {x: 0.064475015, y: 0.33292383, z: 0.060000002}
+--- !u!114 &6789475530889127409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383588442068778520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84176d12fe9a22e4494a672e6e6857d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableObject: {fileID: 2169631188826011682}
 --- !u!1001 &1613128260717199769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,17 +137,17 @@ PrefabInstance:
     - target: {fileID: 259919443017511351, guid: a66026b9f9ca96e48b07fc8b672821ed,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.043
       objectReference: {fileID: 0}
     - target: {fileID: 259919443017511351, guid: a66026b9f9ca96e48b07fc8b672821ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.169
       objectReference: {fileID: 0}
     - target: {fileID: 259919443017511351, guid: a66026b9f9ca96e48b07fc8b672821ed,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.022
       objectReference: {fileID: 0}
     - target: {fileID: 259919443017511351, guid: a66026b9f9ca96e48b07fc8b672821ed,
         type: 3}
@@ -171,11 +189,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: battery
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6211021111823551428, guid: a66026b9f9ca96e48b07fc8b672821ed, type: 3}
-    - {fileID: 641614966072584184, guid: a66026b9f9ca96e48b07fc8b672821ed, type: 3}
-    - {fileID: -8948024447060823573, guid: a66026b9f9ca96e48b07fc8b672821ed, type: 3}
-    - {fileID: 6245401001320323421, guid: a66026b9f9ca96e48b07fc8b672821ed, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

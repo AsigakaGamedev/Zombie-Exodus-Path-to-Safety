@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ReadNoteInteract : AInteractableComponent
 {
-    [SerializeField] private string noteText;
-    [Space]
+    [TextArea(1, 15), SerializeField] private string noteText;
 
     private UIManager uiManager;
+
     public string NoteText { get => noteText; }
 
     protected override void Start()
@@ -17,7 +17,7 @@ public class ReadNoteInteract : AInteractableComponent
         uiManager = ServiceLocator.GetService<UIManager>();
     }
 
-    protected override void OnInteract(PlayerController player)
+    protected override void OnSuccessInteract(PlayerController player)
     {
         uiManager.ChangeScreen("note");
         ServiceLocator.GetService<UINoteManager>().ReadNote(this);

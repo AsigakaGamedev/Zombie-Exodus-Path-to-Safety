@@ -41,7 +41,7 @@ public class ItemsContainerInteract : AInteractableComponent
         }
     }
 
-    protected override void OnInteract(PlayerController player)
+    protected override void OnSuccessInteract(PlayerController player)
     {
         uiInventories.OpenPanel(0, containerCells);
         uiManager.ChangeScreen("container");

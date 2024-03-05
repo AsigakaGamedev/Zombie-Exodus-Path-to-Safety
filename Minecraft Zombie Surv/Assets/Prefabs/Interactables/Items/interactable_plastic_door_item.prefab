@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 22506601642960884}
   - component: {fileID: 2304477606378020725}
   - component: {fileID: 2169631188826011682}
-  - component: {fileID: 7609308459989393739}
   - component: {fileID: 6304229748800820006}
   - component: {fileID: 9135773792866052623}
   m_Layer: 7
@@ -68,26 +67,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 1
-  interactEvent:
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  failedInteractEvent:
     m_PersistentCalls:
       m_Calls: []
   outline: {fileID: 2304477606378020725}
---- !u!114 &7609308459989393739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383588442068778520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0096cfcdb39f34e8045a4139079096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableObject: {fileID: 2169631188826011682}
-  itemData:
-    info: {fileID: 436101377098982996, guid: 82e5f2c51679f0948952e9f85c6f84d8, type: 3}
-    amount: {x: 1, y: 1}
+  validators: []
 --- !u!114 &6304229748800820006
 MonoBehaviour:
   m_ObjectHideFlags: 0

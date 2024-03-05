@@ -8,12 +8,17 @@ using UnityEngine.Events;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private bool deactivateOnInteract = true;
-    [SerializeField] private UnityEvent interactEvent;
+    [SerializeField] private UnityEvent successInteractEvent;
+    [SerializeField] private UnityEvent failedInteractEvent;
 
     [Space]
     [SerializeField] private QuickOutline outline;
 
-    public Action<PlayerController> onInteract;
+    [Space]
+    [SerializeField] private AInteractValidator[] validators; 
+
+    public Action<PlayerController> onSuccessInteract;
+    public Action<PlayerController> onFailedInteract;
 
     private void OnValidate()
     {
@@ -35,11 +40,29 @@ public class InteractableObject : MonoBehaviour
         outline.enabled = false;
     }
 
-    public void Interact(PlayerController player)
+    public void TryInteract(PlayerController player)
     {
-        interactEvent.Invoke();
-        onInteract?.Invoke(player);
+        if (CanInteract(player))
+        {
+            onSuccessInteract?.Invoke(player);
+            successInteractEvent.Invoke();
 
-        if (deactivateOnInteract) gameObject.SetActive(false);
+            if (deactivateOnInteract) gameObject.SetActive(false);
+        }
+        else
+        {
+            onFailedInteract?.Invoke(player);
+            failedInteractEvent?.Invoke();
+        }
+    }
+
+    public bool CanInteract(PlayerController player)
+    {
+        foreach (AInteractValidator validator in validators)
+        {
+            if (validator.OnValidateInteract(player)) return false;
+        }
+
+        return true;
     }
 }

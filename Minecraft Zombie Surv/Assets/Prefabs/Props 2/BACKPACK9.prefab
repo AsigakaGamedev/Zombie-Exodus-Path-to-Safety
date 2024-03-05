@@ -101,6 +101,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1554332146017021150}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a43e65dc072d2214283a57487b28c251,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8749232614504864564}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a43e65dc072d2214283a57487b28c251,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5498641469017268987}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a43e65dc072d2214283a57487b28c251,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6547928119961800495}
   m_SourcePrefab: {fileID: 100100000, guid: a43e65dc072d2214283a57487b28c251, type: 3}
 --- !u!1 &5526676949699629265 stripped
 GameObject:
@@ -129,3 +141,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.9, y: 3.1, z: 1.8000001}
   m_Center: {x: 0.050000012, y: 1.55, z: 0.3}
+--- !u!114 &8749232614504864564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526676949699629265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad29989743ffe346be91928fa26417d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableObject: {fileID: 6547928119961800495}
+  spawnableItems: []
+  cellsCount: 5
+  containerCells: []
+--- !u!114 &-5498641469017268987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526676949699629265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &6547928119961800495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526676949699629265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947405ceb445ed6448b347f0300b7cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deactivateOnInteract: 1
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  outline: {fileID: -5498641469017268987}

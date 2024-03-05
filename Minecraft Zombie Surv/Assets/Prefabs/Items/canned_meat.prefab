@@ -56,4 +56,4 @@ MonoBehaviour:
   useDatas:
   - needID: hunger
     needIncreaseValue: 25
-  healthIncrease: -15
+  healthIncrease: 0

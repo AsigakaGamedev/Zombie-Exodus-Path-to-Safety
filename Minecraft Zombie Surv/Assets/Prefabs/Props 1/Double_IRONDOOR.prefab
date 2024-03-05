@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
       propertyPath: m_Name
-      value: IRONDOOR
+      value: Double_IRONDOOR
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
@@ -210,4 +210,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 0
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1960300220753970515}
+        m_TargetAssemblyTypeName: DoorObject, Assembly-CSharp
+        m_MethodName: SwitchState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  failedInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
   outline: {fileID: 7773811570379646430}
+  validators: []

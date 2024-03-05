@@ -28,6 +28,7 @@ public class TimelineController : AInitializable
         if (startTimeline)
         {
             SetTimeline(startTimeline);
+            Play();
         }
     }
 

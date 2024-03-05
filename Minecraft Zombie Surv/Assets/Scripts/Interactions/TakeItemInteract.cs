@@ -7,7 +7,7 @@ public class TakeItemInteract : AInteractableComponent
     [Space]
     [SerializeField] private ItemData itemData;
 
-    protected override void OnInteract(PlayerController player)
+    protected override void OnSuccessInteract(PlayerController player)
     {
         player.Inventory.AddItem(itemData);
     }

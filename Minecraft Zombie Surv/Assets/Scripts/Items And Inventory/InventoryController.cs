@@ -26,6 +26,8 @@ public class InventoryController : AInventory
     public override List<InventoryCellEntity> MainCells { get => mainCells; }
     public List<InventoryCellEntity> QuickCells { get => quickCells; }
 
+    public bool IsFull => GetFreeCell() == null;
+
     public void Init()
     {
         mainCells = new List<InventoryCellEntity>();
@@ -100,6 +102,21 @@ public class InventoryController : AInventory
         onItemUse?.Invoke(item);
     }
 
+    public bool HasItems(ItemData[] checkingData)
+    {
+        foreach (ItemData check in checkingData)
+        {
+            InventoryCellEntity materialCell = GetCell(check.Info);
+
+            if (materialCell == null || materialCell.Item.Amount < check.RandomAmount)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     #endregion
 
     #region Equipment And Weapon
@@ -152,7 +169,7 @@ public class InventoryController : AInventory
 
     public void CraftItem(CraftInfo craftRecipe)
     {
-        if (CanCraftItem(craftRecipe))
+        if (HasItems(craftRecipe.CreationPriceList.ToArray()))
         {
             foreach (ItemData material in craftRecipe.CreationPriceList)
             {
@@ -169,21 +186,6 @@ public class InventoryController : AInventory
         {
             Debug.LogWarning("Not enough materials to craft item!");
         }
-    }
-
-    public bool CanCraftItem(CraftInfo craftRecipe)
-    {
-        foreach (ItemData material in craftRecipe.CreationPriceList)
-        {
-            InventoryCellEntity materialCell = GetCell(material.Info);
-
-            if (materialCell == null || materialCell.Item.Amount < material.RandomAmount)
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     #endregion

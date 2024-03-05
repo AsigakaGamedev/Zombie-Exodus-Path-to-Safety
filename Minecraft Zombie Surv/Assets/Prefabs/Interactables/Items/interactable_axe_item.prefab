@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2169631188826011682}
   - component: {fileID: 7609308459989393739}
   - component: {fileID: 9135773792866052623}
+  - component: {fileID: 6789475530889127409}
   m_Layer: 7
   m_Name: interactable_axe_item
   m_TagString: Untagged
@@ -67,10 +68,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 1
-  interactEvent:
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  failedInteractEvent:
     m_PersistentCalls:
       m_Calls: []
   outline: {fileID: 2304477606378020725}
+  validators: []
 --- !u!114 &7609308459989393739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +113,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.73, y: 0.56, z: 0.07}
   m_Center: {x: 0.34, y: 0.5, z: 0.06}
+--- !u!114 &6789475530889127409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383588442068778520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84176d12fe9a22e4494a672e6e6857d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableObject: {fileID: 2169631188826011682}
 --- !u!1001 &5112041370144023502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,11 +189,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: axe
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5782442830347759743, guid: 47e97460bbe39204099d29945c28d1b2, type: 3}
-    - {fileID: 7418232277877703272, guid: 47e97460bbe39204099d29945c28d1b2, type: 3}
-    - {fileID: 5047064884546537610, guid: 47e97460bbe39204099d29945c28d1b2, type: 3}
-    - {fileID: 7157153687734737211, guid: 47e97460bbe39204099d29945c28d1b2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

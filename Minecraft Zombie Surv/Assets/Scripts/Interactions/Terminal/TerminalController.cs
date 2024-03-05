@@ -20,7 +20,7 @@ public class TerminalController : AInteractableComponent
         uiManager = ServiceLocator.GetService<UIManager>();
     }
 
-    protected override void OnInteract(PlayerController player)
+    protected override void OnSuccessInteract(PlayerController player)
     {
         uiManager.ChangeScreen("terminal");
         ServiceLocator.GetService<UITerminalManager>().OpenTerminal(this);

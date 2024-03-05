@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
-public enum WeaponType { Pistol, Rifle}
+public enum WeaponType { Pistol, Rifle, Axe}
 
 public class WeaponModel : EquipmentModel
 {
     [SerializeField] private AttacksHandler attacksHandler;
 
     [Space]
-    [SerializeField] private WeaponType weaponType;
+    [SerializeField] private string animBoolKey;
 
     [Header("Reloading")]
     [SerializeField] private bool hasReloading;
@@ -25,13 +25,13 @@ public class WeaponModel : EquipmentModel
     [Space]
     [ShowIf(nameof(needAmmo)), ReadOnly, SerializeField] private int ammoInMagazine;
 
-    public WeaponType WeaponType { get => weaponType; }
-
     public bool HasReloading { get => hasReloading; }
 
     public bool NeedAmmo { get => needAmmo; }
     public ItemInfo AmmoInfo { get => ammoInfo; }
     public int AmmoInMagazine { get => ammoInMagazine; }
+
+    public string AnimBoolKey { get => animBoolKey;}
 
     public void Init()
     {

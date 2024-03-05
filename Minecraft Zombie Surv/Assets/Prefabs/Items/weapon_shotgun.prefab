@@ -50,8 +50,8 @@ MonoBehaviour:
   canEquip: 0
   equipmentSlotID: 0
   equipmentModelID: 
-  isWeapon: 0
-  weaponID: 0
+  isWeapon: 1
+  weaponID: 2
   canUse: 0
   useDatas: []
   healthIncrease: 0

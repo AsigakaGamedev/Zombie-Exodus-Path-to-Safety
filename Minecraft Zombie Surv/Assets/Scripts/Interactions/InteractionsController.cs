@@ -7,6 +7,7 @@ using UnityEngine;
 public class InteractionsController : MonoBehaviour
 {
     [SerializeField] private LayerMask interactLayers;
+    [SerializeField] private LayerMask obstacleLayers;
     [SerializeField] private float interactDistance;
 
     [Space]
@@ -53,7 +54,8 @@ public class InteractionsController : MonoBehaviour
     {
         Ray attackRay = new Ray(checkPoint.position, checkPoint.forward);
 
-        if (Physics.Raycast(attackRay, out RaycastHit hit, interactDistance, interactLayers))
+        if (Physics.Raycast(attackRay, out RaycastHit hit, interactDistance, interactLayers) &&
+            !Physics.Raycast(attackRay, interactDistance, obstacleLayers))
         {
             if (hit.collider.TryGetComponent(out InteractableObject interactable))
             {
@@ -81,7 +83,7 @@ public class InteractionsController : MonoBehaviour
     {
         if (!curInteractable) return;
 
-        curInteractable.Interact(player);
+        curInteractable.TryInteract(player);
         curInteractable.HideOutline();
         curInteractable = null;
         onLoseInteractable?.Invoke();

@@ -52,6 +52,6 @@ MonoBehaviour:
   equipmentModelID: 
   isWeapon: 0
   weaponID: 0
-  canUse: 0
+  canUse: 1
   useDatas: []
-  healthIncrease: 0
+  healthIncrease: 15

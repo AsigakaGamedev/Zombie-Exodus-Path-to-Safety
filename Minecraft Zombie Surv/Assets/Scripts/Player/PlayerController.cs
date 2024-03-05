@@ -172,7 +172,7 @@ public class PlayerController : AInitializable
 
     private void OnEquipWeapon(WeaponModel weapon)
     {
-        //animations.SetAnimType(weapon.AnimTypeIndex);
+        animations.SetTrigger(weapon.AnimBoolKey);
         playerInputs.AttackBtn.gameObject.SetActive(true);
         playerInputs.ReloadBtn.gameObject.SetActive(weapon.HasReloading);
         playerInputs.SetAmmoPanel(weapon.NeedAmmo);
@@ -185,6 +185,7 @@ public class PlayerController : AInitializable
 
     private void OnDequipWeapon()
     {
+        animations.SetTrigger("dequip");
         playerInputs.AttackBtn.gameObject.SetActive(false);
         playerInputs.ReloadBtn.gameObject.SetActive(false);
         playerInputs.SetAmmoPanel(false);

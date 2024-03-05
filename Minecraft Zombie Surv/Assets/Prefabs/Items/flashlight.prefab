@@ -47,9 +47,9 @@ MonoBehaviour:
   itemCellSprite: {fileID: 0}
   itemNameKey: flashlight_name
   itemDescriptionKey: flashlight_desc
-  canEquip: 0
-  equipmentSlotID: 0
-  equipmentModelID: 
+  canEquip: 1
+  equipmentSlotID: 1
+  equipmentModelID: flashlight
   isWeapon: 0
   weaponID: 0
   canUse: 0

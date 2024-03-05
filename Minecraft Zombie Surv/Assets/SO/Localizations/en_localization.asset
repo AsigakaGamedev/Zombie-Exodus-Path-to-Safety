@@ -15,56 +15,133 @@ MonoBehaviour:
   values:
     _serializedList:
     - Key: start
-      Value: Start
+      Value:
+        value: 
     - Key: skins
-      Value: Skins
+      Value:
+        value: 
     - Key: audio
-      Value: Audio
+      Value:
+        value: 
     - Key: language
-      Value: Language
+      Value:
+        value: 
     - Key: main
-      Value: Main
+      Value:
+        value: 
     - Key: graphics
-      Value: Graphics
+      Value:
+        value: 
     - Key: okay
-      Value: Okay
+      Value:
+        value: 
     - Key: select_language
-      Value: Select Language
+      Value:
+        value: 
     - Key: new_game
-      Value: New Game
+      Value:
+        value: 
     - Key: exit
-      Value: Exit
+      Value:
+        value: 
     - Key: continue
-      Value: Continue
+      Value:
+        value: 
     - Key: back
-      Value: Back
+      Value:
+        value: 
     - Key: shop
-      Value: Shop
+      Value:
+        value: 
     - Key: settings
-      Value: Settings
+      Value:
+        value: 
     - Key: sign_in
-      Value: Sign In
+      Value:
+        value: 
     - Key: account_enter
-      Value: Login
+      Value:
+        value: 
     - Key: sign_up
-      Value: Sign Up
+      Value:
+        value: 
     - Key: login
-      Value: Login
+      Value:
+        value: 
     - Key: password
-      Value: Password
+      Value:
+        value: 
     - Key: change
-      Value: Change
+      Value:
+        value: 
     - Key: resources
-      Value: Resources
+      Value:
+        value: 
     - Key: music
-      Value: Music
+      Value:
+        value: 
     - Key: effects
-      Value: Effects
+      Value:
+        value: 
     - Key: characters
-      Value: Characters
+      Value:
+        value: 
     - Key: pets
-      Value: Pets
+      Value:
+        value: 
     - Key: view_advertisement
-      Value: View Advertisement
+      Value:
+        value: 
+    - Key: comp_content_2
+      Value:
+        value: 
+    - Key: comp_lbl_2
+      Value:
+        value: 
+    - Key: door_opened_msg
+      Value:
+        value: 
+    - Key: open_door
+      Value:
+        value: 
+    - Key: key_card_green_name
+      Value:
+        value: 
+    - Key: key_card_green_desc
+      Value:
+        value: 
+    - Key: first_aid_kit_name
+      Value:
+        value: 
+    - Key: first_aid_kit_desc
+      Value:
+        value: 
+    - Key: term_lbl_1
+      Value:
+        value: 
+    - Key: battle_of_water_name
+      Value:
+        value: 
+    - Key: battle_of_water_desc
+      Value:
+        value: 
+    - Key: pistol_ammo_name
+      Value:
+        value: 
+    - Key: pistol_ammo_desc
+      Value:
+        value: 
+    - Key: levels
+      Value:
+        value: 
+    - Key: canned_meat_name
+      Value:
+        value: 
+    - Key: canned_meat_desc
+      Value:
+        value: 
+    - Key: hunger
+      Value:
+        value: 
   copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}
   addNonContainsValue: 1

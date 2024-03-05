@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Localization")]
 public class LocalizationInfo : ScriptableObject
 {
-    [SerializeField] private SerializedDictionary<string, string> values;
+    [SerializeField] private SerializedDictionary<string, LocalizationValue> values;
 
     [Space]
     [SerializeField] private LocalizationInfo copyLocalization;
@@ -19,13 +19,13 @@ public class LocalizationInfo : ScriptableObject
     {
         if (values.ContainsKey(key))
         {
-            if (string.IsNullOrEmpty(values[key])) return key;
+            if (string.IsNullOrEmpty(values[key].Value)) return key;
 
-            return values[key];
+            return values[key].Value;
         }
         else
         {
-            values.Add(key, string.Empty);
+            values.Add(key, new LocalizationValue());
             return key;
         }
     }
@@ -37,7 +37,15 @@ public class LocalizationInfo : ScriptableObject
 
         foreach (string key in copyLocalization.values.Keys)
         {
-            if (addNonContainsValue && !values.ContainsKey(key)) values.Add(key, "");
+            if (addNonContainsValue && !values.ContainsKey(key)) values.Add(key, new LocalizationValue());
         }
     }
+}
+
+[System.Serializable]
+public class LocalizationValue
+{
+    [TextArea(0, 3), SerializeField] private string value;
+
+    public string Value { get => value; }
 }
