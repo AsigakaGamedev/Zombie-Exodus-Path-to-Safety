@@ -31,7 +31,7 @@ public class WeaponModel : EquipmentModel
     public ItemInfo AmmoInfo { get => ammoInfo; }
     public int AmmoInMagazine { get => ammoInMagazine; }
 
-    public string AnimBoolKey { get => animBoolKey;}
+    public string AnimKey { get => animBoolKey;}
 
     public void Init()
     {

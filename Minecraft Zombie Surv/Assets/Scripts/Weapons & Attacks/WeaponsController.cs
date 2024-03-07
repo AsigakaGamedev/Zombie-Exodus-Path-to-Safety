@@ -18,12 +18,13 @@ public class WeaponsController : MonoBehaviour
 
     public void Init()
     {
-        if (startWeaponID != -1) EquipWeapon(startWeaponID);
-
         foreach (var weapon in allWeapons.Values)
         {
             weapon.Init();
+            weapon.gameObject.SetActive(false);
         }
+
+        if (startWeaponID != -1) EquipWeapon(startWeaponID);
     }
 
     public bool TryAttack()
