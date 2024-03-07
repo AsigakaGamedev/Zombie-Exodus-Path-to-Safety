@@ -21,6 +21,7 @@ public class UIAudioSettings : MonoBehaviour
         if (!audioManager) return;
 
         volumeSlider.value = audioSource.Volume;
+        volumeText.text = $"{(int)(audioSource.Volume * 100)}%";
     }
 
     private void Start()
@@ -39,6 +40,9 @@ public class UIAudioSettings : MonoBehaviour
         });
 
         audioSource.onVolumeChanged += OnVolumeChanged;
+
+        volumeSlider.value = audioSource.Volume;
+        volumeText.text = $"{(int)(audioSource.Volume * 100)}%";
     }
 
     private void OnDestroy()

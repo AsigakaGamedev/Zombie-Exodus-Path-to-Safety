@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   values:
     _serializedList:
+    - Key: offline
+      Value:
+        value: "\u041E\u0444\u043B\u0430\u0439\u043D"
     - Key: alpha_version_welcome
       Value:
         value: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C\n\n\u042D\u0442\u043E
@@ -113,7 +116,7 @@ MonoBehaviour:
         value: "\u0412\u0445\u043E\u0434 \u0432 \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
     - Key: sign_up
       Value:
-        value: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
+        value: "\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F"
     - Key: login
       Value:
         value: "\u041B\u043E\u0433\u0438\u043D"
@@ -184,5 +187,12 @@ MonoBehaviour:
     - Key: hunger
       Value:
         value: "\u0413\u043E\u043B\u043E\u0434"
+    - Key: pistol_weapon_name
+      Value:
+        value: "\u041F\u0438\u0441\u0442\u043E\u043B\u0435\u0442"
+    - Key: pistol_weapon_description
+      Value:
+        value: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439 \u043F\u043E\u043B\u0438\u0446\u0435\u0439\u0441\u043A\u0438\u0439
+          \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442"
   copyLocalization: {fileID: 11400000, guid: 2a0e683bd2b4c944daccae33311a6e29, type: 2}
   addNonContainsValue: 1
