@@ -7,7 +7,9 @@ public enum PlayerState { Walk, Run}
 
 public class PlayerController : AInitializable
 {
+    [SerializeField] private Transform camParent;
     [SerializeField] private Transform camBody;
+    [SerializeField] private Transform bodyTarget;
     [SerializeField] private float camMinRotAngle = -70;
     [SerializeField] private float camMaxRotAngle = 90;
 
@@ -42,6 +44,11 @@ public class PlayerController : AInitializable
     public InventoryController Inventory { get => inventory; }
     public NeedsController Needs { get => needs; }
     public HealthComponent Health { get => health; }
+
+    private void OnValidate()
+    {
+        if (camParent && camBody) camBody.position = camParent.position;
+    }
 
     private void OnEnable()
     {
@@ -131,13 +138,21 @@ public class PlayerController : AInitializable
         Movement();
     }
 
+    private void LateUpdate()
+    {
+        camBody.position = camParent.position;
+    }
+
     private void Looking()
     {
         transform.Rotate(0, lookJoystick.Horizontal * Time.deltaTime * lookSensitivity, 0);
 
         xRotation -= lookJoystick.Vertical * Time.deltaTime * lookSensitivity;
         xRotation = Mathf.Clamp(xRotation, camMinRotAngle, camMaxRotAngle);
+
         camBody.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+        bodyTarget.position = new Ray(camBody.position, camBody.forward).GetPoint(5);
     }
 
     private void Movement()
