@@ -2188,6 +2188,11 @@ PrefabInstance:
       propertyPath: textures.Array.data[2]
       value: 
       objectReference: {fileID: 2800000, guid: 946598598e2e9d544a6bcb37e92adabe, type: 3}
+    - target: {fileID: 2932312206006369886, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackStartPoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3002985167431365626, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2207,6 +2212,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3651627687074729607, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackStartPoint
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3658094871741915852, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
@@ -12714,7 +12724,7 @@ PrefabInstance:
     - target: {fileID: 3277841097659531798, guid: 5b1e096598c1d8640928b939de47d393,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3757795318143622636, guid: 5b1e096598c1d8640928b939de47d393,
         type: 3}
