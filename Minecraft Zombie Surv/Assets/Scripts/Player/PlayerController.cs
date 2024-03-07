@@ -172,7 +172,7 @@ public class PlayerController : AInitializable
 
     private void OnEquipWeapon(WeaponModel weapon)
     {
-        animations.SetTrigger(weapon.AnimBoolKey);
+        animations.SetTrigger(weapon.AnimKey);
         playerInputs.AttackBtn.gameObject.SetActive(true);
         playerInputs.ReloadBtn.gameObject.SetActive(weapon.HasReloading);
         playerInputs.SetAmmoPanel(weapon.NeedAmmo);
