@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : AInitializable
 {
     [SerializeField] private string startScreen;
     [SerializeField] private UIScreen[] screens;
 
     [Space]
     [ReadOnly, SerializeField] private UIScreen curScreen;
+
+    private bool isInitialized;
 
     private void OnEnable()
     {
@@ -21,14 +23,22 @@ public class UIManager : MonoBehaviour
         ServiceLocator.RemoveService(this);
     }
 
-    private void Start()
+    public override void OnInit()
     {
+        if (isInitialized) return;
+
         foreach (UIScreen screen in screens)
         {
             screen.Init();
         }
 
         ChangeScreen(startScreen);
+        isInitialized = true;
+    }
+
+    private void Start()
+    {
+        if (!isInitialized) OnInit();
     }
 
     private void Update()

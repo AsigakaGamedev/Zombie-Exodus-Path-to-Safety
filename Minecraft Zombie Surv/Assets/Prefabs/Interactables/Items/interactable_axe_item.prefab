@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableObject: {fileID: 2169631188826011682}
   itemData:
-    info: {fileID: 436101377098982996, guid: d3d397ded95291b408f1ef680069e74a, type: 3}
+    info: {fileID: 5354398805594590092, guid: 72db9f9e7fd86bf4fbd60803c2e6ff52, type: 3}
     amount: {x: 1, y: 1}
 --- !u!65 &9135773792866052623
 BoxCollider:

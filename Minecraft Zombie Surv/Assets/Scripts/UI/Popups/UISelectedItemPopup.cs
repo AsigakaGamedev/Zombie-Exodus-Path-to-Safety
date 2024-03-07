@@ -56,8 +56,6 @@ public class UISelectedItemPopup : APopup
         if (!localizationManager)
         {
             localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
-
-            if (!localizationManager) return;
         }
 
         selectedItem = item;
@@ -65,6 +63,11 @@ public class UISelectedItemPopup : APopup
         ItemInfo info = item.InfoPrefab;
 
         itemIcon.sprite = info.ItemCellSprite;
+
+        useItemBtn.gameObject.SetActive(info.CanUse);
+        equipItemBtn.gameObject.SetActive(info.CanEquip || info.IsWeapon);
+
+        if (!localizationManager) return;
 
         itemName.text = localizationManager.CurrentLocalization.GetValue(info.ItemNameKey);
 
@@ -96,8 +99,5 @@ public class UISelectedItemPopup : APopup
         }
 
         itemDesc.text = resultDescription;
-
-        useItemBtn.gameObject.SetActive(info.CanUse);
-        equipItemBtn.gameObject.SetActive(info.CanEquip || info.IsWeapon);
     }
 }

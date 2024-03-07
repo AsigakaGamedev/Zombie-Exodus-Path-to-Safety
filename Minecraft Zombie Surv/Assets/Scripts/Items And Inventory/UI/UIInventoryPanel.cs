@@ -21,7 +21,7 @@ public class UIInventoryPanel : MonoBehaviour
         spawnedSlots.Clear();
 
         if (!poolingManager) poolingManager = ServiceLocator.GetServiceSafe<ObjectPoolingManager>();
-        if (!poolingManager) return;
+        if (!poolingManager) throw new System.Exception("Pooling Manager Not Found!");
 
         foreach (InventoryCellEntity slotEntity in cells)
         {

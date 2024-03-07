@@ -28,7 +28,14 @@ public class TextureChanger : MonoBehaviour
 
         foreach (var renderer in renderers)
         {
-            renderer.material.mainTexture = texture;
+            try
+            {
+                renderer.material.mainTexture = texture;
+            }
+            catch
+            {
+                renderer.sharedMaterial.mainTexture = texture;
+            }
         }
     }
 }

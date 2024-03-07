@@ -2657,6 +2657,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: axe
       objectReference: {fileID: 0}
+    - target: {fileID: 6697143282819860743, guid: 47e97460bbe39204099d29945c28d1b2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697143282819860743, guid: 47e97460bbe39204099d29945c28d1b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2685,7 +2695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacksHandler: {fileID: 0}
-  weaponType: 0
+  animBoolKey: 
   hasReloading: 0
   reloadingTime: 0
   needAmmo: 0

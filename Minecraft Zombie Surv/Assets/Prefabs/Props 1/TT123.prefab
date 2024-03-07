@@ -172,10 +172,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 0
-  interactEvent:
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  failedInteractEvent:
     m_PersistentCalls:
       m_Calls: []
   outline: {fileID: 7953448539965469230}
+  validators: []
 --- !u!114 &7345480143930052887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,5 +196,5 @@ MonoBehaviour:
   spawnableItems:
   - info: {fileID: -3399545887386218251, guid: e7622bba23bdcc84e982f1b7b502d0f1, type: 3}
     amount: {x: 1, y: 4}
-  cellsCount: 6
+  cellsCount: 3
   containerCells: []

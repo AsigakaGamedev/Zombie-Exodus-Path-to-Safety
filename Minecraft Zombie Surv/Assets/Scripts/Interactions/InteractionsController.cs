@@ -54,8 +54,8 @@ public class InteractionsController : MonoBehaviour
     {
         Ray attackRay = new Ray(checkPoint.position, checkPoint.forward);
 
-        if (Physics.Raycast(attackRay, out RaycastHit hit, interactDistance, interactLayers) &&
-            !Physics.Raycast(attackRay, interactDistance, obstacleLayers))
+        if (Physics.Raycast(attackRay, out RaycastHit hit, interactDistance, interactLayers) && 
+            !Physics.Linecast(hit.point, checkPoint.position, obstacleLayers))
         {
             if (hit.collider.TryGetComponent(out InteractableObject interactable))
             {

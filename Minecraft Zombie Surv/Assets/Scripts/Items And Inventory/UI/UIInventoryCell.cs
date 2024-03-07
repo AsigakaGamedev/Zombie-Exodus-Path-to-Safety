@@ -57,7 +57,7 @@ public class UIInventoryCell : PoolableObject, IDropHandler
 
     private void UpdateVisual()
     {
-        if (this.entity != null && this.entity.Item != null)
+        if (this.entity != null && this.entity.Item != null && this.entity.Item.Amount > 0)
         {
             itemAmount.text = this.entity.Item.Amount.ToString();
             itemAmount.gameObject.SetActive(true);

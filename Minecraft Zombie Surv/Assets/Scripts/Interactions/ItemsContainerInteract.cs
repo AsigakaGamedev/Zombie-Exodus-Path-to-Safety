@@ -35,7 +35,10 @@ public class ItemsContainerInteract : AInteractableComponent
 
         foreach (ItemData spawnItem in  spawnableItems)
         {
-            ItemEntity newItem = new ItemEntity(spawnItem.Info, spawnItem.RandomAmount);
+            int dataItemAmount = spawnItem.RandomAmount;
+            if (dataItemAmount <= 0) continue;
+
+            ItemEntity newItem = new ItemEntity(spawnItem.Info, dataItemAmount);
             containerCells[itemCellIndex].Item = newItem;
             itemCellIndex++;
         }

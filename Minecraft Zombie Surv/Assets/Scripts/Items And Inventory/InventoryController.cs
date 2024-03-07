@@ -61,11 +61,14 @@ public class InventoryController : AInventory
 
     public void AddItem(ItemData data)
     {
+        int dataItemAmount = data.RandomAmount;
+        if (dataItemAmount <= 0) return;
+
         InventoryCellEntity targetCell = GetCell(data.Info);
 
         if (targetCell != null)
         {
-            targetCell.Item.Amount += data.RandomAmount;
+            targetCell.Item.Amount += dataItemAmount;
         }
         else
         {
@@ -73,7 +76,7 @@ public class InventoryController : AInventory
 
             if (targetCell != null)
             {
-                targetCell.Item = new ItemEntity(data.Info, data.RandomAmount);
+                targetCell.Item = new ItemEntity(data.Info, dataItemAmount);
             }
         }
     }
