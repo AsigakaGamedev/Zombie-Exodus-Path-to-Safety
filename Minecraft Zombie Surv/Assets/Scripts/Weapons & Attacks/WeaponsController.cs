@@ -15,6 +15,9 @@ public class WeaponsController : MonoBehaviour
 
     public Action<WeaponModel> onEquip;
     public Action onDequip;
+    public Action onReloadEnd;
+
+    public WeaponModel WeaponInHands { get => weaponInHands; }
 
     public void Init()
     {
@@ -34,20 +37,39 @@ public class WeaponsController : MonoBehaviour
         return weaponInHands.TryAttack();
     }
 
+    public bool TryReload()
+    {
+        if (weaponInHands == null ||
+            weaponInHands != null && !weaponInHands.NeedAmmo) return false;
+
+        return weaponInHands.TryStartReload();
+    }
+
     public void EquipWeapon(int weaponID)
     {
-        if (weaponInHands) onDequip?.Invoke(); ;
+        if (weaponInHands)
+        {
+            onDequip?.Invoke();
+            weaponInHands.onReloadEnd -= OnReloadEnd;
+        }
 
         weaponInHands = allWeapons[weaponID];
         weaponInHands.OnEquip();
         onEquip?.Invoke(weaponInHands);
         onDequip += weaponInHands.OnDequip;
         onDequip += DequipWeapon;
+        weaponInHands.onReloadEnd += OnReloadEnd;
     }
 
     public void DequipWeapon()
     {
         onDequip -= weaponInHands.OnDequip;
         onDequip -= DequipWeapon;
+        weaponInHands.onReloadEnd -= OnReloadEnd;
+    }
+
+    private void OnReloadEnd()
+    {
+        onReloadEnd?.Invoke();
     }
 }

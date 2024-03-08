@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TakeItemInteract : AInteractableComponent
+public class TakeItemInteract : AInteractValidator
 {
     [Space]
     [SerializeField] private ItemData itemData;
 
-    protected override void OnSuccessInteract(PlayerController player)
+    public override bool OnValidateInteract(PlayerController player)
     {
-        player.Inventory.AddItem(itemData);
+        return player.Inventory.TryAddItem(itemData);
     }
 }

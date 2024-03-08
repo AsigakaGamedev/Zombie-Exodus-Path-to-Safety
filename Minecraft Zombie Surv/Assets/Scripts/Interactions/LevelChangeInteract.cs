@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelChangeInteract : AInteractableComponent
 {
@@ -17,14 +18,22 @@ public class LevelChangeInteract : AInteractableComponent
         base.Start();
 
         popupsManager = ServiceLocator.GetService<UIPopupsManager>();
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
+        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
+        loadingManager = ServiceLocator.GetServiceSafe<LoadingManager>();
     }
 
     protected override void OnSuccessInteract(PlayerController player)
     {
+        string hintText = "next_level_load_hint";
+
+        try 
+        {
+            hintText = localizationManager.CurrentLocalization.GetValue("next_level_load_hint");
+        }
+        catch { }
+
         popupsManager.OpenPopup<UIChoosesPopup>("chooses_panel")
-            .ShowPopup(localizationManager.CurrentLocalization.GetValue("next_level_load_hint"),
+            .ShowPopup(hintText,
             new UnityAction[]
             {
                 () =>
@@ -33,7 +42,14 @@ public class LevelChangeInteract : AInteractableComponent
                 },
                 async () =>
                 {
-                    await loadingManager.LoadSceneAsync(nextScene);
+                    if (loadingManager)
+                    {
+                        await loadingManager.LoadSceneAsync(nextScene);
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(nextScene);
+                    }
                 }
             });
     }

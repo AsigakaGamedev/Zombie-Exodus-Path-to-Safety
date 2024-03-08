@@ -32,6 +32,11 @@ public class AnimationsController : MonoBehaviour
         lastPos = transform.position;
     }
 
+    public void SetBool(string key, bool value)
+    {
+        animator.SetBool(key, value);
+    }
+
     public void SetMove(bool value)
     {
         animator.SetBool(moveBoolKey, value);

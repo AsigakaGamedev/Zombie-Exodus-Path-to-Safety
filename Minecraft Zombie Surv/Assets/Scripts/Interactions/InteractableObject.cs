@@ -60,7 +60,7 @@ public class InteractableObject : MonoBehaviour
     {
         foreach (AInteractValidator validator in validators)
         {
-            if (validator.OnValidateInteract(player)) return false;
+            if (!validator.OnValidateInteract(player)) return false;
         }
 
         return true;

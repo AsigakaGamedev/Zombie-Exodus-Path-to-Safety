@@ -17,7 +17,14 @@ public class LocalizableText : MonoBehaviour
 
     private void Start()
     {
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
+        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
+
+        if (!localizationManager)
+        {
+            //targetText.text = localizationKey;
+            return;
+        }
+
         localizationManager.onLocalizationChange += OnLocalizationChange;
 
         OnLocalizationChange("", localizationManager.CurrentLocalization);

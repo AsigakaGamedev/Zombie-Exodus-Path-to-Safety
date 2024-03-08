@@ -17,7 +17,7 @@ public class ItemEntity
         set
         {
             amount = value;
-            if (amount == 0) onItemIsOut?.Invoke();
+            if (amount <= 0) onItemIsOut?.Invoke();
         }
     }
 

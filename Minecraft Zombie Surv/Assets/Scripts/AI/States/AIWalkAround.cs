@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class AIWalkAround : AIStateBase
 {
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private AnimationsController animations;
 
     [Space]
     [SerializeField] private LayerMask walkableLayers;
@@ -18,10 +19,10 @@ public class AIWalkAround : AIStateBase
     [SerializeField] private float walkSpeed;
     [SerializeField] private float walkStoppingDistance;
 
-    private bool canWalkAround = true;
-    private float walkDelayTimer;
-
-    private Vector3 walkPoint;
+    [Space]
+    [ReadOnly, SerializeField] private bool canWalkAround = true;
+    [ReadOnly, SerializeField] private float walkDelayTimer;
+    [ReadOnly, SerializeField] private Vector3 walkPoint;
 
     public override void OnInit()
     {
@@ -43,15 +44,30 @@ public class AIWalkAround : AIStateBase
         walkPoint = transform.position + new Vector3(Random.Range(-walkableRadius / 2, walkableRadius / 2), 25,
                                                                  Random.Range(-walkableRadius / 2, walkableRadius / 2));
 
-        if (Physics.Raycast(walkPoint, Vector3.down, out RaycastHit hit, 100, walkableLayers))
+        //if (Physics.Raycast(walkPoint, Vector3.down, out RaycastHit hit, 100, walkableLayers))
+        //{
+        //    walkPoint.y = hit.point.y;
+        //
+        //    agent.SetDestination(walkPoint);
+        //}
+
+        walkPoint.y = transform.position.y;
+        agent.SetDestination(walkPoint);
+
+        if (!agent.isPathStale)
         {
-            walkPoint.y = hit.point.y;
+            animations.SetMove(true);
 
-            agent.SetDestination(walkPoint);
+            agent.isStopped = false;
+            agent.speed = walkSpeed;
+            agent.stoppingDistance = walkStoppingDistance;
         }
-
-        agent.speed = walkSpeed;
-        agent.stoppingDistance = walkStoppingDistance;
+        else
+        {
+            agent.ResetPath();
+            canWalkAround = false;
+            Invoke(nameof(ResetWalkAround), Random.Range(idleDelay.x, idleDelay.y));
+        }
     }
 
     public override void OnExitState()
@@ -65,10 +81,11 @@ public class AIWalkAround : AIStateBase
 
         walkDelayTimer -= Time.deltaTime;
 
-        if (walkDelayTimer <= 0 || Vector3.Distance(transform.position, walkPoint) <= 0.1f)
+        if (walkDelayTimer <= 0 || Vector3.Distance(transform.position, walkPoint) <= walkStoppingDistance)
         {
             canWalkAround = false;
             Invoke(nameof(ResetWalkAround), Random.Range(idleDelay.x, idleDelay.y));
+            animations.SetMove(false);
             walkDelayTimer = Random.Range(walkDelay.x, walkDelay.y);
         }
     }

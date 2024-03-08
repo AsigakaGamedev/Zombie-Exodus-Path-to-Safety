@@ -67,10 +67,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 1
-  interactEvent:
+  successInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  failedInteractEvent:
     m_PersistentCalls:
       m_Calls: []
   outline: {fileID: 2304477606378020725}
+  validators:
+  - {fileID: 7609308459989393739}
+  - {fileID: 7609308459989393739}
 --- !u!114 &7609308459989393739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableObject: {fileID: 2169631188826011682}
   itemData:
-    info: {fileID: 436101377098982996, guid: 0eb937cedab157847a3854d79a499bc7, type: 3}
-    amount: {x: 1, y: 1}
+    info: {fileID: 436101377098982996, guid: d1ead4a84c8e3554eb3459636d56df90, type: 3}
+    amount: {x: 5, y: 8}
 --- !u!65 &9135773792866052623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102,7 +108,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

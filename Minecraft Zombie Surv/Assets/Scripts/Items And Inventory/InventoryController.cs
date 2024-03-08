@@ -22,6 +22,8 @@ public class InventoryController : AInventory
 
     public Action<ItemEntity> onItemUse;
     public Action<ItemEntity> onItemEquip;
+    public Action<ItemEntity> onItemAdd;
+    public Action<ItemEntity> onItemRemove;
 
     public override List<InventoryCellEntity> MainCells { get => mainCells; }
     public List<InventoryCellEntity> QuickCells { get => quickCells; }
@@ -59,16 +61,18 @@ public class InventoryController : AInventory
 
     #region Items
 
-    public void AddItem(ItemData data)
+    public bool TryAddItem(ItemData data)
     {
         int dataItemAmount = data.RandomAmount;
-        if (dataItemAmount <= 0) return;
+        if (dataItemAmount <= 0) return false;
 
         InventoryCellEntity targetCell = GetCell(data.Info);
 
         if (targetCell != null)
         {
             targetCell.Item.Amount += dataItemAmount;
+            onItemAdd?.Invoke(targetCell.Item);
+            return true;
         }
         else
         {
@@ -77,8 +81,25 @@ public class InventoryController : AInventory
             if (targetCell != null)
             {
                 targetCell.Item = new ItemEntity(data.Info, dataItemAmount);
+                onItemAdd?.Invoke(targetCell.Item);
+                return true;
             }
         }
+
+        return false;
+    }
+
+    public bool TryRemoveItem(ItemInfo info, int removeAmount)
+    {
+        InventoryCellEntity targetCell = GetCell(info);
+
+        if (targetCell != null)
+        {
+            targetCell.Item.Amount -= removeAmount;
+            onItemRemove?.Invoke(targetCell.Item);
+        }
+
+        return false;
     }
 
     public int GetItemsAmount(ItemInfo itemInfo)
@@ -182,7 +203,7 @@ public class InventoryController : AInventory
 
             foreach (ItemData createdItem in craftRecipe.CreatedItemsList)
             {
-                AddItem(createdItem);
+                TryAddItem(createdItem);
             }
         }
         else

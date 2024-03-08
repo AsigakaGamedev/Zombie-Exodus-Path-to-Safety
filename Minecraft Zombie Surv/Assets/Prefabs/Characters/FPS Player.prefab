@@ -246,7 +246,7 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: 0, y: 0, z: 0}
+    m_Offset: {x: 8, y: 0, z: 0}
     m_MinLimit: -180
     m_MaxLimit: 180
     m_AimAxis: 4
@@ -653,8 +653,8 @@ MonoBehaviour:
   camParent: {fileID: 6998796554575712442}
   camBody: {fileID: 2577555360541422802}
   bodyTarget: {fileID: 7928888261071544252}
-  camMinRotAngle: -80
-  camMaxRotAngle: 80
+  camMinRotAngle: -85
+  camMaxRotAngle: 85
   rb: {fileID: 752959283752922715}
   inventory: {fileID: 5187975186740119845}
   interactions: {fileID: 3567399355833262948}
@@ -893,6 +893,16 @@ PrefabInstance:
       propertyPath: textures.Array.data[0]
       value: 
       objectReference: {fileID: 2800000, guid: feb4f56b693988b4ba72aa9dc89a403f, type: 3}
+    - target: {fileID: 2932312206006369886, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackDistance
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932312206006369886, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackStartPoint
+      value: 
+      objectReference: {fileID: 2577555360541422802}
     - target: {fileID: 2933296864537188473, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
       propertyPath: m_Layer
@@ -963,6 +973,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2ab212e369343f54b9f2779100c46427, type: 2}
+    - target: {fileID: 3651627687074729607, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackStartPoint
+      value: 
+      objectReference: {fileID: 2577555360541422802}
     - target: {fileID: 3654051144885107911, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
       propertyPath: m_Layer
@@ -1017,6 +1032,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -174.897
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371174080030990362, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 4336875791643494ba104792670868d6, type: 3}
+    - target: {fileID: 4371174080030990362, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animTriggerKey
+      value: axe
       objectReference: {fileID: 0}
     - target: {fileID: 4784180653397508266, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}
@@ -1287,6 +1312,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937013127237842216, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: attackAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e4a54f305ec1a64f938b69faf529f6b, type: 3}
+    - target: {fileID: 7937013127237842216, guid: 7436dc7a606e86541ac637c56cf2732b,
+        type: 3}
+      propertyPath: animTriggerKey
+      value: pistol
       objectReference: {fileID: 0}
     - target: {fileID: 8109298917663752499, guid: 7436dc7a606e86541ac637c56cf2732b,
         type: 3}

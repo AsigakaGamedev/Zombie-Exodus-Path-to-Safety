@@ -73,9 +73,12 @@ public class PlayerController : AInitializable
         inventory.Init();
         inventory.onItemUse += OnItemUse;
         inventory.onItemEquip += OnItemEquiped;
+        inventory.onItemAdd += OnItemAddOrRemove;
+        inventory.onItemRemove += OnItemAddOrRemove;
 
         weapons.onEquip += OnEquipWeapon;
         weapons.onDequip += OnDequipWeapon;
+        weapons.onReloadEnd += OnReloadEnd;
         weapons.Init();
 
         playerInputs.InteractBtn.onClick.AddListener(() =>
@@ -88,6 +91,21 @@ public class PlayerController : AInitializable
             if (weapons.TryAttack())
             {
                 animations.SetAttackTrigger();
+
+                if (weapons.WeaponInHands.NeedAmmo)
+                {
+                    playerInputs.UpdateAmmoInfo(weapons.WeaponInHands.AmmoInMagazine, inventory.GetItemsAmount(weapons.WeaponInHands.AmmoInfo));
+                }
+            }
+        });
+
+        playerInputs.ReloadBtn.onClick.AddListener(() =>
+        {
+            if (weapons.TryReload())
+            {
+                animations.SetTrigger("reload");
+
+                playerInputs.UpdateAmmoInfo(weapons.WeaponInHands.AmmoInMagazine, inventory.GetItemsAmount(weapons.WeaponInHands.AmmoInfo));
             }
         });
 
@@ -118,10 +136,13 @@ public class PlayerController : AInitializable
 
         inventory.onItemUse -= OnItemUse;
         inventory.onItemEquip -= OnItemEquiped;
+        inventory.onItemAdd -= OnItemAddOrRemove;
+        inventory.onItemRemove -= OnItemAddOrRemove;
         inventory.Destroy();
 
         weapons.onEquip -= OnEquipWeapon;
         weapons.onDequip -= OnDequipWeapon;
+        weapons.onReloadEnd -= OnReloadEnd;
 
         health.onDie -= OnDie;
     }
@@ -189,7 +210,7 @@ public class PlayerController : AInitializable
     {
         animations.SetTrigger(weapon.AnimKey);
         playerInputs.AttackBtn.gameObject.SetActive(true);
-        playerInputs.ReloadBtn.gameObject.SetActive(weapon.HasReloading);
+        playerInputs.ReloadBtn.gameObject.SetActive(weapon.NeedAmmo);
         playerInputs.SetAmmoPanel(weapon.NeedAmmo);
 
         if (weapon.NeedAmmo)
@@ -211,6 +232,14 @@ public class PlayerController : AInitializable
         if (item.InfoPrefab.IsWeapon)
         {
             weapons.EquipWeapon(item.InfoPrefab.WeaponID);
+        }
+    }
+
+    private void OnItemAddOrRemove(ItemEntity item)
+    {
+        if (weapons.WeaponInHands)
+        {
+            playerInputs.UpdateAmmoInfo(weapons.WeaponInHands.AmmoInMagazine, inventory.GetItemsAmount(weapons.WeaponInHands.AmmoInfo));
         }
     }
 
@@ -240,6 +269,12 @@ public class PlayerController : AInitializable
     private void OnDie()
     {
         uiManager.ChangeScreen("die");
+    }
+
+    private void OnReloadEnd()
+    {
+        inventory.TryRemoveItem(weapons.WeaponInHands.AmmoInfo, weapons.WeaponInHands.AmmoInMagazine);
+        playerInputs.UpdateAmmoInfo(weapons.WeaponInHands.AmmoInMagazine, inventory.GetItemsAmount(weapons.WeaponInHands.AmmoInfo));
     }
 
     #endregion

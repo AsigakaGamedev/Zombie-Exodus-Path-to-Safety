@@ -7,37 +7,57 @@ using UnityEngine.AI;
 public class AIPursueAndAttackTarget : AIStateBase
 {
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private FieldOfView vision;
+    [SerializeField] private AnimationsController animations;
+
+    [Space]
+    [SerializeField] private AttacksHandler attacks;
+    [SerializeField] private float attackDistance;
 
     [Space]
     [SerializeField] private float pursueSpeed;
     [SerializeField] private float pursueStoppingDistance;
 
     [Space]
-    [SerializeField] private LayerMask targetsLayer;
-    [SerializeField] private float targetsCheckRadius;
+    [ReadOnly, SerializeField] private Transform target;
 
-    [Space]
-    [ReadOnly, SerializeField] private Collider target;
+    private Vector3 prevTargetPos;
+
+    public override void OnInit()
+    {
+        base.OnInit();
+
+        attacks.Init();
+    }
 
     public override bool OnValidateState()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, targetsCheckRadius, targetsLayer);
+        target = vision.DetectColliderInVision();
 
-        if (colliders.Length > 0)
-        {
-            target = colliders[0];
-            return true;
-        }
-
-        return false;
+        return target;
     }
 
     public override void OnEnterState()
     {
         base.OnEnterState();
 
+        animations.SetMove(true);
+        animations.SetBool("isPursue", true);
+
+        agent.isStopped = false;
         agent.speed = pursueSpeed;
         agent.stoppingDistance = pursueStoppingDistance;
+
+        prevTargetPos = target.position;
+        agent.SetDestination(target.position);
+    }
+
+    public override void OnExitState()
+    {
+        base.OnExitState();
+
+        animations.SetMove(false);
+        animations.SetBool("isPursue", false);
     }
 
     public override void OnUpdateState()
@@ -46,6 +66,23 @@ public class AIPursueAndAttackTarget : AIStateBase
 
         if (!target) return;
 
-        agent.SetDestination(target.transform.position);
+        if (Vector3.Distance(transform.position, target.position) <= attackDistance)
+        {
+            Vector3 dirToTarget = target.position - transform.position;
+            dirToTarget.Normalize();
+            
+            transform.rotation = Quaternion.LookRotation(dirToTarget);
+
+            if (attacks.TryAttack())
+            {
+                animations.SetAttackTrigger();
+            }
+        }
+
+        if (prevTargetPos != target.position)
+        {
+            agent.SetDestination(target.position);
+            prevTargetPos = target.position;
+        }
     }
 }
