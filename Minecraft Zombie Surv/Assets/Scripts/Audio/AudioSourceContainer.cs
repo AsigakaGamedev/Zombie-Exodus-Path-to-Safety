@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class AudioSourceContainer : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class AudioSourceContainer : MonoBehaviour
 
     [Space]
     [Range(0, 1), SerializeField] private float volume;
+
+    private float[] sourcesDelays;
 
     public Action<float> onVolumeChanged;
 
@@ -19,14 +22,39 @@ public class AudioSourceContainer : MonoBehaviour
         SetVolume(volume);
     }
 
+    public void Init()
+    {
+        sourcesDelays = new float[sources.Length];
+    }
+
+    public void UpdateContainer()
+    {
+        for (int i = 0; i < sourcesDelays.Length; i++)
+        {
+            if (sourcesDelays[i] <= 0) continue;
+
+            sourcesDelays[i] -= Time.deltaTime;
+        }
+    }
+
     public void PlayAudio(AudioClip clip)
+    {
+        for (int i = 0; i < sources.Length; i++)
+        {
+            if (sourcesDelays[i] > 0) continue;
+
+            sources[i].clip = clip;
+            sources[i].Play();
+            sourcesDelays[i] = clip.length;
+            break;
+        }
+    }
+
+    public void ClearSources()
     {
         foreach (var source in sources)
         {
-            if (source.clip != null) continue;
-
-            source.clip = clip;
-            source.Play();
+            source.clip = null;
         }
     }
 

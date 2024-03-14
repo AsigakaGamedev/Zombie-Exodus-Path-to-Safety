@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,20 +33,29 @@ public class FieldOfView : MonoBehaviour
     public Transform DetectColliderInVision()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, visionRadius, targetLayerMask);
+        
+        if (colliders.Length > 0)
+        {
+            Debug.DrawLine(transform.position, colliders[0].transform.position + new Vector3(0, 1, 0), Color.red);
+        }
 
         foreach (Collider collider in colliders)
         {
-            if (Vector3.Distance(transform.position, collider.transform.position) <= closestVisionRadius)
+            float distanceToTarget = Vector3.Distance(transform.position, collider.transform.position);
+            if (distanceToTarget <= closestVisionRadius)
             {
                 return collider.transform;
             }
 
-            Vector3 directionToCollider = collider.transform.position - transform.position;
+            Vector3 directionToCollider = (collider.transform.position + new Vector3(0, 1, 0)) - transform.position;
+            directionToCollider.Normalize();
             float angle = Vector3.Angle(transform.forward, directionToCollider);
 
             if (angle <= visionAngle * 0.5f)
             {
-                if (!Physics.Raycast(transform.position, directionToCollider, visionRadius, obstacleLayerMask))
+                Ray obstRay = new Ray(transform.position, directionToCollider);
+
+                if (!Physics.Raycast(obstRay, out RaycastHit obstHit, distanceToTarget, obstacleLayerMask))
                 {
                     return collider.transform;
                 }

@@ -19,6 +19,11 @@ public class AudioManager : AInitializable
     private void OnDisable()
     {
         ServiceLocator.RemoveService(this);
+
+        foreach (var source in sources)
+        {
+            source.Value.ClearSources();
+        }
     }
 
     public override void OnInit()
@@ -30,7 +35,16 @@ public class AudioManager : AInitializable
 
         foreach (var source in sources)
         {
+            source.Value.Init();
             source.Value.transform.SetParent(Camera.main.transform);
+        }
+    }
+
+    private void Update()
+    {
+        foreach (var source in sources)
+        {
+            source.Value.UpdateContainer();
         }
     }
 

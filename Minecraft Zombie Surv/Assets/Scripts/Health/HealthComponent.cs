@@ -39,7 +39,7 @@ public class HealthComponent : MonoBehaviour
         onHealthChange?.Invoke(health);
     }
 
-    public void IncreaseHealth(float increaseValue)
+    public void ChangeHealth(float increaseValue)
     {
         Health += increaseValue;
         onHealthChange?.Invoke(health);

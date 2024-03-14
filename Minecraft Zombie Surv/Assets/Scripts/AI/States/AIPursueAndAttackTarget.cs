@@ -13,6 +13,7 @@ public class AIPursueAndAttackTarget : AIStateBase
     [Space]
     [SerializeField] private AttacksHandler attacks;
     [SerializeField] private float attackDistance;
+    [SerializeField] private float attackStayTime = 2;
 
     [Space]
     [SerializeField] private float pursueSpeed;
@@ -22,6 +23,7 @@ public class AIPursueAndAttackTarget : AIStateBase
     [ReadOnly, SerializeField] private Transform target;
 
     private Vector3 prevTargetPos;
+    private bool hasAttackStay;
 
     public override void OnInit()
     {
@@ -66,16 +68,23 @@ public class AIPursueAndAttackTarget : AIStateBase
 
         if (!target) return;
 
-        if (Vector3.Distance(transform.position, target.position) <= attackDistance)
+        if (!hasAttackStay && Vector3.Distance(transform.position, target.position) <= attackDistance)
         {
             Vector3 dirToTarget = target.position - transform.position;
             dirToTarget.Normalize();
+            dirToTarget.y = 0;
             
             transform.rotation = Quaternion.LookRotation(dirToTarget);
 
             if (attacks.TryAttack())
             {
+                animations.SetMove(false);
+                animations.SetBool("isPursue", false);
+
                 animations.SetAttackTrigger();
+
+                hasAttackStay = true;
+                Invoke(nameof(ResetAttackStay), attackStayTime);
             }
         }
 
@@ -84,5 +93,13 @@ public class AIPursueAndAttackTarget : AIStateBase
             agent.SetDestination(target.position);
             prevTargetPos = target.position;
         }
+    }
+
+    private void ResetAttackStay()
+    {
+        animations.SetMove(true);
+        animations.SetBool("isPursue", true);
+
+        hasAttackStay = false;
     }
 }

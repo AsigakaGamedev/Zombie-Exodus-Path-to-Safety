@@ -143,5 +143,104 @@ MonoBehaviour:
     - Key: hunger
       Value:
         value: 
+    - Key: offline
+      Value:
+        value: 
+    - Key: alpha_version_welcome
+      Value:
+        value: 
+    - Key: reload
+      Value:
+        value: 
+    - Key: you_die
+      Value:
+        value: 
+    - Key: no
+      Value:
+        value: 
+    - Key: yes
+      Value:
+        value: 
+    - Key: start_new_game_hint
+      Value:
+        value: 
+    - Key: ammo_shotgun_name
+      Value:
+        value: 
+    - Key: ammo_shotgun_desc
+      Value:
+        value: 
+    - Key: bandage_name
+      Value:
+        value: 
+    - Key: bandage_desc
+      Value:
+        value: 
+    - Key: battery_name
+      Value:
+        value: 
+    - Key: battery_desc
+      Value:
+        value: 
+    - Key: can_of_gunpowder_name
+      Value:
+        value: 
+    - Key: can_of_gunpowder_desc
+      Value:
+        value: 
+    - Key: canned_veget_name
+      Value:
+        value: 
+    - Key: canned_veget_desc
+      Value:
+        value: 
+    - Key: pistol_weapon_name
+      Value:
+        value: 
+    - Key: flashlight_name
+      Value:
+        value: 
+    - Key: flashlight_desc
+      Value:
+        value: 
+    - Key: metal_ingot_name
+      Value:
+        value: 
+    - Key: metal_ingot_desc
+      Value:
+        value: 
+    - Key: rag_name
+      Value:
+        value: 
+    - Key: rag_desc
+      Value:
+        value: 
+    - Key: weapon_axe_name
+      Value:
+        value: 
+    - Key: weapon_axe_desc
+      Value:
+        value: 
+    - Key: weapon_shotgun_name
+      Value:
+        value: 
+    - Key: weapon_shotgun_desc
+      Value:
+        value: 
+    - Key: services_loading
+      Value:
+        value: 
+    - Key: use
+      Value:
+        value: 
+    - Key: drop
+      Value:
+        value: 
+    - Key: equip
+      Value:
+        value: 
+    - Key: pistol_weapon_description
+      Value:
+        value: 
   copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}
   addNonContainsValue: 1

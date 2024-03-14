@@ -252,7 +252,7 @@ public class PlayerController : AInitializable
 
         if (item.InfoPrefab.HealthIncrease != 0)
         {
-            health.IncreaseHealth(item.InfoPrefab.HealthIncrease);
+            health.ChangeHealth(item.InfoPrefab.HealthIncrease);
         }
     }
 

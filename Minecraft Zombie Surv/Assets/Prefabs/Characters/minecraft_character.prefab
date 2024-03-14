@@ -1268,11 +1268,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacksHandler: {fileID: 961452050965179744}
-  attackAudio: {fileID: 0}
-  animTriggerKey: 
+  attackAudio: {fileID: 8300000, guid: 4e4a54f305ec1a64f938b69faf529f6b, type: 3}
+  animTriggerKey: pistol
   needAmmo: 1
   reloadingTime: 2
-  reloadingAudio: {fileID: 0}
+  reloadingAudio: {fileID: 8300000, guid: 353bd2b887055f140ac349d700a8250d, type: 3}
   magazineCapacity: 8
   ammoInfo: {fileID: 436101377098982996, guid: d1ead4a84c8e3554eb3459636d56df90, type: 3}
   ammoInMagazine: 0
@@ -2235,7 +2235,6 @@ GameObject:
   - component: {fileID: 5242080903645845919}
   - component: {fileID: 2781102578989624980}
   - component: {fileID: 5321733042507482998}
-  - component: {fileID: 6216732742005634774}
   - component: {fileID: 7514483613575396163}
   - component: {fileID: 1951238630372453716}
   m_Layer: 0
@@ -2308,25 +2307,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6216732742005634774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264217198965691266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4819037fb636ea346afd1feecdde1e4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renders:
-  - {fileID: 5245953356179765962}
-  - {fileID: 3002985167431365626}
-  - {fileID: 3658094871741915852}
-  - {fileID: 3220522982093845105}
-  - {fileID: 2490678468557165647}
-  - {fileID: 2581681111132466969}
 --- !u!114 &7514483613575396163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2952,8 +2932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacksHandler: {fileID: 6250076284316188213}
-  attackAudio: {fileID: 0}
-  animTriggerKey: 
+  attackAudio: {fileID: 8300000, guid: 4336875791643494ba104792670868d6, type: 3}
+  animTriggerKey: axe
   needAmmo: 0
   reloadingTime: 0
   reloadingAudio: {fileID: 0}

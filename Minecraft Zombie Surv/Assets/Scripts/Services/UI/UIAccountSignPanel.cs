@@ -11,8 +11,12 @@ public class UIAccountSignPanel : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInput;
 
     [Space]
+    [Scene, SerializeField] private string mainMenuScene = "MainMenu";
+
+    [Space]
     [SerializeField] private Button signInBtn;
     [SerializeField] private Button signUpBtn;
+    [SerializeField] private Button offlineBtn;
 
     private ServicesManager servicesManager;
 
@@ -24,6 +28,7 @@ public class UIAccountSignPanel : MonoBehaviour
         {
             signInBtn.interactable = false;
             signUpBtn.interactable = false;
+            offlineBtn.interactable = false;
             await servicesManager.TrySignIn(loginInput.text, passwordInput.text);
         });
 
@@ -31,7 +36,16 @@ public class UIAccountSignPanel : MonoBehaviour
         {
             signInBtn.interactable = false;
             signUpBtn.interactable = false;
+            offlineBtn.interactable = false;
             await servicesManager.TrySignUp(loginInput.text, passwordInput.text);
+        });
+
+        offlineBtn.onClick.AddListener(async () =>
+        {
+            signInBtn.interactable = false;
+            signUpBtn.interactable = false;
+            offlineBtn.interactable = false;
+            await ServiceLocator.GetService<LoadingManager>().LoadSceneAsync(mainMenuScene);
         });
     }
 }

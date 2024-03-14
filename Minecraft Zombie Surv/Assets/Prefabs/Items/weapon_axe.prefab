@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b49a3c1f269d54eafe36350a637edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCellSprite: {fileID: 0}
+  itemCellSprite: {fileID: 2137717610, guid: 29665d120c510be44bf00d1b91a56e04, type: 3}
   itemNameKey: weapon_axe_name
   itemDescriptionKey: weapon_axe_desc
   canEquip: 0

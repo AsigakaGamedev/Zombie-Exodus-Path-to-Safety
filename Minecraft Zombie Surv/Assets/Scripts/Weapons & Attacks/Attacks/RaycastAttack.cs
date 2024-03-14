@@ -27,7 +27,7 @@ public class RaycastAttack : BaseAttack
         {
             if (hit.collider.TryGetComponent(out HealthComponent damageHealth))
             {
-                damageHealth.IncreaseHealth(-attackDamage);
+                damageHealth.ChangeHealth(-attackDamage);
             }
         }
     }

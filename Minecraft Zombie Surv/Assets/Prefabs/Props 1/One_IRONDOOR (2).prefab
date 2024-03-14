@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.4440002
+      value: -18.444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.997999
+      value: -3.9979992
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea43ebd4055418e4aacfcc5078452d0b,
         type: 3}
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateOnInteract: 0
-  interactEvent:
+  successInteractEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 170206097429629459}
@@ -225,4 +225,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  failedInteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
   outline: {fileID: 7472932370927663154}
+  validators: []

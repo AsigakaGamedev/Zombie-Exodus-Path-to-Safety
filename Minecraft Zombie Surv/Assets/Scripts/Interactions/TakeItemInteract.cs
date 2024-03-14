@@ -9,6 +9,7 @@ public class TakeItemInteract : AInteractValidator
 
     public override bool OnValidateInteract(PlayerController player)
     {
+        print("Беру вещь");
         return player.Inventory.TryAddItem(itemData);
     }
 }

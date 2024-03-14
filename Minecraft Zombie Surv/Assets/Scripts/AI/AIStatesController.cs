@@ -22,8 +22,6 @@ public class AIStatesController : MonoBehaviour
             state.OnInit();
         }
 
-        currentState = states[0];
-
         if (health) health.onDie += OnDie;
     }
 
@@ -46,13 +44,16 @@ public class AIStatesController : MonoBehaviour
         {
             if (state.OnValidateState())
             {
-                if (currentState != state)
+                if (currentState)
                 {
-                    currentState.OnExitState();
-                }
-                else
-                {
-                    break;
+                    if (currentState != state)
+                    {
+                        currentState.OnExitState();
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 currentState = state;

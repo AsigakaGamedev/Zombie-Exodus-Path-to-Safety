@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1791721465744145722}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,6 +60,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8ceee6814a3be48be1c363f0a5dea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRadius: 1.5
+  attackAngle: 80
+  damage: 10
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3791902926752693165
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa9201a8bdbd3429d97cdaa69768e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRadius: 7
-  visionAngle: 75
+  visionRadius: 13
+  visionAngle: 90
   closestVisionRadius: 1.5
   targetLayerMask:
     serializedVersion: 2
@@ -245,7 +251,7 @@ MonoBehaviour:
   walkableRadius: 5
   walkDelay: {x: 6, y: 15}
   idleDelay: {x: 6, y: 25}
-  walkSpeed: 1.5
+  walkSpeed: 1
   walkStoppingDistance: 0.5
   canWalkAround: 1
   walkDelayTimer: 0
@@ -318,8 +324,9 @@ MonoBehaviour:
   animations: {fileID: 8306197148449710412}
   attacks: {fileID: 3060019182275281314}
   attackDistance: 1.5
-  pursueSpeed: 1.7
-  pursueStoppingDistance: 1
+  attackStayTime: 2
+  pursueSpeed: 1
+  pursueStoppingDistance: 1.25
   target: {fileID: 0}
 --- !u!1001 &7516995404390173720
 PrefabInstance:
