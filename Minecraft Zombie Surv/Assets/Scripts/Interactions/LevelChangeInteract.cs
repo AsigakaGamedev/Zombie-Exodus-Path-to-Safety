@@ -12,10 +12,13 @@ public class LevelChangeInteract : AInteractableComponent
     private UIPopupsManager popupsManager;
     private LocalizationManager localizationManager;
     private LoadingManager loadingManager;
+    private AdsService ads;
 
     protected override void Start()
     {
         base.Start();
+
+        ads = ServiceLocator.GetService<ServicesManager>().Ads;
 
         popupsManager = ServiceLocator.GetService<UIPopupsManager>();
         localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
@@ -50,6 +53,8 @@ public class LevelChangeInteract : AInteractableComponent
                     {
                         SceneManager.LoadScene(nextScene);
                     }
+
+                    ads.LoadInterstitial();
                 }
             });
     }
