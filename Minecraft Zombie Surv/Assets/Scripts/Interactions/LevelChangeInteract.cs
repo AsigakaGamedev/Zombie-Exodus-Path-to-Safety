@@ -54,7 +54,11 @@ public class LevelChangeInteract : AInteractableComponent
                         SceneManager.LoadScene(nextScene);
                     }
 
-                    ads.LoadInterstitial();
+                    try
+                    {
+                        ads.LoadInterstitial();
+                    }
+                    catch{}
                 }
             });
     }

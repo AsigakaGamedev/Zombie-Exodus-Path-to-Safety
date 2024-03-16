@@ -49,7 +49,9 @@ public class ServicesManager : AInitializable
 
     private void OnDestroy()
     {
+#if !UNITY_WEBGL
         ads.DestroyService();
+#endif
     }
 
     public async Task StartServices()
@@ -67,7 +69,9 @@ public class ServicesManager : AInitializable
 
     private async Task InitializeAllServices()
     {
+#if !UNITY_WEBGL
         ads.InitService();
+#endif
 
         await cloud.CheckServices();
 

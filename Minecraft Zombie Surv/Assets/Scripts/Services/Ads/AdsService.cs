@@ -53,7 +53,11 @@ public class AdsService : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        IronSource.Agent.onApplicationPause(pause);
+        try
+        {
+            IronSource.Agent.onApplicationPause(pause);
+        }
+        catch { }
     }
 
     private void OnSDKInitialized()

@@ -30,8 +30,8 @@ public class UISceneChanger : MonoBehaviour
         Invoke(nameof(ChangeScene), delay);
     }
 
-    private void ChangeScene()
+    private async void ChangeScene()
     {
-        SceneManager.LoadScene(sceneName);
+        await ServiceLocator.GetService<LoadingManager>().LoadSceneAsync(sceneName);
     }
 }

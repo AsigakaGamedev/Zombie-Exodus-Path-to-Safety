@@ -29,13 +29,21 @@ public class UIAdBanner : MonoBehaviour
 
     private void Start()
     {
-        adsService = ServiceLocator.GetService<ServicesManager>().Ads;
-        adsService.LoadBanner(bannerSize, bannerPosition);
-        bannerLoaded = true;
+        try
+        {
+            adsService = ServiceLocator.GetService<ServicesManager>().Ads;
+            adsService.LoadBanner(bannerSize, bannerPosition);
+            bannerLoaded = true;
+        }
+        catch { }
     }
 
     private void OnDestroy()
     {
-        adsService.DestroyBanner();
+        try
+        {
+            adsService.DestroyBanner();
+        }
+        catch { }
     }
 }

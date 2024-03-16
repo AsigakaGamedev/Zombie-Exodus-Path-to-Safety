@@ -20,7 +20,7 @@ public class EntryPoint : MonoBehaviour
     private async void Start()
     {
         loadingManager = ServiceLocator.GetService<LoadingManager>();
-        servicesManager = ServiceLocator.GetService<ServicesManager>();
+        //servicesManager = ServiceLocator.GetService<ServicesManager>();
 
         foreach (var manager in systemManagers)
         {
@@ -33,14 +33,15 @@ public class EntryPoint : MonoBehaviour
             offlineBtn.interactable = false;
         });
 
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-        {
-             await loadingManager.LoadSceneAsync(mainMenuScene);
-        }
-        else
-        {
-            await servicesManager.StartServices();
-            await loadingManager.LoadSceneAsync(mainMenuScene);
-        }
+        //if (Application.internetReachability == NetworkReachability.NotReachable)
+        //{
+        //     await loadingManager.LoadSceneAsync(mainMenuScene);
+        //}
+        //else
+        //{
+        //    await servicesManager.StartServices();
+        //    await loadingManager.LoadSceneAsync(mainMenuScene);
+        //}
+        await loadingManager.LoadSceneAsync(mainMenuScene);
     }
 }

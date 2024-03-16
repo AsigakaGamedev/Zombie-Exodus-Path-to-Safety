@@ -2478,7 +2478,7 @@ MonoBehaviour:
   cloud: {fileID: 857796453}
   ads: {fileID: 857796454}
   loadingScreen: {fileID: 878102197}
-  autoSignIn: 1
+  autoSignIn: 0
 --- !u!4 &857796451
 Transform:
   m_ObjectHideFlags: 0
@@ -2767,8 +2767,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   systemManagers:
   - {fileID: 1976536937}
-  - {fileID: 857796450}
   - {fileID: 2079738081}
+  - {fileID: 857796450}
   offlineBtn: {fileID: 699940841}
   mainMenuScene: MainMenu
 --- !u!4 &909927605
