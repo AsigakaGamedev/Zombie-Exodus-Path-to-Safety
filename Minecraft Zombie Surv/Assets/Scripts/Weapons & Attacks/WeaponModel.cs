@@ -11,6 +11,7 @@ public class WeaponModel : EquipmentModel
 {
     [SerializeField] private AttacksHandler attacksHandler;
     [SerializeField] private AudioClip attackAudio;
+    [SerializeField] private float audioDelay;
 
     [Space]
     [SerializeField] private string animTriggerKey;
@@ -69,9 +70,14 @@ public class WeaponModel : EquipmentModel
             ammoInMagazine--;
         }
 
-        if (attackAudio && audioManager) audioManager.PlayAudio(attackAudio, AudioType.Effects);
+        Invoke(nameof(AttackAudio), audioDelay);
 
         return true;
+    }
+
+    private void AttackAudio()
+    {
+        if (attackAudio && audioManager) audioManager.PlayAudio(attackAudio, AudioType.Effects);
     }
 
     public bool TryStartReload()
