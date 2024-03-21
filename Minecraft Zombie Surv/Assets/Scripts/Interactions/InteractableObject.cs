@@ -7,9 +7,12 @@ using UnityEngine.Events;
 [RequireComponent(typeof(QuickOutline))]
 public class InteractableObject : MonoBehaviour
 {
+    [SerializeField] private AudioClip successInteractAudio;
+    [SerializeField] private AudioClip failedInteractAudio;
     [SerializeField] private bool deactivateOnInteract = true;
     [SerializeField] private UnityEvent successInteractEvent;
     [SerializeField] private UnityEvent failedInteractEvent;
+
 
     [Space]
     [SerializeField] private QuickOutline outline;
@@ -20,6 +23,9 @@ public class InteractableObject : MonoBehaviour
     public Action<PlayerController> onSuccessInteract;
     public Action<PlayerController> onFailedInteract;
 
+    [Space]
+    private AudioManager audioManager;
+
     private void OnValidate()
     {
         if (!outline) outline = GetComponent<QuickOutline>();
@@ -27,6 +33,7 @@ public class InteractableObject : MonoBehaviour
 
     private void Start()
     {
+        if (successInteractAudio && failedInteractAudio) audioManager = ServiceLocator.GetServiceSafe<AudioManager>();
         HideOutline();
     }
 
@@ -47,10 +54,14 @@ public class InteractableObject : MonoBehaviour
             onSuccessInteract?.Invoke(player);
             successInteractEvent.Invoke();
 
+            if (successInteractAudio) audioManager.PlayAudio(successInteractAudio, AudioType.Effects);
+
             if (deactivateOnInteract) gameObject.SetActive(false);
         }
         else
         {
+            if (failedInteractAudio) audioManager.PlayAudio(failedInteractAudio, AudioType.Effects);
+
             onFailedInteract?.Invoke(player);
             failedInteractEvent?.Invoke();
         }
