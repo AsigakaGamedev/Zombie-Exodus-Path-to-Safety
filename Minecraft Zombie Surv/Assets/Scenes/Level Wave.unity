@@ -5244,6 +5244,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5725655761170531889, guid: 5b1e096598c1d8640928b939de47d393,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.809907
+      objectReference: {fileID: 0}
     - target: {fileID: 5815391692047507818, guid: 5b1e096598c1d8640928b939de47d393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5327,6 +5332,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: interactable_canned_veget_item
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169631188826011682, guid: b731aa2e735e50a4d9b2549ca8d14fe9,
+        type: 3}
+      propertyPath: successInteractEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169631188826011682, guid: b731aa2e735e50a4d9b2549ca8d14fe9,
+        type: 3}
+      propertyPath: successInteractEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169631188826011682, guid: b731aa2e735e50a4d9b2549ca8d14fe9,
+        type: 3}
+      propertyPath: successInteractEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
