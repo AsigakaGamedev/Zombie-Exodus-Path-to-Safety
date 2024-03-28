@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public enum PlayerState { Walk, Run}
 
@@ -21,7 +22,6 @@ public class PlayerController : AInitializable
     [SerializeField] private WeaponsController weapons;
     [SerializeField] private NeedsController needs;
     [SerializeField] private HealthComponent health;
-    [SerializeField] private UIMobilePlayerInputs playerInputs;
 
     [Space]
     [SerializeField] private float walkSpeed = 2.6f;
@@ -33,6 +33,7 @@ public class PlayerController : AInitializable
     [ReadOnly, SerializeField] private PlayerState state;
 
     private UIManager uiManager;
+    private UIMobilePlayerInputs playerInputs;
 
     private Joystick moveJoystick;
     private Joystick lookJoystick;
@@ -50,22 +51,17 @@ public class PlayerController : AInitializable
         if (camParent && camBody) camBody.position = camParent.position;
     }
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(UIMobilePlayerInputs mobilePlayerInputs, UIManager uiManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
+        this.playerInputs = mobilePlayerInputs;
+        this.uiManager = uiManager;
     }
 
     public override void OnInit()
     {
         currentSpeed = walkSpeed;
         state = PlayerState.Walk;
-        
-        uiManager = ServiceLocator.GetService<UIManager>();
 
         moveJoystick = playerInputs.MoveJoystick;
         lookJoystick = playerInputs.LookJoystick;

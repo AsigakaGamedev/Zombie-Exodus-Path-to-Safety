@@ -18,16 +18,6 @@ public class LocalizationManager : MonoBehaviour
     public LocalizationInfo CurrentLocalization { get => currentLocalization; }
     public string LanguageID { get => languageID; }
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     private void Awake()
     {
         currentLocalization = localizations["ru"];

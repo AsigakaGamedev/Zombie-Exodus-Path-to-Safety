@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIPlayerEquipmentSlot : MonoBehaviour, IDropHandler
 {
@@ -12,11 +13,18 @@ public class UIPlayerEquipmentSlot : MonoBehaviour, IDropHandler
     [SerializeField] private Image emptySlotImg;
     [SerializeField] private GameObject showedItem;
 
+    private PlayerController playerController;
     private EquipmentSlot linkedSlot;
+
+    [Inject]
+    private void Construct(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }
 
     private void Start()
     {
-        linkedSlot = ServiceLocator.GetService<PlayerController>().Inventory.GetEquipmentSlot(equipmentSlotIndex);
+        linkedSlot = playerController.Inventory.GetEquipmentSlot(equipmentSlotIndex);
         linkedSlot.onEquipedItemChange += OnEquipedItemChange;
         UpdateVisual();
     }

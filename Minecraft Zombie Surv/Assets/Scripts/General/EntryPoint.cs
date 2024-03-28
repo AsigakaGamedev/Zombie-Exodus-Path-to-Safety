@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class EntryPoint : MonoBehaviour
 {
-    [SerializeField] private AInitializable[] systemManagers;
-
-    [Space]
     [SerializeField] private Button offlineBtn;
 
     [Space]
@@ -17,15 +15,15 @@ public class EntryPoint : MonoBehaviour
     private LoadingManager loadingManager;
     private ServicesManager servicesManager;
 
+    [Inject]
+    private void Construct(LoadingManager loadingManager)
+    {
+        this.loadingManager = loadingManager;
+    }
+
     private async void Start()
     {
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
         //servicesManager = ServiceLocator.GetService<ServicesManager>();
-
-        foreach (var manager in systemManagers)
-        {
-            manager.OnInit();
-        }
 
         offlineBtn.onClick.AddListener(async () =>
         {

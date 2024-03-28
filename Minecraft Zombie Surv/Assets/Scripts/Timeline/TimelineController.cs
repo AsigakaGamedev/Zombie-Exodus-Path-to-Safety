@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
 using NaughtyAttributes;
+using Zenject;
 
 public class TimelineController : AInitializable
 {
@@ -11,20 +12,14 @@ public class TimelineController : AInitializable
 
     private UIManager uiManager;
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(UIManager uiManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
+        this.uiManager = uiManager;
     }
 
     public override void OnInit()
     {
-        uiManager = ServiceLocator.GetService<UIManager>();
-
         if (startTimeline)
         {
             SetTimeline(startTimeline);

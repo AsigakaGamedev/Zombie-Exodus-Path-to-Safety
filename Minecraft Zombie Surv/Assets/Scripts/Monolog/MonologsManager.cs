@@ -12,16 +12,6 @@ public class MonologsManager : MonoBehaviour
     [Space]
     [SerializeField] private List<MonologData> curMonologList;
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     public void SetMonolog(List<MonologData> monologList)
     {
         curMonologList = monologList;

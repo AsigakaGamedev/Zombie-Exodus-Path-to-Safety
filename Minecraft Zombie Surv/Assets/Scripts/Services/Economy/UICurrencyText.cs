@@ -4,25 +4,30 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Economy.Model;
 using UnityEngine;
+using Zenject;
 
 public class UICurrencyText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI linkedText;
     [SerializeField] private string currencyID;
 
-    private ServicesManager services;
+    private ServicesManager servicesManager;
     private GameEconomyService economy;
+
+    [Inject]
+    private void Construct(ServicesManager servicesManager)
+    {
+        this.servicesManager = servicesManager;
+    }
 
     private async void Start()
     {
-        services = ServiceLocator.GetService<ServicesManager>();
-
-        while (!services.IsInitialized)
+        while (!servicesManager.IsInitialized)
         {
             await Task.Delay(500);
         }
 
-        economy = services.Economy;
+        economy = servicesManager.Economy;
         economy.onPlayerBalanceUpdate += OnUpdateBalance;
 
         UpdateBalance();

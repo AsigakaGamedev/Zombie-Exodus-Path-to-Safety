@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ItemsContainerInteract : AInteractableComponent
 {
@@ -16,12 +17,16 @@ public class ItemsContainerInteract : AInteractableComponent
     private UIManager uiManager;
     private UIInventoriesManager uiInventories;
 
+    [Inject]
+    private void Construct(UIManager uiManager, UIInventoriesManager uiInventories)
+    {
+        this.uiManager = uiManager;
+        this.uiInventories = uiInventories;
+    }
+
     protected override void Start()
     {
         base.Start();
-
-        uiManager = ServiceLocator.GetService<UIManager>();
-        uiInventories = ServiceLocator.GetService<UIInventoriesManager>();
 
         containerCells = new List<InventoryCellEntity>();
 

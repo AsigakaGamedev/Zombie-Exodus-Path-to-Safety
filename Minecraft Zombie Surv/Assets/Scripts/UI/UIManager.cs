@@ -11,51 +11,14 @@ public class UIManager : AInitializable
     [Space]
     [ReadOnly, SerializeField] private UIScreen curScreen;
 
-    private bool isInitialized;
-
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     public override void OnInit()
     {
-        if (isInitialized) return;
-
         foreach (UIScreen screen in screens)
         {
             screen.Init();
         }
 
         ChangeScreen(startScreen);
-        isInitialized = true;
-    }
-
-    private void Start()
-    {
-        if (!isInitialized) OnInit();
-    }
-
-    private void Update()
-    {
-        if (curScreen)
-        {
-            curScreen.UpdateScreen();
-
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftAlt))
-            {
-                Cursor.lockState = curScreen.CursorLockMode;
-            }
-        }
     }
 
     private UIScreen GetScreen(string screenName)

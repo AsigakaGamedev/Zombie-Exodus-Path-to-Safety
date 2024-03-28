@@ -5,34 +5,12 @@ using UnityEngine.SceneManagement;
 
 public enum AudioType { Music, Effects, Characters}
 
-public class AudioManager : AInitializable
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] private SerializedDictionary<AudioType, AudioSourceContainer> sources = new SerializedDictionary<AudioType, AudioSourceContainer>();
 
-    private LoadingManager loadingManager;
-
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-
-        foreach (var source in sources)
-        {
-            source.Value.ClearSources();
-        }
-    }
-
-    public override void OnInit()
-    {
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
-
-        loadingManager.onLoadingStart += OnLoadingStart;
-        loadingManager.onLoadingFinish += OnLoadingFinish;
-
+    private void Awake()
+    { 
         foreach (var source in sources)
         {
             source.Value.Init();
@@ -45,31 +23,6 @@ public class AudioManager : AInitializable
         foreach (var source in sources)
         {
             source.Value.UpdateContainer();
-        }
-    }
-
-    private void OnDestroy()
-    {
-        loadingManager.onLoadingStart -= OnLoadingStart;
-        loadingManager.onLoadingFinish -= OnLoadingFinish;
-    }
-
-    private void OnLoadingStart()
-    {
-        foreach (var source in sources)
-        {
-            source.Value.transform.parent = transform;
-        }
-    }
-
-    private void OnLoadingFinish()
-    {
-        foreach (var source in sources)
-        {
-            source.Value.transform.parent = Camera.main.transform;
-            source.Value.transform.localPosition = Vector3.zero;
-            source.Value.transform.localRotation = Quaternion.identity;
-            source.Value.transform.localScale = Vector3.one;
         }
     }
 

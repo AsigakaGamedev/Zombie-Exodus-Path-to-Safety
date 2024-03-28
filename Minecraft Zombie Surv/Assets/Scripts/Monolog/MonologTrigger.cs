@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class MonologTrigger : MonoBehaviour
 {
     [SerializeField] private List<MonologData> monologList;
 
-    private MonologsManager monologsController;
+    private MonologsManager monologsManager;
 
-    private void Start()
+    [Inject]
+    private void Construct(MonologsManager monologsManager)
     {
-        monologsController = ServiceLocator.GetService<MonologsManager>();
+        this.monologsManager = monologsManager;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            monologsController.SetMonolog(monologList);
+            monologsManager.SetMonolog(monologList);
             Destroy(gameObject);
         }
     }

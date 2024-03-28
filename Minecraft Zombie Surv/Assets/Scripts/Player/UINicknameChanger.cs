@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UINicknameChanger : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class UINicknameChanger : MonoBehaviour
 
     private PlayerManager playerManager;
 
+    [Inject]
+    private void Construct(PlayerManager playerManager)
+    {
+        this.playerManager = playerManager;
+    }
+
     private void Start()
     {
-        playerManager = ServiceLocator.GetService<PlayerManager>();
         playerManager.onNicknameChange += OnNicknameChange;
 
         inputField.text = playerManager.PlayerNickname;
@@ -26,7 +32,7 @@ public class UINicknameChanger : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (playerManager) playerManager.onNicknameChange -= OnNicknameChange;
+        playerManager.onNicknameChange -= OnNicknameChange;
     }
 
     private void OnNicknameChange(string newNick)

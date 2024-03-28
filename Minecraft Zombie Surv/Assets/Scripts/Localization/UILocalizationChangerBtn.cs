@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class UILocalizationChangerBtn : MonoBehaviour
@@ -15,10 +16,14 @@ public class UILocalizationChangerBtn : MonoBehaviour
         if (!btn) btn = GetComponent<Button>();
     }
 
+    [Inject]
+    private void Construct(LocalizationManager localizationManager)
+    {
+        this.localizationManager = localizationManager;
+    }
+
     private void Start()
     {
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
-
         btn.onClick.AddListener(() =>
         {
             localizationManager.ChangeLocalization(localizationKey);

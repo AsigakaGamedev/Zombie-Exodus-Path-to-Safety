@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LevelsManager : MonoBehaviour
 {
@@ -15,19 +16,10 @@ public class LevelsManager : MonoBehaviour
 
     public LevelInfo[] AllLevels { get => allMaps; }
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(LoadingManager loadingManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
-    private void Start()
-    {
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
+        this.loadingManager = loadingManager;
     }
 
     [Button]

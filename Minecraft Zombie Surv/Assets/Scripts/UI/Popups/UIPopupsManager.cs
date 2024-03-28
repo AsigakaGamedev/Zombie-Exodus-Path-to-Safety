@@ -11,17 +11,7 @@ public class UIPopupsManager : MonoBehaviour
     [Space]
     [ReadOnly, SerializeField] private APopup currentPopup; 
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
-    private void Start()
+    private void Awake()
     {
         foreach (var popup in allPopups.Values)
         {

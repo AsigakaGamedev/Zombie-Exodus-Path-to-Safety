@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class UITerminalManager : MonoBehaviour
 {
@@ -20,14 +21,11 @@ public class UITerminalManager : MonoBehaviour
 
     private List<UITerminalComponent> showedComponents = new List<UITerminalComponent>();
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(ObjectPoolingManager poolingManager, LocalizationManager localizationManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
+        this.poolingManager = poolingManager;
+        this.localizationManager = localizationManager;
     }
 
     public void OpenTerminal(TerminalController terminal)
@@ -40,11 +38,7 @@ public class UITerminalManager : MonoBehaviour
 
         showedComponents.Clear();
 
-        if (!localizationManager) localizationManager = ServiceLocator.GetService<LocalizationManager>();
-
         labelText.text = localizationManager.CurrentLocalization.GetValue(terminal.TerminalLabelKey);
-
-        if (!poolingManager) poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
 
         foreach (var logicComponent in terminal.Components)
         {

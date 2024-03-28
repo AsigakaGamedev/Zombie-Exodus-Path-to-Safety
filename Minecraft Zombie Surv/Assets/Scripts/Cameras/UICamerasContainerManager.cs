@@ -10,15 +10,8 @@ public class UICamerasContainerManager : MonoBehaviour
 
     private CamerasContainer container;
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
     private void OnDisable()
     {
-        ServiceLocator.RemoveService(this);
-
         if (container)
         {
             container.CloseContainer();

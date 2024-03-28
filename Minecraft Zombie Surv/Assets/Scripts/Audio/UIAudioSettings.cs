@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIAudioSettings : MonoBehaviour
 {
@@ -16,17 +17,14 @@ public class UIAudioSettings : MonoBehaviour
     private AudioManager audioManager;
     private AudioSourceContainer audioSource;
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(AudioManager audioManager)
     {
-        if (!audioManager) return;
-
-        volumeSlider.value = audioSource.Volume;
-        volumeText.text = $"{(int)(audioSource.Volume * 100)}%";
+        this.audioManager = audioManager;
     }
 
     private void Start()
     {
-        audioManager = ServiceLocator.GetService<AudioManager>();
         audioSource = audioManager.GetSource(audioType);
 
         volumeBtn.onClick.AddListener(() =>

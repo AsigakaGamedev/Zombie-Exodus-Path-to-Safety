@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIAdRewardedVideo : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class UIAdRewardedVideo : MonoBehaviour
     [SerializeField] private string currencyID = "MONEY";
     [SerializeField] private int currencyIncrement = 100;
 
+    private ServicesManager servicesManager;
     private AdsService adsService;
+
+    [Inject]
+    private void Construct(ServicesManager servicesManager)
+    {
+        this.servicesManager = servicesManager;
+    }
 
     private void Start()
     {
-        adsService = ServiceLocator.GetService<ServicesManager>().Ads;
+        adsService = servicesManager.Ads;
 
         linkedBtn.onClick.AddListener(() =>
         {

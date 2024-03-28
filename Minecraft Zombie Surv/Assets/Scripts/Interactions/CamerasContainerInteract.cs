@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class CamerasContainerInteract : AInteractableComponent
 {
     [SerializeField] private CamerasContainer camerasContainer;
 
-    private UICamerasContainerManager uiContainersManager;
+    private UICamerasContainerManager uiCamerasContainer;
     private UIManager uiManager;
 
-    protected override void Start()
+    [Inject]
+    private void Construct(UIManager uiManager, UICamerasContainerManager uiCamerasContainer)
     {
-        base.Start();
-
-        uiManager = ServiceLocator.GetService<UIManager>();
-        uiContainersManager = ServiceLocator.GetService<UICamerasContainerManager>();
+        this.uiCamerasContainer = uiCamerasContainer;
+        this.uiManager = uiManager;
     }
 
     protected override void OnSuccessInteract(PlayerController player)
     {
-        uiContainersManager.OpenContainer(camerasContainer);
+        uiCamerasContainer.OpenContainer(camerasContainer);
         uiManager.ChangeScreen("sequrity_cameras");
     }
 }

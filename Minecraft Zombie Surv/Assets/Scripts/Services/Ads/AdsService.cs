@@ -7,10 +7,10 @@ public class AdsService : MonoBehaviour
 {
     private const string appKey = "1ce3ac4fd";
 
-    private string currencyID;
-    private int currencyIncrement;
+    //private string currencyID;
+    //private int currencyIncrement;
 
-    private GameEconomyService economyService;
+    //private GameEconomyService economyService;
 
     public void InitService()
     {
@@ -43,7 +43,7 @@ public class AdsService : MonoBehaviour
         IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
         IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
 
-        economyService = ServiceLocator.GetService<ServicesManager>().Economy;
+        //economyService = ServiceLocator.GetService<ServicesManager>().Economy;
     }
 
     public void DestroyService()
@@ -188,8 +188,8 @@ public class AdsService : MonoBehaviour
 
     public IEnumerator LoadAndShowRewarded(string currencyID, int currencyIncrement)
     {
-        this.currencyID = currencyID;
-        this.currencyIncrement = currencyIncrement;
+        //this.currencyID = currencyID;
+        //this.currencyIncrement = currencyIncrement;
 
         LoadRewarded();
 
@@ -224,9 +224,9 @@ public class AdsService : MonoBehaviour
     // The user completed to watch the video, and should be rewarded.
     // The placement parameter will include the reward data.
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
-    async void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
+    void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        await economyService.IncrementBalance(currencyID, currencyIncrement);
+        //await economyService.IncrementBalance(currencyID, currencyIncrement);
 
     }
     // The rewarded video ad was failed to show.

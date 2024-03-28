@@ -14,16 +14,6 @@ public class CamerasManager : MonoBehaviour
 
     private bool canShake;
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     private void Start() 
     {
         canShake = true;

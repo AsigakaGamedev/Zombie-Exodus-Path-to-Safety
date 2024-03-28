@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -11,19 +12,14 @@ public class SettingsManager : MonoBehaviour
 
     public const string localizationPrefsKey = "LOCALIZATION";
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(LocalizationManager localizationManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
+        this.localizationManager = localizationManager;
     }
 
     private void Start()
     {
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
         localizationManager.ChangeLocalization(PlayerPrefs.GetString(localizationPrefsKey, defaultLocalization));
     }
 }

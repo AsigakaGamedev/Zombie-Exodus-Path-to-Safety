@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 public class UINewGameBtn : MonoBehaviour
 {
@@ -14,12 +15,16 @@ public class UINewGameBtn : MonoBehaviour
     private UIPopupsManager popupsManager;
     private LocalizationManager localizationManager;
 
+    [Inject]
+    private void Construct(LoadingManager loadingManager, UIPopupsManager popupsManager, LocalizationManager localizationManager)
+    {
+        this.loadingManager = loadingManager;
+        this.popupsManager = popupsManager;
+        this.localizationManager = localizationManager;
+    }
+
     private void Start()
     {
-        loadingManager = ServiceLocator.GetService<LoadingManager>();
-        popupsManager = ServiceLocator.GetService<UIPopupsManager>();
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
-
         newGameBtn.onClick.AddListener(async () =>
         {
             if (true) //Если есть сохранения

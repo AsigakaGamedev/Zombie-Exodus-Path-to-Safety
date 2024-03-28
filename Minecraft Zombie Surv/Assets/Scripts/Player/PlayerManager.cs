@@ -3,30 +3,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerManager : MonoBehaviour
 {
     [ReadOnly, SerializeField] private string playerNickname;
 
+    private ServicesManager servicesManager;
     private GameCloudService cloudService;
 
     public Action<string> onNicknameChange;
 
     public string PlayerNickname { get => playerNickname; }
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(ServicesManager servicesManager)
     {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
+        this.servicesManager = servicesManager;
     }
 
     private void Start()
     {
-        cloudService = ServiceLocator.GetService<ServicesManager>().Cloud;
+        cloudService = servicesManager.Cloud;
         cloudService.onLoadPlayerData += OnLoadPlayerData;
     }
 

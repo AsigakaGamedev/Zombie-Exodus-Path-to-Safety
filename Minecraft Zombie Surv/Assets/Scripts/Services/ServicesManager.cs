@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using Zenject;
 
-public class ServicesManager : AInitializable
+public class ServicesManager : MonoBehaviour
 {
     [SerializeField] private GameEconomyService economy;
     [SerializeField] private GameCloudService cloud;
     [SerializeField] private AdsService ads;
 
-    [Space]
-    [SerializeField] private GameObject loadingScreen; 
+    //[Space]
+    //[SerializeField] private GameObject loadingScreen; 
 
     [Space]
     [SerializeField] private bool autoSignIn = true;
+
+    private PlayerManager playerManager;
 
     private const string loginPrefsKey = "PLAYER_LOGIN";
     private const string passwordPrefsKey = "PLAYER_PASSWORD";
@@ -30,36 +33,37 @@ public class ServicesManager : AInitializable
 
     public bool IsInitialized { get; private set; }
 
-    private void OnEnable()
+    public static ServicesManager Instance;
+
+    [Inject]
+    private void Construct(PlayerManager playerManager)
     {
-        ServiceLocator.AddService(this);
+        this.playerManager = playerManager;
     }
 
-    private void OnDisable()
+    private void Awake()
     {
-        ServiceLocator.RemoveService(this);
-    }
+        if (Instance != null) Destroy(gameObject);
 
-    public override void OnInit()
-    {
-        loadingScreen.SetActive(false);
+        Instance = this;
+
+        //loadingScreen.SetActive(false);
 
         IsInitialized = false;
     }
 
     private void OnDestroy()
     {
-#if !UNITY_WEBGL
         ads.DestroyService();
-#endif
+        Instance = null;
     }
 
     public async Task StartServices()
     {
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
         await UnityServices.InitializeAsync();
         await InitializeAllServices();
-        loadingScreen.SetActive(false);
+        //loadingScreen.SetActive(false);
 
         if (autoSignIn)
         {
@@ -69,9 +73,7 @@ public class ServicesManager : AInitializable
 
     private async Task InitializeAllServices()
     {
-#if !UNITY_WEBGL
         ads.InitService();
-#endif
 
         await cloud.CheckServices();
 
@@ -81,7 +83,7 @@ public class ServicesManager : AInitializable
 
     private async Task TryAutoSignIn()
     {
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
         string existingLogin = PlayerPrefs.GetString(loginPrefsKey, "");
         string existingPassword = PlayerPrefs.GetString(passwordPrefsKey, "");
 
@@ -100,7 +102,7 @@ public class ServicesManager : AInitializable
             //}
         }
 
-        loadingScreen.SetActive(false);
+        //loadingScreen.SetActive(false);
     }
 
     public async Task TrySignUp(string login, string password)
@@ -111,7 +113,7 @@ public class ServicesManager : AInitializable
         PlayerPrefs.SetString(loginPrefsKey, login);
         PlayerPrefs.SetString(passwordPrefsKey, password);
 
-        ServiceLocator.GetService<PlayerManager>().SetNickname(login);
+        playerManager.SetNickname(login);
 
         await cloud.SavePlayerData();
         await economy.Refresh();

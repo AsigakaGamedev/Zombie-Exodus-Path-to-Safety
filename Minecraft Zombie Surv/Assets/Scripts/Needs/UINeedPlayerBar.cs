@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UINeedPlayerBar : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class UINeedPlayerBar : MonoBehaviour
     private PlayerController player;
     private NeedData linkedNeed;
 
+    [Inject]
+    private void Construct(PlayerController player)
+    {
+        this.player = player;
+    }
+
     private void Start()
     {
-        player = ServiceLocator.GetService<PlayerController>();
         linkedNeed = player.Needs.GetNeed(needID);
 
         slider.maxValue = linkedNeed.MaxValue;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class UIAudioClick : MonoBehaviour
@@ -18,10 +19,14 @@ public class UIAudioClick : MonoBehaviour
         if (!btn) btn = GetComponent<Button>();
     }
 
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        this.audioManager = audioManager;
+    }
+
     private void Start()
     {
-        audioManager = ServiceLocator.GetService<AudioManager>();
-
         btn.onClick.AddListener(() =>
         {
             audioManager.PlayAudio(clip, type);

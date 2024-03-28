@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIPlayerHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
 
+    private PlayerController player;
     private HealthComponent health;
+
+    [Inject]
+    private void Construct(PlayerController playerController)
+    {
+        this.player = playerController;
+    }
 
     private void Start()
     {
-        PlayerController player = ServiceLocator.GetServiceSafe<PlayerController>();
-
-        if (!player) return;
-
         health = player.Health;
 
         slider.maxValue = health.MaxHealth;
@@ -28,10 +32,6 @@ public class UIPlayerHealthBar : MonoBehaviour
     {
         if (!health)
         {
-            PlayerController player = ServiceLocator.GetServiceSafe<PlayerController>();
-
-            if (!player) return;
-
             health = player.Health;
         }
 

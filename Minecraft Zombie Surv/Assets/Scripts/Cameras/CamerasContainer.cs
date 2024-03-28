@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class CamerasContainer : MonoBehaviour
 {
@@ -9,9 +10,14 @@ public class CamerasContainer : MonoBehaviour
     private CamerasManager camerasManager;
     private int curCameraIndex;
 
-    private void Start()
+    [Inject]
+    private void Construct(CamerasManager camerasManager)
     {
-        camerasManager = ServiceLocator.GetService<CamerasManager>();
+        this.camerasManager = camerasManager;
+    }
+
+    private void Awake()
+    {
         curCameraIndex = 0;
     }
 

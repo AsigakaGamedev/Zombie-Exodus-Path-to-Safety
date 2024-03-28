@@ -9,14 +9,4 @@ public class UIQuickCellsPanel : MonoBehaviour
 
     private InventoryController inventory;
     private UIQuickCell spawnedCells;
-
-    private void Start()
-    {
-        inventory = ServiceLocator.GetService<PlayerController>().Inventory;
-    }
-
-    private void UpdatePanel()
-    {
-
-    }
 }

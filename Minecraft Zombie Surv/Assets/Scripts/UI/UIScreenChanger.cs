@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class UIScreenChanger : MonoBehaviour
@@ -11,16 +12,22 @@ public class UIScreenChanger : MonoBehaviour
     private Button button;
     private UIManager uiManager;
 
-    private void Start()
+    private void OnValidate()
     {
-        uiManager = ServiceLocator.GetService<UIManager>();
-
-        button = GetComponent<Button>();
-        button.onClick.AddListener(OnBtnClick);
+        if (!button) button = GetComponent<Button>();
     }
 
-    private void OnBtnClick()
+    [Inject]
+    private void Construct(UIManager uiManager)
     {
-        uiManager.ChangeScreen(screenName);
+        this.uiManager = uiManager;
+    }
+
+    private void Start()
+    {
+        button.onClick.AddListener(() =>
+        {
+            uiManager.ChangeScreen(screenName);
+        });
     }
 }

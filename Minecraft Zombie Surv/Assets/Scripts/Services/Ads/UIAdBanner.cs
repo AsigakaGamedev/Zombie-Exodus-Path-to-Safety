@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class UIAdBanner : MonoBehaviour
 {
     [SerializeField] private IronSourceBannerPosition bannerPosition;
 
+    private ServicesManager servicesManager;
     private AdsService adsService;
     private bool bannerLoaded;
 
     private IronSourceBannerSize bannerSize = IronSourceBannerSize.BANNER;
+
+    [Inject]
+    private void Construct(ServicesManager servicesManager)
+    {
+        this.servicesManager = servicesManager;
+    }
 
     private void OnEnable()
     {
@@ -31,7 +39,7 @@ public class UIAdBanner : MonoBehaviour
     {
         try
         {
-            adsService = ServiceLocator.GetService<ServicesManager>().Ads;
+            adsService = servicesManager.Ads;
             adsService.LoadBanner(bannerSize, bannerPosition);
             bannerLoaded = true;
         }

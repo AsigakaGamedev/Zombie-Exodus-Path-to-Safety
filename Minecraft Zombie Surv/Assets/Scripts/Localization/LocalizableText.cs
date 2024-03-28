@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class LocalizableText : MonoBehaviour
@@ -15,16 +16,14 @@ public class LocalizableText : MonoBehaviour
         if (!targetText) targetText = GetComponent<TextMeshProUGUI>();
     }
 
+    [Inject]
+    private void Construct(LocalizationManager localizationManager)
+    {
+        this.localizationManager = localizationManager;
+    }
+
     private void Start()
     {
-        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
-
-        if (!localizationManager)
-        {
-            //targetText.text = localizationKey;
-            return;
-        }
-
         localizationManager.onLocalizationChange += OnLocalizationChange;
 
         OnLocalizationChange("", localizationManager.CurrentLocalization);

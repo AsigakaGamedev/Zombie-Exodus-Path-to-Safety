@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 [RequireComponent(typeof(QuickOutline))]
 public class InteractableObject : MonoBehaviour
@@ -31,9 +32,14 @@ public class InteractableObject : MonoBehaviour
         if (!outline) outline = GetComponent<QuickOutline>();
     }
 
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        this.audioManager = audioManager;
+    }
+
     private void Start()
     {
-        if (successInteractAudio && failedInteractAudio) audioManager = ServiceLocator.GetServiceSafe<AudioManager>();
         HideOutline();
     }
 

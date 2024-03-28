@@ -16,16 +16,6 @@ public class SkinsManager : MonoBehaviour
     public Texture2D[] AllTetxures { get => allTetxures; }
     public Texture2D SelectedTexture { get => selectedTexture; }
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     private void Awake()
     {
         SelectSkin(startTexture);

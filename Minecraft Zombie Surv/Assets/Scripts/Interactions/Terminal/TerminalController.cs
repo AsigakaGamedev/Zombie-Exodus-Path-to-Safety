@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class TerminalController : AInteractableComponent
 {
@@ -9,20 +10,21 @@ public class TerminalController : AInteractableComponent
     [SerializeField] private TerminalComponent[] components;
 
     private UIManager uiManager;
+    private UITerminalManager uiTerminalManager;
 
     public string TerminalLabelKey { get => terminalLabelKey; }
     public TerminalComponent[] Components { get => components; }
 
-    protected override void Start()
+    [Inject]
+    private void Construct(UIManager uiManager, UITerminalManager uiTerminalManager)
     {
-        base.Start();
-
-        uiManager = ServiceLocator.GetService<UIManager>();
+        this.uiManager = uiManager;
+        this.uiTerminalManager = uiTerminalManager;
     }
 
     protected override void OnSuccessInteract(PlayerController player)
     {
         uiManager.ChangeScreen("terminal");
-        ServiceLocator.GetService<UITerminalManager>().OpenTerminal(this);
+        uiTerminalManager.OpenTerminal(this);
     }
 }

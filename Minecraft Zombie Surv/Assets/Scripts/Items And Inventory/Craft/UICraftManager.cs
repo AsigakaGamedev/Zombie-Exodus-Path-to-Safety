@@ -6,6 +6,7 @@ using Unity.Services.CloudSave.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UICraftManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class UICraftManager : MonoBehaviour
     [SerializeField] private Button craftBtn;
 
     private ObjectPoolingManager poolingManager;
+    private PlayerController playerController;
     private InventoryController playerInventory;
     private CraftsManager craftsManager;
     private LocalizationManager localizationManager;
@@ -29,14 +31,21 @@ public class UICraftManager : MonoBehaviour
 
     private List<UICraftRecipe> spawnedRecipies;
 
+    [Inject]
+    private void Construct(PlayerController playerController, ObjectPoolingManager poolingManager,
+                           CraftsManager craftsManager, LocalizationManager localizationManager)
+    {
+        this.playerController = playerController;
+        this.poolingManager = poolingManager;
+        this.craftsManager = craftsManager;
+        this.localizationManager = localizationManager;
+    }
+
     private void Start()
     {
         spawnedRecipies = new List<UICraftRecipe>();
 
-        playerInventory = ServiceLocator.GetService<PlayerController>().Inventory;
-        poolingManager = ServiceLocator.GetService<ObjectPoolingManager>();
-        craftsManager = ServiceLocator.GetService<CraftsManager>();
-        localizationManager = ServiceLocator.GetService<LocalizationManager>();
+        playerInventory = playerController.Inventory;
 
         craftBtn.onClick.AddListener(() =>
         {

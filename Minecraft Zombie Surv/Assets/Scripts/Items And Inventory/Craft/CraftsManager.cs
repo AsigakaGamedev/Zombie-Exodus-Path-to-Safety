@@ -6,16 +6,6 @@ public class CraftsManager : MonoBehaviour
 {
     [SerializeField] private CraftInfo[] allCrafts;
 
-    private void OnEnable()
-    {
-        ServiceLocator.AddService(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
     public List<CraftInfo> GetCrafts(CraftType craftType)
     {
         List<CraftInfo> typeCrafts = new List<CraftInfo>();

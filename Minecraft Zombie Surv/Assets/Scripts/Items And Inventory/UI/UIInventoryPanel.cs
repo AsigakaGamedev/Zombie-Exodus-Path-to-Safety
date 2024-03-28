@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class UIInventoryPanel : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class UIInventoryPanel : MonoBehaviour
 
     private List<UIInventoryCell> spawnedSlots = new List<UIInventoryCell>();
 
+    [Inject]
+    private void Construct(ObjectPoolingManager poolingManager)
+    {
+        this.poolingManager = poolingManager;
+    }
+
     public void OpenList(List<InventoryCellEntity> cells)
     {
         foreach (UIInventoryCell spawnedSlot in spawnedSlots)
@@ -19,9 +26,6 @@ public class UIInventoryPanel : MonoBehaviour
         }
 
         spawnedSlots.Clear();
-
-        if (!poolingManager) poolingManager = ServiceLocator.GetServiceSafe<ObjectPoolingManager>();
-        if (!poolingManager) throw new System.Exception("Pooling Manager Not Found!");
 
         foreach (InventoryCellEntity slotEntity in cells)
         {

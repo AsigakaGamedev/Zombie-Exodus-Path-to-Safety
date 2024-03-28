@@ -4,26 +4,11 @@ using UnityEngine;
 
 public class ObjectPoolingManager : MonoBehaviour
 {
-    [SerializeField] private PoolableObject[] poolablePrefabs;
-
     private Dictionary<string, PoolObjects<PoolableObject>> cachedPoolables;
 
-    private void OnEnable()
+    private void Awake()
     {
-        ServiceLocator.AddService(this);
-
         cachedPoolables = new Dictionary<string, PoolObjects<PoolableObject>>();
-
-        foreach (PoolableObject poolable in poolablePrefabs)
-        {
-            PoolObjects<PoolableObject> newPool = new PoolObjects<PoolableObject>(poolable, 2, true, transform);
-            cachedPoolables.Add(poolable.PoolID, newPool);
-        }
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
     }
 
     public T GetPoolable<T>(T prefab, int poolableCount = 2) where T : PoolableObject

@@ -6,6 +6,7 @@ using Unity.Services.Economy.Model;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UISelectedItemPopup : APopup
 {
@@ -26,12 +27,16 @@ public class UISelectedItemPopup : APopup
     private LocalizationManager localizationManager;
     private ItemEntity selectedItem;
 
+    [Inject]
+    private void Construct(UIPopupsManager popupsManager, LocalizationManager localizationManager)
+    {
+        this.popupsManager = popupsManager;
+        this.localizationManager = localizationManager;
+    }
+
     public override void OnInit()
     {
         base.OnInit();
-
-        popupsManager = ServiceLocator.GetService<UIPopupsManager>();
-        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
 
         useItemBtn.onClick.AddListener(() =>
         {
@@ -53,11 +58,6 @@ public class UISelectedItemPopup : APopup
 
     public void SelectItem(ItemEntity item)
     {
-        if (!localizationManager)
-        {
-            localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
-        }
-
         selectedItem = item;
 
         ItemInfo info = item.InfoPrefab;

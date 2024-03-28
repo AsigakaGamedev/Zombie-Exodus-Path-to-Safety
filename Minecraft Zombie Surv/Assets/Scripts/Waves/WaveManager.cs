@@ -1,28 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private List<WaveData> waveInfoList;
     [SerializeField] private Transform[] waveSpawnPoint;
 
-    private ObjectPoolingManager poolManager;
+    private ObjectPoolingManager poolingManager;
 
-    private void OnEnable()
+    [Inject]
+    private void Construct(ObjectPoolingManager poolingManager)
     {
-        ServiceLocator.AddService(this);
+        this.poolingManager = poolingManager;
     }
-
-    private void OnDisable()
-    {
-        ServiceLocator.RemoveService(this);
-    }
-
 
     private void Start()
     {
-        poolManager = ServiceLocator.GetService<ObjectPoolingManager>();
         StartCoroutine(ESpawnWave());
     }
 
@@ -40,7 +35,7 @@ public class WaveManager : MonoBehaviour
 
                     int randomIndex = Random.Range(0, waveSpawnPoint.Length);
                     Vector3 spawnPosition = waveSpawnPoint[randomIndex].position;
-                    PoolableObject newObject = poolManager.GetPoolable(waveObject.Prefab);
+                    PoolableObject newObject = poolingManager.GetPoolable(waveObject.Prefab);
                     newObject.transform.position = spawnPosition;
                 }
             }

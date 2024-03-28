@@ -19,7 +19,7 @@ public class AudioSourceContainer : MonoBehaviour
 
     private void OnValidate()
     {
-        SetVolume(volume);
+        if (sources != null) SetVolume(volume);
     }
 
     public void Init()
@@ -50,14 +50,6 @@ public class AudioSourceContainer : MonoBehaviour
         }
     }
 
-    public void ClearSources()
-    {
-        foreach (var source in sources)
-        {
-            source.clip = null;
-        }
-    }
-
     public void SetVolume(float volume)
     {
         this.volume = Mathf.Clamp01(volume);
@@ -65,6 +57,8 @@ public class AudioSourceContainer : MonoBehaviour
 
         foreach (var source in sources)
         {
+            if (source == null) continue;
+
             source.volume = this.volume;
         }
     }

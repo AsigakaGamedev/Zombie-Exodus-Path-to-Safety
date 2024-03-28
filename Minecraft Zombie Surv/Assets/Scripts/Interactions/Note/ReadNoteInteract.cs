@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ReadNoteInteract : AInteractableComponent
 {
     [TextArea(1, 15), SerializeField] private string noteText;
 
     private UIManager uiManager;
+    private UINoteManager uiNoteManager;
 
     public string NoteText { get => noteText; }
 
-    protected override void Start()
+    [Inject]
+    private void Construct(UIManager uiManager, UINoteManager uiNoteManager)
     {
-        base.Start();
-
-        uiManager = ServiceLocator.GetService<UIManager>();
+        this.uiManager = uiManager;
+        this.uiNoteManager = uiNoteManager;
     }
 
     protected override void OnSuccessInteract(PlayerController player)
     {
         uiManager.ChangeScreen("note");
-        ServiceLocator.GetService<UINoteManager>().ReadNote(this);
+        uiNoteManager.ReadNote(this);
     }
 }

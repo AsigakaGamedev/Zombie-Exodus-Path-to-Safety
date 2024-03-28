@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UISelectLevelPanel : MonoBehaviour
 {
@@ -21,9 +22,14 @@ public class UISelectLevelPanel : MonoBehaviour
 
     private int selectedLevelIndex;
 
+    [Inject]
+    private void Construct(LevelsManager levelsManager)
+    {
+        this.levelsManager = levelsManager;
+    }
+
     private void Start()
     {
-        levelsManager = ServiceLocator.GetService<LevelsManager>();
         SelectLevel(0);
 
         startLevelBtn.onClick.AddListener(() =>

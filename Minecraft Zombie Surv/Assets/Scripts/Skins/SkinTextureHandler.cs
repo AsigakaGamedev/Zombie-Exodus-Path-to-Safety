@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SkinTextureHandler : MonoBehaviour
 {
@@ -8,19 +9,12 @@ public class SkinTextureHandler : MonoBehaviour
 
     private SkinsManager skinManager;
 
-    private void Start()
+    [Inject]
+    private void Construct(SkinsManager skinsManager)
     {
-        try
-        {
-            skinManager = ServiceLocator.GetService<SkinsManager>();
-            OnSkinChange(skinManager.SelectedTexture);
+        OnSkinChange(skinManager.SelectedTexture);
 
-            skinManager.onSelectSkin += OnSkinChange;
-        }
-        catch
-        {
-
-        }
+        skinManager.onSelectSkin += OnSkinChange;
     }
 
     private void OnDestroy()

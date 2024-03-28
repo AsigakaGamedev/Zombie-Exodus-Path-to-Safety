@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class UISceneChanger : MonoBehaviour
@@ -15,23 +16,34 @@ public class UISceneChanger : MonoBehaviour
 
     private Button button;
     private bool isClicked;
+    private LoadingManager loadingManager;
+
+    private void OnValidate()
+    {
+        if (!button) button = GetComponent<Button>();
+    }
+
+    [Inject]
+    private void Construct(LoadingManager loadingManager)
+    {
+        this.loadingManager = loadingManager;
+    }
 
     private void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(OnBtnClick);
-    }
+        isClicked = false;
 
-    private void OnBtnClick()
-    {
-        if (isClicked) return;
+        button.onClick.AddListener(() =>
+        {
+            if (isClicked) return;
 
-        isClicked = true;   
-        Invoke(nameof(ChangeScene), delay);
+            isClicked = true;
+            Invoke(nameof(ChangeScene), delay);
+        });
     }
 
     private async void ChangeScene()
     {
-        await ServiceLocator.GetService<LoadingManager>().LoadSceneAsync(sceneName);
+        await loadingManager.LoadSceneAsync(sceneName);
     }
 }

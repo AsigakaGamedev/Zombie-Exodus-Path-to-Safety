@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIAccountSignPanel : MonoBehaviour
 {
@@ -19,11 +20,17 @@ public class UIAccountSignPanel : MonoBehaviour
     [SerializeField] private Button offlineBtn;
 
     private ServicesManager servicesManager;
+    private LoadingManager loadingManager;
+
+    [Inject]
+    private void Construct(ServicesManager servicesManager, LoadingManager loadingManager)
+    {
+        this.servicesManager = servicesManager;
+        this.loadingManager = loadingManager;
+    }
 
     private void Start()
     {
-        servicesManager = ServiceLocator.GetService<ServicesManager>();
-
         signInBtn.onClick.AddListener(async () =>
         {
             signInBtn.interactable = false;
@@ -45,7 +52,7 @@ public class UIAccountSignPanel : MonoBehaviour
             signInBtn.interactable = false;
             signUpBtn.interactable = false;
             offlineBtn.interactable = false;
-            await ServiceLocator.GetService<LoadingManager>().LoadSceneAsync(mainMenuScene);
+            await loadingManager.LoadSceneAsync(mainMenuScene);
         });
     }
 }

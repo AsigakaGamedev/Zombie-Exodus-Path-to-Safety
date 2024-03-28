@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
+using Zenject;
 
 public enum WeaponType { Pistol, Rifle, Axe}
 
@@ -39,12 +40,16 @@ public class WeaponModel : EquipmentModel
 
     public string AnimKey { get => animTriggerKey;}
 
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        this.audioManager = audioManager;
+    }
+
     public void Init()
     {
         reloadingInProcess = false;
         attacksHandler.Init();
-
-        if (attackAudio || reloadingAudio) audioManager = ServiceLocator.GetServiceSafe<AudioManager>(); 
     }
 
     public bool TryAttack()
@@ -77,12 +82,12 @@ public class WeaponModel : EquipmentModel
 
     private void AttackAudio()
     {
-        if (attackAudio && audioManager) audioManager.PlayAudio(attackAudio, AudioType.Effects);
+        if (attackAudio) audioManager.PlayAudio(attackAudio, AudioType.Effects);
     }
 
     public bool TryStartReload()
     {
-        if (reloadingAudio && audioManager) audioManager.PlayAudio(reloadingAudio, AudioType.Effects);
+        if (reloadingAudio) audioManager.PlayAudio(reloadingAudio, AudioType.Effects);
 
         reloadingInProcess = true;
         Invoke(nameof(EndReload), reloadingTime);

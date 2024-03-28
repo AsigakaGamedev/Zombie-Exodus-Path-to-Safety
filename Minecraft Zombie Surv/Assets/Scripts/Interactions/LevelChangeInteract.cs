@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LevelChangeInteract : AInteractableComponent
 {
@@ -14,15 +15,22 @@ public class LevelChangeInteract : AInteractableComponent
     private LoadingManager loadingManager;
     private AdsService ads;
 
+    [Inject]
+    private void Construct(UIPopupsManager popupsManager, LocalizationManager localizationManager, LoadingManager loadingManager)
+    {
+        this.popupsManager = popupsManager;
+        this.loadingManager = loadingManager;
+        this.localizationManager = localizationManager;
+    }
+
     protected override void Start()
     {
         base.Start();
 
-        ads = ServiceLocator.GetService<ServicesManager>().Ads;
-
-        popupsManager = ServiceLocator.GetService<UIPopupsManager>();
-        localizationManager = ServiceLocator.GetServiceSafe<LocalizationManager>();
-        loadingManager = ServiceLocator.GetServiceSafe<LoadingManager>();
+        if (ServicesManager.Instance)
+        {
+            ads = ServicesManager.Instance.Ads;
+        }
     }
 
     protected override void OnSuccessInteract(PlayerController player)
@@ -45,14 +53,7 @@ public class LevelChangeInteract : AInteractableComponent
                 },
                 async () =>
                 {
-                    if (loadingManager)
-                    {
-                        await loadingManager.LoadSceneAsync(nextScene);
-                    }
-                    else
-                    {
-                        SceneManager.LoadScene(nextScene);
-                    }
+                    await loadingManager.LoadSceneAsync(nextScene);
 
                     try
                     {

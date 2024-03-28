@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models;
 using UnityEngine;
+using Zenject;
 
 public class GameCloudService : MonoBehaviour
 {
@@ -14,13 +15,18 @@ public class GameCloudService : MonoBehaviour
 
     public Action<PlayerCloudData> onLoadPlayerData;
 
+    [Inject]
+    private void Construct(PlayerManager playerManager)
+    {
+        this.playerManager = playerManager;
+    }
+
     public async Task CheckServices()
     {
         if (!playerManager)
         {
             await Task.Run(() =>
             {
-                playerManager = ServiceLocator.GetService<PlayerManager>();
                 playerManager.onNicknameChange += OnPlayerChangeNickname;
             });
         }
