@@ -10092,12 +10092,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1113685774}
   m_PrefabAsset: {fileID: 0}
---- !u!320 &1118913222 stripped
-PlayableDirector:
-  m_CorrespondingSourceObject: {fileID: 6772371266259213084, guid: 5b1e096598c1d8640928b939de47d393,
-    type: 3}
-  m_PrefabInstance: {fileID: 7797305722028605686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!21 &1147554360
 Material:
   serializedVersion: 8
@@ -18088,7 +18082,7 @@ PrefabInstance:
         type: 3}
       propertyPath: startTimeline
       value: 
-      objectReference: {fileID: 1118913222}
+      objectReference: {fileID: 0}
     - target: {fileID: 3277841097659531798, guid: 5b1e096598c1d8640928b939de47d393,
         type: 3}
       propertyPath: m_IsActive

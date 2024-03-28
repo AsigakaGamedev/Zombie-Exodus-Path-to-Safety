@@ -5,24 +5,31 @@ using UnityEngine.SceneManagement;
 
 public enum AudioType { Music, Effects, Characters}
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : AInitializable
 {
     [SerializeField] private SerializedDictionary<AudioType, AudioSourceContainer> sources = new SerializedDictionary<AudioType, AudioSourceContainer>();
 
-    private void Awake()
+    public override void OnInit()
     { 
         foreach (var source in sources)
         {
             source.Value.Init();
             source.Value.transform.SetParent(Camera.main.transform);
         }
+
+        StartCoroutine(EUpdateSources());
     }
 
-    private void Update()
+    private IEnumerator EUpdateSources()
     {
-        foreach (var source in sources)
+        while (true)
         {
-            source.Value.UpdateContainer();
+            foreach (var source in sources)
+            {
+                source.Value.UpdateContainer();
+            }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 

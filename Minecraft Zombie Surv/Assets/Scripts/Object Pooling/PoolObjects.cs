@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PoolObjects<T> where T : PoolableObject
 {
+    private DiContainer di;
     private T prefab;
     private bool expanding;
     private Transform parent;
     private List<T> objectsInPool;
 
-    public PoolObjects(T prefab, int startCount, bool expanding, Transform parent = null)
+    public PoolObjects(DiContainer di, T prefab, int startCount, bool expanding, Transform parent = null)
     {
+        this.di = di;
         this.prefab = prefab;
         this.expanding = expanding;
         this.parent = parent;
@@ -24,7 +27,7 @@ public class PoolObjects<T> where T : PoolableObject
 
     public T CreateNewObject()
     {
-        T newObj = Object.Instantiate(prefab, parent);
+        T newObj = di.InstantiatePrefabForComponent<T>(prefab, parent);
         newObj.gameObject.SetActive(false);
         objectsInPool.Add(newObj);
         return newObj;

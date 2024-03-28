@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializables:
+  - {fileID: 682863011}
   - {fileID: 2088053997}
 --- !u!1 &914381013
 GameObject:

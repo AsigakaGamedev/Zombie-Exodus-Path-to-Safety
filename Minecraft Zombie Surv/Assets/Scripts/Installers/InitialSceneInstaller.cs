@@ -10,5 +10,7 @@ public class InitialSceneInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<AudioManager>().FromInstance(audioManager);
+
+        print("Initial Installer Binded");
     }
 }

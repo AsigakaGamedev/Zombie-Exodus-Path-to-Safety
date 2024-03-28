@@ -23,7 +23,7 @@ public class UIAudioSettings : MonoBehaviour
         this.audioManager = audioManager;
     }
 
-    private void Start()
+    private void Awake()
     {
         audioSource = audioManager.GetSource(audioType);
 
