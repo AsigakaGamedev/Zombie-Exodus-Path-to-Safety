@@ -16,231 +16,264 @@ MonoBehaviour:
     _serializedList:
     - Key: start
       Value:
-        value: 
+        value: Start
     - Key: skins
       Value:
-        value: 
+        value: Skins
     - Key: audio
       Value:
-        value: 
+        value: Audio
     - Key: language
       Value:
-        value: 
+        value: Language
     - Key: main
       Value:
-        value: 
+        value: Main
     - Key: graphics
       Value:
-        value: 
+        value: Graphics
     - Key: okay
       Value:
-        value: 
+        value: Okay
     - Key: select_language
       Value:
-        value: 
+        value: Select Language
     - Key: new_game
       Value:
-        value: 
+        value: New Game
     - Key: exit
       Value:
-        value: 
+        value: Exit
     - Key: continue
       Value:
-        value: 
+        value: Continue
     - Key: back
       Value:
-        value: 
+        value: Back
     - Key: shop
       Value:
-        value: 
+        value: Shop
     - Key: settings
       Value:
-        value: 
+        value: Settings
     - Key: sign_in
       Value:
-        value: 
+        value: Sign In
     - Key: account_enter
       Value:
-        value: 
+        value: Enter in account
     - Key: sign_up
       Value:
-        value: 
+        value: Sign Up
     - Key: login
       Value:
-        value: 
+        value: Login
     - Key: password
       Value:
-        value: 
+        value: Password
     - Key: change
       Value:
-        value: 
+        value: Change
     - Key: resources
       Value:
-        value: 
+        value: Resources
     - Key: music
       Value:
-        value: 
+        value: Music
     - Key: effects
       Value:
-        value: 
+        value: Effects
     - Key: characters
       Value:
-        value: 
+        value: Characters
     - Key: pets
       Value:
-        value: 
+        value: Perts
     - Key: view_advertisement
       Value:
-        value: 
+        value: View Advertisement
     - Key: comp_content_2
       Value:
-        value: 
+        value: 'Letter from the head of the security service.
+
+          
+
+          We
+          ask your people to remain calm. The military is devoting significant forces
+          to containing the epidemic.
+
+          
+
+          I ask you to keep
+          the bunker in working condition.'
     - Key: comp_lbl_2
       Value:
-        value: 
+        value: Security Service
     - Key: door_opened_msg
       Value:
-        value: 
+        value: Door opened
     - Key: open_door
       Value:
-        value: 
+        value: Open the door
     - Key: key_card_green_name
       Value:
-        value: 
+        value: Green Card
     - Key: key_card_green_desc
       Value:
-        value: 
+        value: Green access card
     - Key: first_aid_kit_name
       Value:
-        value: 
+        value: First aid kit
     - Key: first_aid_kit_desc
       Value:
-        value: 
+        value: Restores health
     - Key: term_lbl_1
       Value:
-        value: 
+        value: Service Computer
     - Key: battle_of_water_name
       Value:
-        value: 
+        value: Bottle of water
     - Key: battle_of_water_desc
       Value:
-        value: 
+        value: Regular bottle of drinking water
     - Key: pistol_ammo_name
       Value:
-        value: 
+        value: Pistol cartridges
     - Key: pistol_ammo_desc
       Value:
-        value: 
+        value: Pistol caliber cartridges
     - Key: levels
       Value:
-        value: 
+        value: Levels
     - Key: canned_meat_name
       Value:
-        value: 
+        value: Canned meat
     - Key: canned_meat_desc
       Value:
-        value: 
+        value: Canned meat satisfies hunger well
     - Key: hunger
       Value:
-        value: 
+        value: Hunger
     - Key: offline
       Value:
-        value: 
+        value: Offline
     - Key: alpha_version_welcome
       Value:
-        value: 
+        value: 'Welcome
+
+          
+
+          This is an alpha version of the
+          game. There may be bugs in the game, but we are testing and fixing everything.
+
+          
+
+          Thanks
+          for understanding!'
     - Key: reload
       Value:
-        value: 
+        value: Reload
     - Key: you_die
       Value:
-        value: 
+        value: You Die
     - Key: no
       Value:
-        value: 
+        value: No
     - Key: yes
       Value:
-        value: 
+        value: Yes
     - Key: start_new_game_hint
       Value:
-        value: 
+        value: Start a new game?
     - Key: ammo_shotgun_name
       Value:
-        value: 
+        value: Shotgun shells
     - Key: ammo_shotgun_desc
       Value:
-        value: 
+        value: Excellent caliber for close combat
     - Key: bandage_name
       Value:
-        value: 
+        value: Bandage
     - Key: bandage_desc
       Value:
-        value: 
+        value: Will save you from bleeding at the right time
     - Key: battery_name
       Value:
-        value: 
+        value: Battery
     - Key: battery_desc
       Value:
-        value: 
+        value: Battery for electrical devices
     - Key: can_of_gunpowder_name
       Value:
-        value: 
+        value: Can of gunpowder
     - Key: can_of_gunpowder_desc
       Value:
-        value: 
+        value: Can be used to create ammunition
     - Key: canned_veget_name
       Value:
-        value: 
+        value: Canned vegetables
     - Key: canned_veget_desc
       Value:
-        value: 
+        value: Who likes vegetables in jars anyway?
     - Key: pistol_weapon_name
       Value:
-        value: 
+        value: Pistol
     - Key: flashlight_name
       Value:
-        value: 
+        value: Flashlight
     - Key: flashlight_desc
       Value:
-        value: 
+        value: A good way to avoid running into zombies in the dark
     - Key: metal_ingot_name
       Value:
-        value: 
+        value: Steel ingot
     - Key: metal_ingot_desc
       Value:
-        value: 
+        value: Can be used to craft something out of steel
     - Key: rag_name
       Value:
-        value: 
+        value: Rag
     - Key: rag_desc
       Value:
-        value: 
+        value: Used to create bandages and other useful things
     - Key: weapon_axe_name
       Value:
-        value: 
+        value: Fire Axe
     - Key: weapon_axe_desc
       Value:
-        value: 
+        value: Great ax for a great zombie apocalypse
     - Key: weapon_shotgun_name
       Value:
-        value: 
+        value: Shotgun
     - Key: weapon_shotgun_desc
       Value:
-        value: 
+        value: A great way to destroy enemies in close combat with a powerful shot
     - Key: services_loading
       Value:
-        value: 
+        value: Services Loading...
     - Key: use
       Value:
-        value: 
+        value: Use
     - Key: drop
       Value:
-        value: 
+        value: Drop
     - Key: equip
       Value:
-        value: 
+        value: Equip
     - Key: pistol_weapon_description
       Value:
-        value: 
+        value: Regular police pistol
+    - Key: low
+      Value:
+        value: Low
+    - Key: medium
+      Value:
+        value: Medium
+    - Key: high
+      Value:
+        value: High
+    - Key: next_level_load_hint
+      Value:
+        value: Go to the next level?
   copyLocalization: {fileID: 11400000, guid: e511bb0bc596b8349bf2670608245d41, type: 2}
   addNonContainsValue: 1

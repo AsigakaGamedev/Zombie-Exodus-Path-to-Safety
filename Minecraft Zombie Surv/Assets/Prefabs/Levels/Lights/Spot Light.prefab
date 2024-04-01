@@ -49,7 +49,7 @@ Light:
   m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 179
-  m_InnerSpotAngle: 69.444664
+  m_InnerSpotAngle: 110.594086
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
