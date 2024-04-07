@@ -12,11 +12,6 @@ public class UIScreenChanger : MonoBehaviour
     private Button button;
     private UIManager uiManager;
 
-    private void OnValidate()
-    {
-        if (!button) button = GetComponent<Button>();
-    }
-
     [Inject]
     private void Construct(UIManager uiManager)
     {
@@ -25,6 +20,7 @@ public class UIScreenChanger : MonoBehaviour
 
     private void Start()
     {
+        if (!button) button = GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
             uiManager.ChangeScreen(screenName);
