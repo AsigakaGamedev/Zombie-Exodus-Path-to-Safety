@@ -14,7 +14,7 @@ public class UIScreenPartBtn : MonoBehaviour
 
     public Button Btn { get => btn; }
 
-    private void OnValidate()
+    private void Start()
     {
         if (!btn) btn = GetComponent<Button>();
     }

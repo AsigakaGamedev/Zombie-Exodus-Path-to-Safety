@@ -18,11 +18,6 @@ public class UISceneChanger : MonoBehaviour
     private bool isClicked;
     private LoadingManager loadingManager;
 
-    private void OnValidate()
-    {
-        if (!button) button = GetComponent<Button>();
-    }
-
     [Inject]
     private void Construct(LoadingManager loadingManager)
     {
@@ -31,6 +26,7 @@ public class UISceneChanger : MonoBehaviour
 
     private void Start()
     {
+        if (!button) button = GetComponent<Button>();
         isClicked = false;
 
         button.onClick.AddListener(() =>

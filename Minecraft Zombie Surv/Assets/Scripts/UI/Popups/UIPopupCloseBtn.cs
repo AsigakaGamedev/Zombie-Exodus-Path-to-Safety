@@ -11,11 +11,6 @@ public class UIPopupCloseBtn : MonoBehaviour
 
     private UIPopupsManager popupsManager;
 
-    private void OnValidate()
-    {
-        if (!button) button = GetComponent<Button>();
-    }
-
     [Inject]
     private void Construct(UIPopupsManager popupsManager)
     {
@@ -24,6 +19,7 @@ public class UIPopupCloseBtn : MonoBehaviour
 
     private void Awake()
     {
+        if (!button) button = GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
             popupsManager.CloseCurrentPopup();
